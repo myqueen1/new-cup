@@ -1,0 +1,609 @@
+@media only screen and (max-width:1400px ) {
+	.message_box{
+    margin-top: 50px !important;
+}
+}
+@media only screen and (max-width:1100px) {
+	.order .new_add form p select{
+		display: block;
+		margin-left:30%;
+		margin-bottom: 10px;
+	}
+	.product {
+		width: 100%;
+		margin: 15px auto;
+	}
+	.product ul li {
+		width: 96%;
+		margin-left: 2%;
+	}
+	.personal {
+		width: 99%;
+	}
+	.register {
+		width: 99%;
+	}
+	.register .res_box .res_nav li {
+		width: 33%;
+	}
+	.register .res_box .res_nav li:last-child {
+		width: 33%;
+	}
+	.buy {
+		width: 99%;
+	}
+	.buy .buy_info .buy_right {
+		width: 40%;
+		padding-left: 10px;
+		box-sizing: border-box;
+	}
+	.buy .buy_info .buy_img {
+		width: 60%;
+	}
+	
+	.buy .buy_info .buy_right .p7 a {
+		width: 47%;
+	}
+	.order {
+		width: 99%;
+	}
+	.order .order_b1 .say_info {
+		width: 488px;
+	}
+	.order .order_b1 .song .name {
+		width: 650px;
+	}
+}
+
+@media only screen and (max-width:900px) {
+	.blog {
+		width: 96%;
+	}
+	.bloglist {
+		width: 96%;
+	}
+	.personal .per_box .per_navul li {
+		width: 96px;
+	}
+	.personal .per_box .per_navul li:nth-child(2) {
+		width: 114px !important;
+	}
+	.personal .per_box .per_listul li {
+		width: 96px;
+	}
+	.personal .per_box .per_listul li:nth-child(2) {
+		width: 114px !important;
+	}
+}
+
+@media only screen and (max-width:800px) {
+	body{
+		cursor: pointer;
+	}
+	#img1{
+		 right: 4%;
+    top: 3%;
+	}
+.conpou .conpou_box{
+	width:90%;
+	height: 287px;
+	background:rgba(255,255,255,.8);
+	top: 50%;
+	left: 5%;
+	margin-left:0px;
+	margin-top: -123px;
+	position: absolute;
+	padding: 30px;
+	box-sizing: border-box;
+	text-align: center;
+	padding-top: 40px;
+}
+.conpou .conpou_box .gb{
+	right: 15px;
+	top: 15px;
+	width: 30px;
+}
+.conpou .conpou_box input{
+	width: 100%;
+}
+.conpou .conpou_box p{
+	width: 100%;
+}
+/*.message_bg{
+	width: 100%;
+}*/
+.message_box{
+	width: 100%;
+	margin-top: 0px !important;
+}
+	.ding {
+		width: 100px;
+		height: 150px;
+		right: 7%;
+		bottom: 8%;
+		cursor: pointer;
+	}
+	.ding2 {
+		width: 100px;
+		height: 100px;
+		left: 32%;
+		top: 55%;
+		cursor: pointer;
+	}
+	.pc {
+		width: 100%;
+		display: none;
+	}
+	.mobile {
+		width: 100%;
+		display: block;
+	}
+	.pc_h {
+		width: 100%;
+		display: none;
+	}
+	.mobile_h {
+		width: 100%;
+		display: block;
+	}
+	.header {
+		display: none;
+	}
+	.header2 {
+		display: block;
+		width: 100%;
+		height: 76px;
+		background: #131313;
+		padding: 11px 10px;
+		box-sizing: border-box;
+		position: relative;
+		z-index: 99999;
+	}
+	.header2 .meau {
+		width: 8%;
+		max-width: 27px;
+		margin-top: 8px;
+		cursor: pointer;
+		display: block;
+		float: left;
+	}
+	.header2 .logo {
+		display: inline-block;
+		width: 148px;
+		/*height: 27px;*/
+		left: 50%;
+		margin-left: -96px;
+		position: relative;
+	}
+	.header2>a:nth-child(3){
+		float: right;
+		margin-top: 0px;
+		position: relative;
+	}
+	.header2 i {
+		color: #fff;
+		font-size: 31px;
+	}
+	.header2>a span{
+		display: block;
+		width: 19px;
+		height: 19px;
+		border-radius: 100%;
+		background: #E60012;
+		color: #fff;
+		text-align: center;
+		line-height: 19px;
+		font-family: arial;
+		font-size: 14px;
+		position: absolute;
+		top: -5px;
+		right: -5px;
+	}
+	.header2 ul {
+		width: 100%;
+		height: auto;
+		position: absolute;
+		left: 0;
+		top: 76px;
+		background: #131313;
+		display: none;
+	}
+	.header2 ul li {
+		width: 100%;
+		height: 50px;
+		text-align: center;
+		color: #fff;
+		line-height: 50px;
+	}
+	.header2 ul li:hover {
+		background: #AC0819;
+		color: #fff;
+	}
+	.header2 p {
+		width: 50%;
+		float: left;
+		text-align: center;
+		line-height: 50px;
+		color: #fff;
+		box-sizing: border-box;
+		padding: 5px 0px;
+	}
+	.footer {
+		height: auto;
+	}
+	.footer .footer_con img {
+		width: 100%;
+	}
+	.footer .footer_con {
+		height: auto;
+		padding-bottom: 20px;
+		margin-top: 0px;
+		width: 95%;
+		text-align: center;
+	}
+	.footer .footer_con2 {
+		width: 100%;
+		text-align: center;
+		padding: 20px 0px;
+	}
+	.footer .footer_con2 p {
+		line-height: 23px;
+		float: none;
+	}
+	.footer .footer_con2 img {
+		margin: 5px auto;
+		display: block;
+		float: none;
+	}
+	.bloglist {
+		padding: 0px 20px;
+		box-sizing: border-box;
+	}
+	.blog {
+		height: auto;
+		overflow: hidden;
+	}
+	.blog .blog_list {
+		height: auto;
+		overflow: hidden;
+		padding-bottom: 20px;
+		margin: 0px auto;
+		margin-top: 30px;
+	}
+	.buy {
+		margin: 30px auto;
+	}
+	.buy .buy_info {
+		height: auto;
+		overflow: hidden;
+	}
+	.buy .buy_info .buy_img {
+		width: 100%;
+		height: auto;
+	}
+	.middle_img{
+		width: 100%;
+		height: auto;
+	}
+	.small_img img{
+		margin-bottom: 10px;
+	}
+	.big_img .swiper-slide img{
+		width: 100%;
+		height: auto;
+	}
+	.buy .buy_info .buy_right {
+		width: 100%;
+		height: auto;
+		padding-left: 20px;
+		box-sizing: border-box;
+	}
+	.buy .buy_info .buy_right .p7 a {
+		width: 45%;
+		margin-bottom: 20px;
+	}
+	.buy .info_img {
+		width: 100%;
+		margin-top: 20px;
+	}
+	.order .order_b1 .info {
+		width: 88%;
+		padding: 10px;
+		float: none;
+		margin: 10px auto;
+	}
+	.order .order_b1 .add {
+		width: 88%;
+		margin: 10px auto;
+		float: none;
+	}
+	.order .new_add form p .tl {
+		width: 68px;
+		margin-right: 0px;
+	}
+	.order .order_b1 .say {
+		width: 100%;
+		margin: 0px;
+	}
+	.order .order_b1 .say_info {
+		width:90%;
+		margin-right: 5%;
+		margin-top: 0px;
+		margin-bottom: 10px;
+	}
+	.order .order_b1 .song .pic {
+		width: 20%;
+	}
+	.order .order_b1 .song .name {
+		width: 60%;
+		margin-left: 2%;
+	}
+	.order .order_b1 .song .num {
+		width: 10%;
+		margin-left: 2%;
+		text-align: center;
+	}
+	.order .order_b1 .song .totle {
+		display: none;
+	}
+	.order .order_b2 {
+		padding-right: 20px;
+		box-sizing: border-box;
+	}
+	.order .order_b3 {
+		padding-right: 20px;
+		box-sizing: border-box;
+	}
+	.personal {
+		padding: 0px 5px;
+		box-sizing: border-box;
+		margin: 20px auto;
+	}
+	.personal .per_nav li {
+		width: 20%;
+		text-align: center;
+		margin: 0px;
+		padding: 0px 13px;
+		box-sizing: border-box;
+	}
+	.register .res_box .res_nav {
+		height: 58px;
+	}
+	.register .res_box .res_nav li {
+		width: 33%;
+		line-height: 23px;
+	}
+	.register .res_box .res_nav li:last-child {
+		width: 33%;
+	}
+	.register .res_box .res_nav li i {
+		font-size: 26px;
+		height: 21px;
+	}
+	.register .res_box .res_nav li span {
+		display: block;
+		line-height: 39px;
+	}
+	.register .res_box .res_form {
+		width: 98%;
+		height: auto;
+		overflow: hidden;
+	}
+	.register .res_box .res_form form {
+		width: 100%;
+		padding-right: 20px;
+		box-sizing: border-box;
+		border-right: none;
+		float: none;
+		height: auto;
+		overflow: hidden;
+	}
+	.register .res_box .res_form form p span {
+		width: 25%;
+	}
+	.register .res_box .res_form form p .yan_code {
+		width: 30%;
+	}
+	.register .res_box .res_form form p input {
+		width: 69%;
+	}
+	.register .res_box .res_form form p {
+		width: 100%;
+	}
+	.register .res_box .res_form>p {
+		margin: 20px auto;
+	}
+	.register .res_box .res_form form .res_btn {
+		width: 30%;
+	}
+	.login {
+		width: 94%;
+		left: 3%;
+		margin-left: 0px;
+	}
+	.per_box ul li:nth-child(3),
+	.per_box ul li:nth-child(4),
+	.per_box ul li:nth-child(6) {
+		display: none;
+	}
+	.per_box ul li:nth-child(1) {
+		width: 28% !important;
+		margin-right: 0px !important;
+		margin-left: 0px;
+	}
+	.per_box ul li:nth-child(1) input {
+		margin-right: 0px !important;
+		margin-left: 0px !important;
+	}
+	.per_box ul li:nth-child(2) {
+		width: 55% !important;
+		padding-left: 5px;
+		box-sizing: border-box;
+	}
+	.per_box ul li:nth-child(5) {
+		width: 17% !important;
+	}
+	.personal .shop_car_totle {
+		margin-top: 20px;
+		text-align: right;
+		padding-right: 20px;
+		box-sizing: border-box;
+	}
+	.personal .shop_car_totle .jie_btn {
+		margin-top: 8px;
+	}
+	.per_box .per_navul li:nth-child(3),
+	.per_box .per_navul li:nth-child(4),
+	.per_box .per_navul li:nth-child(7) {
+		display: none;
+	}
+	.per_box .per_navul li:nth-child(1) {
+		width: 28% !important;
+		margin-right: 0px !important;
+		margin-left: 0px;
+	}
+	.per_box .per_navul li:nth-child(1) input {
+		margin-right: 0px !important;
+		margin-left: 0px !important;
+	}
+	.per_box .per_navul li:nth-child(2) {
+		width: 45% !important;
+		padding-left: 5px;
+		box-sizing: border-box;
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.per_box .per_navul li:nth-child(5) {
+		/*width: 11% !important;*/
+		display: none;
+	}
+	.per_box .per_navul li:nth-child(6) {
+		display: block;
+		width: 16% !important;
+	}
+	.per_box .per_listul li:nth-child(3),
+	.per_box .per_listul li:nth-child(4),
+	.per_box .per_listul li:nth-child(5),
+	.per_box .per_listul li:nth-child(7) {
+		display: none;
+	}
+	.per_box .per_listul li:nth-child(1) {
+		width: 28% !important;
+		margin-right: 0px !important;
+		margin-left: 0px;
+	}
+	.per_box .per_listul li:nth-child(1) input {
+		margin-right: 0px !important;
+		margin-left: 0px !important;
+	}
+	.per_box .per_listul li:nth-child(2) {
+		width: 45% !important;
+		padding-left: 5px;
+		box-sizing: border-box;
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.per_box .per_listul li:nth-child(5) {
+		width: 17% !important;
+	}
+	.per_box .per_listul li:nth-child(6) {
+		display: block;
+		width: 16% !important;
+	}
+	.order .new_add form p input {
+		width: 180px !important;
+	}
+	.order .new_add form p input[type="checkbox"] {
+		width: 10px !important;
+	}
+	.personal .per_nav {
+		display: none;
+	}
+	.personal .per_nav2 {
+		display: block;
+		width: 100%;
+		display: inline-block;
+		height: 38px;
+		background: #E9E9E9;
+		border-radius: 5px;
+		margin: 20px 0px;
+	}
+	.personal .per_nav2 li {
+		width: 25%;
+		height: 38px;
+		line-height: 38px;
+		text-align: center;
+		float: left;
+		font-size: 14px;
+		color: #505050;
+		border-radius: 5px;
+		cursor: pointer;
+		margin-right: 0px;
+	}
+	.personal .per_nav2 li:last-child {
+		margin-right: 0px;
+	}
+	.personal .per_nav2 li.active {
+		background: #D70000;
+		color: #fff;
+	}
+	.personal .per_nav2 li:hover {
+		background: #D70000;
+		color: #fff;
+	}
+	.per_box .per_listul>p {
+		width: 100% !important;
+		box-sizing: border-box;
+		margin-left: 0px !important;
+		line-height: 35px !important;
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.personal .per_info form p span:nth-child(1) {
+		width: 20%;
+	}
+	.personal .per_info form p input {
+		width: 60%;
+	}
+	.personal .per_info {
+		padding: 10px;
+	}
+	.personal .per_info form {
+		width: 100%;
+	}
+	.personal .per_coupon ul {
+		width: 100%;
+	}
+	.personal .per_coupon .per_coupon_list {
+		margin: 10px 0px;
+		margin-left: 20px;
+	}
+	.personal .per_box {
+		padding: 10px;
+	}
+}
+
+
+@media only screen and (max-width:600px) {
+	.header2 {
+		height: 66px;
+	}
+	.header2 ul {
+		top: 66px;
+	}
+}
+
+@media only screen and (max-width:500px) {
+	.header2 {
+		height: 50px;
+	}
+	.header2 ul {
+		top: 50px;
+	}
+}
