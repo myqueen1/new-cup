@@ -33,6 +33,8 @@ class GoodsController extends Controller
                 }
             }
         }
+        $data = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->select();
+        $this->assign('data',$data);
         $this->display();
     }
 
@@ -87,5 +89,14 @@ class GoodsController extends Controller
         } else {// 上传成功
             return $info;
         }
+    }
+
+    public function add_referral()
+    {
+        if (IS_POST) {
+            print_r($_POST);
+            die();
+        }
+        $this->display();
     }
 }

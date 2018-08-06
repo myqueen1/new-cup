@@ -4,11 +4,18 @@ namespace Ht\Controller;
 
 use Think\Controller;
 
-class IndexController extends Controller
+class IndexController extends LoginController
 {
+    public function __construct(){
+    parent::__construct();
+        $userInfo = cookie("userInfo");
+        if (empty($userInfo)) {
+            $this->redirect('Login/adminLogin',"", 3, '请先登入...');   
+        }  
+    }
     public function index()
     {
-        $this->display('index');
+        $this->display();
     }
 
     public function order_list()
@@ -18,20 +25,8 @@ class IndexController extends Controller
 
     public function top()
     {
-        $this->assign("name","测试");
-        $this->display();
-    }
-
-    public function menu()
-    {
-        $this->display();
-    }
-    public function bar()
-    {
-        $this->display();
-    }
-    public function main()
-    {
+        $userInfo = cookie("userInfo");
+        $this->assign("name",$userInfo['admin_name']);
         $this->display();
     }
 }

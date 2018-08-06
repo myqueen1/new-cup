@@ -20,47 +20,29 @@ $(document).ready(function() {
   $('.intro').css({
     'margin-top': -($('.intro').height() /2)
   });
-  $(".loginform input[type='button']").click(function(){
-     var $name = $("#name").val();
-      var $pwd = $("#pwd").val();
-      $.ajax({
-          type: "POST",
-          url: "{:U('Login/adminLogin')}",
-          data: "name="+$name+"&"+"pwd="+$pwd,
-          success: function(msg){
-              alert(msg);
-             if (msg==1){
-                 alert("用户名不存在");
-             } else if(msg==2)
-             {
-                 alert("密码错误");
-             } else {
-                 alert("3")
-             }
-          }
-      });
-	  // location.href="{:U('Index/index')}";
-	  });
+ 
 });
 </script>
 
 </head>
 <body>
+<form action="{:U('Login/adminLogin')}" method='post' >
   <section class="loginform">
    <h1>后台管理系统</h1>
    <ul>
     <li>
      <label>账号：</label>
-     <input type="text" class="textBox" placeholder="管理员账号" id="name" />
+     <input type="text" class="textBox" placeholder="管理员账号" name="admin_number" />
     </li>
     <li>
      <label>密码：</label>
-     <input type="password" class="textBox" placeholder="登陆密码" id="pwd" />
+     <input type="password" class="textBox" placeholder="登陆密码" name="admin_password" />
     </li>
     <li>
-     <input type="button" value="立即登陆"/>
+     <input type="submit" value="立即登陆"   />
     </li>
    </ul>
   </section>
-</body>
+</form>
+</body>  
 </html>
