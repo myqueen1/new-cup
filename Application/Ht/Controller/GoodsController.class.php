@@ -88,13 +88,4 @@ class GoodsController extends Controller
             return $info;
         }
     }
-
-    public function add_referral()
-    {
-        if (IS_POST) {
-            print_r($_POST);
-            die();
-        }
-        $this->display();
-    }
 }
