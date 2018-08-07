@@ -11,6 +11,8 @@ use Think\Controller;
 
 class GoodsController extends Controller
 {
+    private static $message = [];
+
     //商品列表
     public function product_list()
     {
@@ -98,5 +100,64 @@ class GoodsController extends Controller
             die();
         }
         $this->display();
+    }
+
+    /**
+     *   @param $goods_status $goods_id string 
+     *   @return $result json 
+     *   @content  AJAX 修改上架、下架、审核状态
+    */
+    public function AjaxUpdateStatus()
+    {
+        if (IS_AJAX) {
+            $goods_status = I('get.status');
+            $goods_id     = I('get.id');
+
+            if (is_numeric($goods_id)) {
+                $goods_detailed = D('goods_detailed');
+                $result = $goods_detailed->where("goods_id = '$goods_id'")
+                                         ->setField('goods_status',$goods_status);
+
+                if ($result) {
+                    self::$message['status'] = 'success';
+                    self::$message['message'] = '修改成功！';
+                } else {
+                    self::$message['status'] = 'error';
+                    self::$message['message'] = '系统错误，请稍后重试！';
+                }
+            } else{
+                self::$message['status'] = 'error';
+                self::$message['message'] = '请求参数错误，请稍后重试！';
+            }
+        } else {
+            self::$message['status'] = 'error';
+            self::$message['message'] = '请求方式错误，请稍后重试';
+        }
+
+        echo json_encode(self::$message,JSON_UNESCAPED_UNICODE);
+    }
+
+
+    /**
+     *   @param $is_hot string 
+     *   @content AJAX修改是否为热销产品
+    */
+    public function AjaxUpdateHot(){
+        if (IS_AJAX) {
+            $is_hot   = I('get.is_hot');
+            $goods_id = I('get.id');
+
+            $goods_detailed = D('goods_detailed');
+            $result = $goods_detailed->where("goods_id = '$goods_id'")
+                                     ->setField('is_hot',$is_hot);
+            if ($result) {
+                self::$message['status'] = 'success';
+                self::$message['message'] = '修改成功！';
+            } else {
+                self::$message['status'] = 'error';
+                self::$message['message'] = '系统错误，请稍后重试！';
+            }
+            echo json_encode(self::$message,JSON_UNESCAPED_UNICODE);
+        }
     }
 }
