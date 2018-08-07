@@ -61,12 +61,23 @@ class GoodsController extends Controller
     {
         if (IS_POST) {
             $data = I("post.");
+            // print_r($data);die;
+            $goods_id = $data['goods_id'];
             $imag = $this->upload($_FILES);
             $data['goods_cover'] = $imag['goods_cover']['savepath'] . $imag['goods_cover']['savename'];
+            $num =  count($imag['array']);
+                for ($i=0; $i <=$num-1 ; $i++) { 
+                    $rest['goods_id'] = $goods_id;
+                    $rest['detailed_path']  = $imag['array'][$i]['savepath'].$imag['array'][$i]['savename'];
+                    M("goods_img")->add($rest);
+                }
+                
             $data['goods_time'] = date("Y-m-d H:i:s", time());
             $re = D('goods_detailed')->add($data);
             if ($re) {
                 $this->redirect('Goods/product_list', '', 0, '页面跳转中...');
+            } else {
+                $this->error("添加失败");
             }
         } else {
             $id = I("get.goods_id");
@@ -75,20 +86,35 @@ class GoodsController extends Controller
         }
     }
 
-    //文件长传
+   //多图  和 单图 文件上传
     public function upload()
     {
         $upload = new \Think\Upload();// 实例化上传类
-        $upload->maxSize = 3145728;// 设置附件上传大小
-        $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-        $upload->savePath = '/Public/Uploads/'; // 设置附件上传目录    // 上传文件
-        $upload->rootPath = "./";
-        $info = $upload->upload();
-        if (!$info) {// 上传错误提示错误信息
-            $this->error($upload->getError());
-        } else {// 上传成功
-            return $info;
+        $upload->maxSize = $size ;// 设置附件上传大小
+        $upload->exts = $type;// 设置附件上传类型
+        $upload->savePath = './Application/Uploads/'; // 设置附件上传根目录
+        $upload->rootPath  =      './'; // 设置附件上传根目录
+        $upload->replace = true;
+        foreach($_FILES as $key => $value){
+            if(count($_FILES[$key]) == count($_FILES[$key],1)){//判断$_FILES变量是否是二维数组
+                $info = $upload->uploadOne($_FILES[$key]);// 如果不是二维数组，使用单文件依次上传的方法
+                unset($_FILES[$key]);
+                $arr[$key] = $info;
+                if(!$info){
+                    $this->errorMsg($upload->getError());
+                    exit;
+                }
+            }
         }
+        if(count($_FILES)){
+            $info = $upload->upload();// 如果是二维数组，使用批量上传文件的方法(上传文件时，每个文件域的name属性是未知的或者以数组形式定义的)
+            if(!$info){
+                $this->errorMsg($upload->getError());
+                exit;
+            }
+            $arr['array'] = $info;//数组上传的返回信息全部在键名为array的
+        }
+        return $arr;
     }
 
     public function add_referral()
