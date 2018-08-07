@@ -58,15 +58,20 @@ class BrandController extends Controller
 //    删除
     public function del()
     {
-        $p = I('get.p');
-        $brand_id = I('get.brand_id');
-        $brand = M('brand');
-        $data = $brand->find($brand_id);
-        unlink($data['brand_url']);
-        if ($brand->delete($brand_id)) {
-            echo "<script>alert('删除成功');location.href='brand_list?p=$p'</script>";
+        if (IS_POST) {
+            $ids = I('post.ids');
+            $str = implode($ids, ',');
+            $where = "`brand_id` IN ($str)";
         } else {
-            echo "<script>alert('数据删除失败');location.href='brand_list?p=$p'</script>";
+            $brand_id = I('get.brand_id');
+            $where = "`brand_id`=" . $brand_id;
+        }
+        $p = I('get.p');
+        $brand = M('brand');
+        if ($brand->where($where)->delete()) {
+            $this->success('删除成功', 'brand_list?p=' . $p);
+        } else {
+            $this->error('删除失败');
         }
     }
 
