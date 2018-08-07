@@ -66,12 +66,16 @@ class BrandController extends Controller
             $brand_id = I('get.brand_id');
             $where = "`brand_id`=" . $brand_id;
         }
-        $p = I('get.p');
         $brand = M('brand');
+        $data = $brand->where($where)->select();
+        foreach ($data as $k => $v) {
+//          删除图片
+            unlink('.' . $v['brand_logo']);
+        }
         if ($brand->where($where)->delete()) {
-            $this->success('删除成功', 'brand_list?p=' . $p);
+            echo true;
         } else {
-            $this->error('删除失败');
+            echo false;
         }
     }
 

@@ -59,12 +59,11 @@ class ClassifyController extends Controller
             $type_id = I('get.type_id');
             $where = "`type_id`=" . $type_id;
         }
-        $p = I('get.p');
         $type = M('type');
         if ($type->where($where)->delete()) {
-            $this->success('删除成功', 'product_category?p=' . $p);
+            echo true;
         } else {
-            $this->error('删除失败');
+            echo false;
         }
 
 

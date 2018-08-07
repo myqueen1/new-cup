@@ -55,8 +55,23 @@
     </div>
 </div>
 
-<script src="__PUBLIC__/jquery-3.1.1.min.js"></script>
+<script src="js/jquery.js"></script>
 <script>
+    $(document).on('click','.block',function () {
+        event.preventDefault()
+        var url=$(this).attr('href');
+        $.ajax({
+            url:url,
+            success:function(result){
+                if (result){
+                    alert('删除成功');
+                    location.href = "{:U('Brand/brand_list')}?p=<?php echo I('get.p');?>";
+                } else {
+                    alert('删除失败');
+                    location.href = "{:U('Brand/brand_list')}?p=<?php echo I('get.p');?>";
+                }
+            }});
+    })
     // 全选反选
     $(function () {
         //实现全选反选
@@ -81,7 +96,7 @@
             alert("请选择至少一项！");
             return;
         }
-// // 批量选择
+        // 批量选择
         if (confirm("确定要删除所选项目？")) {
             var che = $("input[name='checkbox']:checked");
             var ids = new Array();
@@ -93,7 +108,13 @@
                 url: "{:U('Brand/del')}?p=<?php echo I('get.p');?>",
                 data: {'ids': ids},
                 success: function (result) {
-                    alert('删除成功');location.href="{:U('Brand/brand_list')}?p=<?php echo I('get.p');?>";
+                    if (result){
+                        alert('删除成功');
+                        location.href = "{:U('Brand/brand_list')}?p=<?php echo I('get.p');?>";
+                    } else {
+                        alert('删除失败');
+                        location.href = "{:U('Brand/brand_list')}?p=<?php echo I('get.p');?>";
+                    }
                 }
             });
         }
