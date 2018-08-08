@@ -71,5 +71,19 @@ class IndexController extends Controller
         $this->display();
     }
 
-
+    // 用户个人信息修改
+    public function UseSave()
+    {
+        // echo 11;
+        $db=D('user');
+        // $data=$db->select();
+        $arr=I('post.');
+        // var_dump($arr);die;
+        $id=$arr['user_id'];
+        // echo $id;die;
+        $data=$db->where("user_id='$id'")->save($arr);
+        $res=$db->where("user_id='$id'")->find();
+        // var_dump($res);die;
+        echo json_encode($res);
+    }
 }
