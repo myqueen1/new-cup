@@ -33,14 +33,14 @@ class ClassifyController extends Controller
             $type_name = $data['type_name'];
             $type = M('type');
             if (empty($type_name)) {
-                echo "<script>alert('分类名不能为空');location.href='add_category'</script>";
+                $this->error('分类名不能为空');
             } elseif ($type->where("`type_name`='$type_name'")->find()) {
-                echo "<script>alert('添加的分类已存在');location.href='add_category'</script>";
+                $this->error('添加的分类已存在');
             } else {
                 if ($type->add($data)) {
-                    echo "<script>alert('添加成功');location.href='product_category'</script>";
+                    $this->success('添加成功', 'product_category');
                 } else {
-                    echo "<script>alert('添加失败');location.href='add_category'</script>";
+                    $this->error('添加失败');
                 }
             };
             die;
@@ -51,13 +51,19 @@ class ClassifyController extends Controller
 //    删除
     public function del()
     {
-        $p = I('get.p');
-        $type_id = I('get.type_id');
-        $type = M('type');
-        if ($type->delete($type_id)) {
-            echo "<script>alert('删除成功');location.href='product_category?p=$p'</script>";
+        if (IS_POST) {
+            $ids = I('post.ids');
+            $str = implode($ids, ',');
+            $where = "`type_id` IN ($str)";
         } else {
-            echo "<script>alert('删除失败');location.href='product_category?p=$p'</script>";
+            $type_id = I('get.type_id');
+            $where = "`type_id`=" . $type_id;
+        }
+        $type = M('type');
+        if ($type->where($where)->delete()) {
+            echo true;
+        } else {
+            echo false;
         }
 
 

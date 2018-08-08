@@ -11,6 +11,8 @@ use Think\Controller;
 
 class GoodsController extends Controller
 {
+    private static $message = [];
+
     //商品列表
     public function product_list()
     {
@@ -18,9 +20,10 @@ class GoodsController extends Controller
         $goods_name = I("get.goods_name");
         $map['goods_name'] =array('like',"%$goods_name%");
         $count      = M('goods')->where($map)->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,4);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show       = $Page->show();// 分页显示输出// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         $data = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->where($map)->order('five_goods.goods_id')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $this->assign('keyword',$goods_name);
         $this->assign('data',$data);
         $this->assign("page",$show);
         $this->display();  
@@ -155,5 +158,64 @@ class GoodsController extends Controller
             die();
         }
         $this->display();
+    }
+
+    /**
+     *   @param $goods_status $goods_id string 
+     *   @return $result json 
+     *   @content  AJAX 修改上架、下架、审核状态
+    */
+    public function AjaxUpdateStatus()
+    {
+        if (IS_AJAX) {
+            $goods_status = I('get.status');
+            $goods_id     = I('get.id');
+
+            if (is_numeric($goods_id)) {
+                $goods_detailed = D('goods_detailed');
+                $result = $goods_detailed->where("goods_id = '$goods_id'")
+                                         ->setField('goods_status',$goods_status);
+
+                if ($result) {
+                    self::$message['status'] = 'success';
+                    self::$message['message'] = '修改成功！';
+                } else {
+                    self::$message['status'] = 'error';
+                    self::$message['message'] = '系统错误，请稍后重试！';
+                }
+            } else{
+                self::$message['status'] = 'error';
+                self::$message['message'] = '请求参数错误，请稍后重试！';
+            }
+        } else {
+            self::$message['status'] = 'error';
+            self::$message['message'] = '请求方式错误，请稍后重试';
+        }
+
+        echo json_encode(self::$message,JSON_UNESCAPED_UNICODE);
+    }
+
+
+    /**
+     *   @param $is_hot string 
+     *   @content AJAX修改是否为热销产品
+    */
+    public function AjaxUpdateHot(){
+        if (IS_AJAX) {
+            $is_hot   = I('get.is_hot');
+            $goods_id = I('get.id');
+
+            $goods_detailed = D('goods_detailed');
+            $result = $goods_detailed->where("goods_id = '$goods_id'")
+                                     ->setField('is_hot',$is_hot);
+            if ($result) {
+                self::$message['status'] = 'success';
+                self::$message['message'] = '修改成功！';
+            } else {
+                self::$message['status'] = 'error';
+                self::$message['message'] = '系统错误，请稍后重试！';
+            }
+            echo json_encode(self::$message,JSON_UNESCAPED_UNICODE);
+        }
     }
 }

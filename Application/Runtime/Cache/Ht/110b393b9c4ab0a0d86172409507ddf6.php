@@ -1,40 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>产品品牌</title>
+    <title>产品分类</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <base href="__PUBLIC__/backend/"/>
+    <base href="/Public/backend/"/>
     <link href="style/adminStyle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="wrap">
     <div class="page-title">
-        <span class="modular fl"><i></i><em>产品品牌</em></span>
-        <span class="modular fr"><a href="{:U('Brand/add_brand')}" class="pt-link-btn">+添加新品牌</a></span>
+        <span class="modular fl"><i></i><em>产品分类</em></span>
+        <span class="modular fr"><a href="<?php echo U('Classify/add_category');?>" class="pt-link-btn">+添加新分类</a></span>
     </div>
 
     <table class="list-style">
         <tr>
-            <th>品牌名称</th>
-            <th>品牌LOGO</th>
+            <th>分类名称</th>
             <th>操作</th>
         </tr>
-        <foreach name="list" item="v">
-            <tr>
+        <?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
                 <td>
-                    <input type="checkbox" name="checkbox" value="{$v.brand_id}"/>
-                    <span><a href="{$v.brand_url}">{$v.brand_name}</a></span>
+                    <input type="checkbox" name="checkbox" value="<?php echo ($v["type_id"]); ?>"/>
+                    <span><?php echo ($v["type_name"]); ?></span>
                 </td>
-                <td>
-                    <span><img src="{$v.brand_logo}" alt="" width="80px"/></span>
-                </td>
-
-                <td class="center"><a href="{:U('Brand/del')}?brand_id={$v.brand_id}&p=<?php echo I('get.p');?>"
+                <td class="center"><a href="<?php echo U('Classify/del');?>?type_id=<?php echo ($v["type_id"]); ?>&p=<?php echo I('get.p');?>"
                                       class="block" title="移除"><img
                         src="images/icon_trash.gif"/></a></td>
-            </tr>
-        </foreach>
+            </tr><?php endforeach; endif; ?>
 
     </table>
 
@@ -48,9 +41,8 @@
         </div>
         <!-- turn page -->
 
-
         <div class="turnPage center fr">
-            {$page}
+            <?php echo ($page); ?>
         </div>
     </div>
 </div>
@@ -65,10 +57,10 @@
             success:function(result){
                 if (result){
                     alert('删除成功');
-                    location.href = "{:U('Brand/brand_list')}?p=<?php echo I('get.p');?>";
+                    location.href = "<?php echo U('Classify/product_category');?>?p=<?php echo I('get.p');?>";
                 } else {
                     alert('删除失败');
-                    location.href = "{:U('Brand/brand_list')}?p=<?php echo I('get.p');?>";
+                    location.href = "<?php echo U('Classify/product_category');?>?p=<?php echo I('get.p');?>";
                 }
             }});
     })
@@ -96,7 +88,7 @@
             alert("请选择至少一项！");
             return;
         }
-        // 批量选择
+// // 批量选择
         if (confirm("确定要删除所选项目？")) {
             var che = $("input[name='checkbox']:checked");
             var ids = new Array();
@@ -105,22 +97,22 @@
             }
             $.ajax({
                 type: "POST",
-                url: "{:U('Brand/del')}?p=<?php echo I('get.p');?>",
+                url: "<?php echo U('Classify/del');?>?p=<?php echo I('get.p');?>",
                 data: {'ids': ids},
                 success: function (result) {
-                    if (result){
+                    if (result) {
                         alert('删除成功');
-                        location.href = "{:U('Brand/brand_list')}?p=<?php echo I('get.p');?>";
+                        location.href = "<?php echo U('Classify/product_category');?>?p=<?php echo I('get.p');?>";
                     } else {
                         alert('删除失败');
-                        location.href = "{:U('Brand/brand_list')}?p=<?php echo I('get.p');?>";
+                        location.href = "<?php echo U('Classify/product_category');?>?p=<?php echo I('get.p');?>";
                     }
+
                 }
             });
         }
     })
 
 </script>
-
 </body>
 </html>
