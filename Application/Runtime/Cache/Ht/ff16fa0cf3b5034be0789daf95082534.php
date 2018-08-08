@@ -16,9 +16,9 @@
 			</span>
 		</div>
 		<div class="operate">
-			<form>
-				<input type="text" class="textBox length-long" placeholder="输入商品名称..."/>
-				<input type="button" value="查询" class="tdBtn"/>
+			<form method="get">
+				<input type="text" name="goods_name" class="textBox length-long" placeholder="输入商品名称..." value="<?php echo ($keyword); ?>" />
+				<input type="submit" value="查询" class="tdBtn"/>
 			</form>
 		</div>
 		<table class="list-style Interlaced">
@@ -37,7 +37,7 @@
 		<?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
 			<td>
 				<span>
-					<input type="checkbox" class="middle children-checkbox"/>
+					<input type="checkbox" name="checkbox" value="<?php echo ($v["goods_id"]); ?>" class="middle children-checkbox"/>
 					<i><?php echo ($v["goods_id"]); ?></i>
 				</span>
 			</td>
@@ -85,13 +85,11 @@
 			<div class="BatchOperation fl">
 				<input type="checkbox" id="del"/>
 				<label for="del" class="btnStyle middle">全选</label>
-				<input type="button" value="批量删除" class="btnStyle"/>
+				<input type="button" id="delete" value="批量删除" class="btnStyle"/>
 			</div>
 			<!-- turn page -->
 			<div class="turnPage center fr">
-				<a>第一页</a>
-				<a>1</a>
-				<a>最后一页</a>
+				<?php echo ($page); ?>
 			</div>
 		</div>
 	</div>
@@ -145,5 +143,47 @@
 			}
 		})
 	})
+</script>
+<script>
+// 全选反选
+    $(function () {
+        //实现全选反选
+        $("#del").on('click', function () {
+            $(".list-style input:checkbox").prop("checked", $(this).prop('checked'));
+        })
+        $(".list-style input:checkbox").on('click', function () {
+            //当选中的长度等于checkbox的长度的时候,就让控制全选反选的checkbox设置为选中,否则就为未选中
+            if ($(".list-style input:checkbox").length === $(".list-style input:checked").length) {
+                $("#del").prop("checked", true);
+            } else {
+                $("#del").prop("checked", false);
+            }
+        })
+    })
+     // 批删
+    $(document).on('click', '#delete', function () {
+        var checkedNum = $("input[name='checkbox']:checked").length;
+        if (checkedNum == 0) {
+            alert("请选择至少一项！");
+            return;
+        }
+// // 批量选择
+        if (confirm("确定要删除所选项目？")) {
+            var che = $("input[name='checkbox']:checked");
+            var goods_id = new Array();
+            for (var a = 0; a < che.length; a++) {
+                goods_id[a] = che[a].value;
+            }
+            alert(goods_id)
+            $.ajax({
+                type: "POST",
+                url: "<?php echo U('Goods/delAll');?>",
+                data: {'goods_id': goods_id},
+                success: function (result) {
+                  window.location.reload();
+                }
+            });
+        }
+    })
 </script>
 </html>

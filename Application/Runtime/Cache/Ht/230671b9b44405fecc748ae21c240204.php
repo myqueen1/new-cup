@@ -12,7 +12,7 @@
  <div class="wrap">
   <div class="page-title">
     <span class="modular fl"><i class="user"></i><em>会员列表</em></span>
-    <span class="modular fr"><a href="add_user.html" class="pt-link-btn">+添加新会员</a></span>
+    <span class="modular fr"><a href="<?php echo U('Login/add_user');?>" class="pt-link-btn">+添加新会员</a></span>
   </div>
   <div class="operate">
    <form>
