@@ -1,7 +1,6 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<<<<<<< HEAD
 	<title>产品列表</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link href="/Public/backend/style/adminStyle.css" rel="stylesheet" type="text/css" />
@@ -18,8 +17,8 @@
 		</div>
 		<div class="operate">
 			<form>
-				<input type="text" class="textBox length-long" placeholder="输入商品名称..."/>
-				<input type="button" value="查询" class="tdBtn"/>
+				<input type="text" name="goods_name" id="goods_name" class="textBox length-long" placeholder="输入商品名称..."  />
+    			<input type="submit" id="btn" value="查询" class="tdBtn"/>
 			</form>
 		</div>
 		<table class="list-style Interlaced">
@@ -38,7 +37,7 @@
 		<?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
 			<td>
 				<span>
-					<input type="checkbox" class="middle children-checkbox"/>
+					<input type="checkbox" class="middle children-checkbox" value="<?php echo ($v["goods_id"]); ?>" name="checkbox"/>
 					<i><?php echo ($v["goods_id"]); ?></i>
 				</span>
 			</td>
@@ -73,8 +72,8 @@
 				<a href="edit_product.html" title="添加商品规格">
 					<img src="/Public/backend/images/icon_edit.gif"/>
 				</a>&nbsp;&nbsp;&nbsp;
-				<a title="删除">
-					<img src="/Public/backend/images/icon_trash.gif"/>
+				<a title="删除" href="<?php echo U('Goods/delAll');?>?goods_id=<?php echo ($v["goods_id"]); ?>" >
+					<img src="images/icon_drop.gif"/>
 				</a>
 			</td>
 		</tr><?php endforeach; endif; ?>
@@ -86,13 +85,11 @@
 			<div class="BatchOperation fl">
 				<input type="checkbox" id="del"/>
 				<label for="del" class="btnStyle middle">全选</label>
-				<input type="button" value="批量删除" class="btnStyle"/>
+				<input type="button" id="delete" value="批量删除" class="btnStyle"/>
 			</div>
 			<!-- turn page -->
 			<div class="turnPage center fr">
-				<a>第一页</a>
-				<a>1</a>
-				<a>最后一页</a>
+				<?php echo ($page); ?>
 			</div>
 		</div>
 	</div>
@@ -146,97 +143,7 @@
 			}
 		})
 	})
-=======
-<title>商品列表</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <base href="/Public/backend/">
-<link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
-<script src="js/jquery.js"></script>
-<script src="js/public.js"></script>
-</head>
-<body>
- <div class="wrap">
-  <div class="page-title">
-    <span class="modular fl"><i></i><em>商品列表</em></span>
-    <span class="modular fr"><a href="<?php echo U('edit_product');?>" class="pt-link-btn">+添加商品</a></span>
-  </div>
-  <div class="operate">
-   <form action="<?php echo U('Goods/product_list');?>" method="get" >
-   <!--  <select class="inline-select">
-     <option>A店铺</option>
-     <option>B店铺</option>
-    </select> -->
-    <input type="text" name="goods_name" id="goods_name" class="textBox length-long" placeholder="输入商品名称..."  />
-    <input type="submit" id="btn" value="查询" class="tdBtn"/>
-   </form>
-  </div>
-  <table class="list-style Interlaced">
-   <tr>
-    <th>ID编号</th>
-    <th>产品</th>
-    <th>名称</th>
-    <th>市场价</th>
-    <th>会员价</th>
-    <th>库存</th>
-    <th>精品</th>
-    <th>新品</th>
-    <th>热销</th>
-    <th>操作</th>
-   </tr>
-   <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
-    <td>
-     <span>
-     <input type="checkbox" class="middle children-checkbox" value="<?php echo ($v["goods_id"]); ?>" name="checkbox" />
-     <i><?php echo ($v["goods_id"]); ?></i>
-     </span>
-    </td>
-    <td class="center pic-area"><img src="<?php echo ($v["goods_cover"]); ?>" class="thumbnail"/></td>
-    <td class="td-name">
-      <span class="ellipsis td-name block"><?php echo ($v["goods_name"]); ?></span>
-    </td>
-    <td class="center">
-     <span>
-      <i>￥</i>
-      <em><?php echo ($v["goods_original"]); ?></em>
-     </span>
-    </td>
-    <td class="center">
-     <span>
-      <i>￥</i>
-      <em><?php echo ($v["goods_price"]); ?></em>
-     </span>
-    </td>
-    <td class="center">
-     <span>
-      <em><?php echo ($v["goods_stock"]); ?></em>
-      <i>件</i>
-     </span>
-    </td>
-    <td class="center"><img src="images/yes.gif"/></td>
-    <td class="center"><img src="images/no.gif"/></td>
-    <td class="center"><img src="images/yes.gif"/></td>
-    <td class="center">
-     <a href="http://www.baidu.com/跳转至前台页面哦" title="查看" target="_blank"><img src="images/icon_view.gif"/></a>
-     <a href="edit_product.html" title="编辑"><img src="images/icon_edit.gif"/></a>
-     <a title="删除"  href="<?php echo U('Goods/delAll');?>?goods_id=<?php echo ($v["goods_id"]); ?>" ><img src="images/icon_drop.gif"/></a>
-    </td>
-   </tr><?php endforeach; endif; ?>
-  </table>
-  <!-- BatchOperation -->
-  <div style="overflow:hidden;">
-      <!-- Operation -->
-	  <div class="BatchOperation fl">
-	   <input type="checkbox" id="del" value=" " />
-	   <label for="del" class="btnStyle middle"  >全选</label>
-	   <input type="button" id="delete" value="批量删除" class="btnStyle"/>
-	  </div>
-	  <!-- turn page -->
-	  <div class="turnPage center fr">
-        <?php echo ($page); ?>
-	  </div>
-  </div>
- </div>
-</body>
+</script>
 <script>
 // 全选反选
     $(function () {
@@ -253,14 +160,15 @@
             }
         })
     })
-     // 批删
+
+    // 批删
     $(document).on('click', '#delete', function () {
         var checkedNum = $("input[name='checkbox']:checked").length;
         if (checkedNum == 0) {
             alert("请选择至少一项！");
             return;
         }
-// // 批量选择
+		// 批量选择
         if (confirm("确定要删除所选项目？")) {
             var che = $("input[name='checkbox']:checked");
             var goods_id = new Array();
@@ -277,20 +185,5 @@
             });
         }
     })
-      //搜索
-      // $("#btn").click(function(){
-      //   var name = $("#goods_name").val();
-      //   alert(name);
-      //   $.ajax({
-      //     type:"get",
-      //     url:"<?php echo U('Goods/product_list');?>?goods_name="+name,
-      //     success:function(res){
-           
-      //       // JSON.parse(res);
-      //       alert(res.goods_name)
-      //     }
-      //   })
-      // })
->>>>>>> 5aa020acc1d1338a33aa22b3a6da692fc63b790d
 </script>
 </html>
