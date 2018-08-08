@@ -100,105 +100,33 @@
 
 <div>
 
-    <!DOCTYPE html>
-<html>
-
-
-<body>
-
-<div class="product">
-    <ul>
-        <a href="<?php echo U('Index/buy');?>">
-            <li>
-                <img src="img/pro_pic1.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <a href="<?php echo U('Index/buy');?>">
-            <li>
-                <img src="img/pro_pic2.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <a href="<?php echo U('Index/buy');?>">
-            <li>
-                <img src="img/pro_pic3.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <a href="<?php echo U('Index/buy');?>">
-            <li>
-                <img src="img/pro_pic4.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <a href="<?php echo U('Index/buy');?>">
-            <li>
-                <img src="img/pro_pic3.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <a href="<?php echo U('Index/buy');?>">
-            <li>
-                <img src="img/pro_pic4.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-    </ul>
+    <div class="bloglist">
+    <a href="blog.html">返回博客列表</a>
+    <p class="title">2016年1月15日 花束主题 | 感谢之意</p>
+    <p class="date">2016/01/25</p>
+    <p class="info">待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+        看着他们的眼睛，问他们近况如何，听他们讲自己的生活，自己的爱人，自己的孩子，自己的小狗，自己的一切一切，我们就静静的听着就好。
+        就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+        就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+        就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+        就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+        就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+        就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+        就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+        就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+        就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+    </p>
+    <p class="name">发表：XXXX</p>
 </div>
 
 
-</body>
 
-</html>
 
 </div>
 

@@ -220,20 +220,22 @@
 				我的留言
 			</div>
 			<div class="per_box per_info" style="display: none;">
-				<form action="" method="post">
+				<form action="<?php echo U('User/Pwd');?>" method="post">
+				<input type="hidden" name="user_id" value="<?php echo ($user_id); ?>" id="uid" />
 					<p>
 						<span>旧密码</span>
-						<input type="password"/>
+						<input type="password" id="oldpwd" />
 					</p>
 					<p>
 						<span>新密码</span>
-						<input type="password"/>
+						<input type="password" id="newpwd" />
 					</p>
 					<p>
-						<span>确认新密码</span>
-						<input type="password"/>
+						<span>确认新密码 </span>
+						<input type="password" id="newpwd1" />
+						<span id="tishi"></span>
 					</p>
-					<p class="per_info_btn">保存</p>
+					<p class="per_info_btn" id="pwd_btn">保存</p>
 				</form>
 			</div>
 		</div>
@@ -258,6 +260,8 @@
 					$(".per_box").eq($(".per_nav2 li").index(this)).fadeIn();
 				});
 			});
+
+
 				</script>
 
 

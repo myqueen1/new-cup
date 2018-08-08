@@ -8,7 +8,7 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport"
           content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-    <base href="/Public/frontend/">
+    <base href="/18-08-03/cup/new-cup/Public/frontend/">
     <link rel="stylesheet" href="css/demo.css"/>
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/fen.css"/>
@@ -109,7 +109,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="renderer" content="webkit">
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-		<base href="/Public/frontend/">
+		<base href="/18-08-03/cup/new-cup/Public/frontend/">
 		<link rel="stylesheet" href="css/demo.css" />
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/fen.css" />

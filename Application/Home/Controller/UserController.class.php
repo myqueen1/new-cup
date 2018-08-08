@@ -74,4 +74,31 @@ class UserController extends Controller
     public function SetCookie($data){
 
     }
+
+    //修改密码
+    public function Pwd(){
+        if(IS_AJAX){
+            $user_pass=I("post.user_pass");
+            $newpwd=I("post.newpwd");
+            $newpwd1=I("post.newpwd1");
+            if($newpwd!=$newpwd1){
+                $data['status']=-2;
+                $data['info']="两次密码不一致";
+                $this->ajaxReturn($data);
+                return;
+            }
+           if($oldPwd!=$_SESSION['pwd']){
+               $data['status']=-1;
+               $data['info']="原始密码错误";
+               $this->ajaxReturn($data);
+               return;
+           }else{
+               $data['status'] = 0;
+               $data['info'] = "输入正确";
+               $this->ajaxReturn($data);
+               return;
+           }
+        }
+    }
+
 }
