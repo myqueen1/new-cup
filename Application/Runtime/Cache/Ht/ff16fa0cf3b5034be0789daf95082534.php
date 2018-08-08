@@ -16,9 +16,15 @@
 			</span>
 		</div>
 		<div class="operate">
+<<<<<<< HEAD
 			<form method="get">
 				<input type="text" name="goods_name" class="textBox length-long" placeholder="输入商品名称..." value="<?php echo ($keyword); ?>" />
 				<input type="submit" value="查询" class="tdBtn"/>
+=======
+			<form>
+				<input type="text" name="goods_name" id="goods_name" class="textBox length-long" placeholder="输入商品名称..."  />
+    			<input type="submit" id="btn" value="查询" class="tdBtn"/>
+>>>>>>> yanxusheng
 			</form>
 		</div>
 		<table class="list-style Interlaced">
@@ -37,7 +43,11 @@
 		<?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
 			<td>
 				<span>
+<<<<<<< HEAD
 					<input type="checkbox" name="checkbox" value="<?php echo ($v["goods_id"]); ?>" class="middle children-checkbox"/>
+=======
+					<input type="checkbox" class="middle children-checkbox" value="<?php echo ($v["goods_id"]); ?>" name="checkbox"/>
+>>>>>>> yanxusheng
 					<i><?php echo ($v["goods_id"]); ?></i>
 				</span>
 			</td>
@@ -72,8 +82,8 @@
 				<a href="edit_product.html" title="添加商品规格">
 					<img src="/Public/backend/images/icon_edit.gif"/>
 				</a>&nbsp;&nbsp;&nbsp;
-				<a title="删除">
-					<img src="/Public/backend/images/icon_trash.gif"/>
+				<a title="删除" href="<?php echo U('Goods/delAll');?>?goods_id=<?php echo ($v["goods_id"]); ?>" >
+					<img src="images/icon_drop.gif"/>
 				</a>
 			</td>
 		</tr><?php endforeach; endif; ?>
@@ -160,14 +170,23 @@
             }
         })
     })
+<<<<<<< HEAD
      // 批删
+=======
+
+    // 批删
+>>>>>>> yanxusheng
     $(document).on('click', '#delete', function () {
         var checkedNum = $("input[name='checkbox']:checked").length;
         if (checkedNum == 0) {
             alert("请选择至少一项！");
             return;
         }
+<<<<<<< HEAD
 // // 批量选择
+=======
+		// 批量选择
+>>>>>>> yanxusheng
         if (confirm("确定要删除所选项目？")) {
             var che = $("input[name='checkbox']:checked");
             var goods_id = new Array();
