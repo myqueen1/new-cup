@@ -1,7 +1,7 @@
 <?php
 /**
  * 说    明:
- * 创建用户: 郭佳伟
+ * 创建用户: 马燕 王晓雪
  * 创建日期: 2018/8/2
  * 创建时间: 9:19
  */
@@ -21,8 +21,12 @@ class UserController extends Controller
 
             $user_model = D('user');
             $result = $user_model->add($data);
+
             if ($result) {
-                //$this->SetCookie();
+                //拼接 储存所必须 id 和手机号
+                $arr = array('id'=>$result , 'user_tel'=>$data['user_tel']);
+                $this->SetCookie($arr);
+
                 $this->ajaxReturn(1);
             } else {
                 $this->ajaxReturn(0);
@@ -35,22 +39,25 @@ class UserController extends Controller
     //登录
     public function login()
     {
-        $User = M("user");
-        $user_tel  = I('post.user_tel');    //手机号
-        $user_pass = I('post.user_pass');   //密码
-        $res=$User->where()->find();
-        if ($res){
-            //返回值int    1：成功   0：失败
-            if (empty($_COOKIE)){
-                $user=array("$res[user_id]","$res[user_nickname]");
-                cookie("user",$user,24*7*3600);
+        
+        $user_tel  = I('get.user_tel');  //手机号
+        $user_pass = MD5(I('get.user_pass'));   //密码
 
-            }else{
-                cookie("user",null);
-                $user=array("$res[user_id]","$res[user_nickname]");
-                cookie("user",$user,24*7*3600);
+        $UserModel = M("user");
+        $result    = $UserModel->field('user_id,user_nickname,user_tel,user_email')
+                               ->where("user_tel = '".$user_tel."'and user_pass = '".$user_pass."'")
+                               ->find();
+
+        //判断返回值 并 存储COOKIE
+        if ($result){
+            //调用设置COOKIE方法
+            $comeback = $this->SetCookie($result);
+
+            if ($comeback) {
+                echo json_encode("1");
+            } else {
+                echo json_encode("0");
             }
-            echo json_encode("1");
         }else{
             echo json_encode("0");
         }
@@ -68,6 +75,11 @@ class UserController extends Controller
 
     //存储COOKIE
     public function SetCookie($data){
-
+        if (empty($data)) {
+            return false;
+        } else {
+            cookie('user_info',json_encode($data));
+            return true;
+        }
     }
 }

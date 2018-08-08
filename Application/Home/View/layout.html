@@ -107,22 +107,24 @@ $(".sub").click(function () {
     var pass_myreg= /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
     //判断是否通过请求 然后再去请求控制器
     if (tel_myreg.test(user_tel) && pass_myreg.test(user_pass)) {
-
+        $('.Hint').html('');
         $.ajax({ 
-            url:"{:U('User/login')}" , type:"POST",
-            data:{user_tel:user_tel,user_pass:user_pass} , dataType:"json",
+            url:"{:U('User/login')}",type:"GET",dataType:"json",
+            data:{user_tel:user_tel,user_pass:user_pass}, 
             success:function (comeback) {
-                console.log(comeback)
-                /*if(e==1){
-                    window.location=("{:U('Index/index')}");
+                //console.log(comeback)
+                if(comeback==1){
+                    $('.Hint').html('<font color="green" size="1">登录成功,请稍后....</font>');
+                    setTimeout(function(){
+                        window.location.reload();//刷新当前页面.
+                    },1500)
                 }else{
-                    window.location=("{:U('Index/index')}");
-                }*/
+                    $('.Hint').html('<font color="red" size="1">手机号 或密码 不正确 请核对后重试!@</font>');
+                }
             }
         })
     } else {
-        $('.Hint');
-        alert('请输入格式正确的手机号 或 密码');
+        $('.Hint').html('<font color="red" size="1">请输入格式正确的手机号 或 密码</font>');
     };
 });
 </script>

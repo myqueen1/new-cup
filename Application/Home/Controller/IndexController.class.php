@@ -202,8 +202,5 @@ class IndexController extends Controller
             ->where("type_id='$id'")
             ->select();
         echo json_encode($data);
-
-
     }
-
 }
