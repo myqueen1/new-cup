@@ -16,28 +16,38 @@ class GoodsController extends Controller
     //商品列表
     public function product_list()
     {
-        if (IS_POST) {
-            $data = I("post.");
-            //判断商品名 是否为空
-            if (empty($data['goods_name'])) {
-                //为空跳回页面
-                echo "<script>alert('商品名不能为空');location.href='product_list'</script>";
-            } else {
-                //不为空 查询商品名称是否唯一
-                $goods = M('goods')->where("goods_name=" . "'" . $data['goods_name'] . "'")->find();
-                if ($goods) {
-                    echo "<script>alert('商品已存在');location.href='product_list'</script>";
-                } else {
-                    //不存在 添加
-                    M("goods")->add($data);
-                    $id = M("goods")->getLastInsID();
-                    $this->redirect('Goods/add_con', array('goods_id' => $id), 0, '页面跳转中...');
-                }
-            }
-        }
-        $data = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->select();
+        $num = M('goods')->count();
+        $goods_name = I("get.goods_name");
+        $map['goods_name'] =array('like',"%$goods_name%");
+        $count      = M('goods')->where($map)->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,4);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+        $data = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->where($map)->order('five_goods.goods_id')->limit($Page->firstRow.','.$Page->listRows)->select();
         $this->assign('data',$data);
-        $this->display();
+        $this->assign("page",$show);
+        $this->display();  
+    }
+    //
+    //删除
+    public function delAll()
+    {
+        if (IS_POST) {
+            $ids = I('post.goods_id');
+            $str = implode($ids, ',');
+            $where = "`goods_id` IN ($str)";
+        } else {
+            $goods_id = I('get.goods_id');
+            $where = "`goods_id`=" . $goods_id;
+        }
+
+        if (M('goods')->where($where)->delete()) {
+            M('goods_detailed')->where($where)->delete();
+            M('goods_img')->where($where)->delete();
+            $this->redirect('Goods/product_list', "", 0, '页面跳转中...');
+        } else {
+            $this->error("删除失败");
+        }
+
     }
 
     //商品回收站
@@ -49,13 +59,34 @@ class GoodsController extends Controller
     //商品添加
     public function edit_product()
     {
-        //分类表
-        $fen = D('type')->select();
-        //品牌表
-        $brand = D('brand')->select();
-        $this->assign("fen", $fen);
-        $this->assign("brand", $brand);
-        $this->display();
+           if (IS_POST) {
+            $data = I("post.");
+            //判断商品名 是否为空
+            if (empty($data['goods_name'])) {
+                //为空跳回页面
+                $this->error('商品名不能为空');
+            } else {
+                //不为空 查询商品名称是否唯一
+                $goods = M('goods')->where("goods_name=" . "'" . $data['goods_name'] . "'")->find();
+                if ($goods) {
+                    $this->error('商品已存在');
+                } else {
+                    //不存在 添加
+                    M("goods")->add($data);
+                    $id = M("goods")->getLastInsID();
+                    $this->redirect('Goods/add_con', array('goods_id' => $id), 0, '页面跳转中...');
+                }
+            }
+        } else {
+              //分类表
+            $fen = D('type')->select();
+            //品牌表
+            $brand = D('brand')->select();
+            $this->assign("fen", $fen);
+            $this->assign("brand", $brand);
+            $this->display();
+        }
+      
     }
 
     //商品详情添加
