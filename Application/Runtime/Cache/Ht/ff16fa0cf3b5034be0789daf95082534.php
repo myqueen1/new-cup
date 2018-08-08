@@ -174,7 +174,6 @@
             for (var a = 0; a < che.length; a++) {
                 goods_id[a] = che[a].value;
             }
-            alert(goods_id)
             $.ajax({
                 type: "POST",
                 url: "<?php echo U('Goods/delAll');?>",
