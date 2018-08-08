@@ -3,7 +3,7 @@
 <head>
 <title>header</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <base href="/Public/backend/">
+ <base href="/new-cup/Public/backend/">
 <link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
