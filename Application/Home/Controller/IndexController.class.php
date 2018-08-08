@@ -169,7 +169,7 @@ class IndexController extends Controller
 
     }
 
-<<<<<<< HEAD
+
     // 用户个人信息修改
     public function UseSave()
     {
@@ -185,7 +185,6 @@ class IndexController extends Controller
         // var_dump($res);die;
         echo json_encode($res);
     }
-=======
 
 
     /*
@@ -207,5 +206,4 @@ class IndexController extends Controller
 
     }
 
->>>>>>> 98b4dc4e26cc2917a0833ab001fcea0f1adfaf92
 }
