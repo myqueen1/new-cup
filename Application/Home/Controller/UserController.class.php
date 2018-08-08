@@ -15,22 +15,24 @@ class UserController extends Controller
     //注册
     public function register()
     {
-        if(IS_POST) {
-            $data = I('post.');
-            $model = D('user');
-            $res = $model->add($data);
-//            var_dump($res);
-//            dei;
-            if ($res) {
-                $this->success('注册成功', U('Index/index'));
+        if(IS_AJAX) {
+            $data['user_tel']  = I('post.tel');
+            $data['user_pass'] = MD5(I('post.pass'));
+
+            $user_model = D('user');
+            $result = $user_model->add($data);
+            if ($result) {
+                //$this->SetCookie();
+                $this->ajaxReturn(1);
             } else {
-                $this->error('注册失败');
+                $this->ajaxReturn(0);
             }
         }else{
             $this->display();
         }
     }
-//   登录
+
+    //   登录
     public function login()
     {
         $User = M("user"); // 实例化User对象// 查找status值为1name值为think的用户数据
@@ -65,5 +67,11 @@ class UserController extends Controller
         if(empty($user)){
             $this->success(U('Index/index'),0);
         }
+    }
+
+
+    //存储COOKIE
+    public function SetCookie($data){
+
     }
 }
