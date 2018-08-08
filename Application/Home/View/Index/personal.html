@@ -119,19 +119,20 @@
 			</div>
 			<div class="per_box per_info" style="display: none;">
 				<form action="" method="post">
+				<input type="hidden" name="user_id" value="{$user_id}" id="uid" />
 					<p>
 						<span>旧密码</span>
-						<input type="password"/>
+						<input type="password" name="user_pass" />
 					</p>
 					<p>
 						<span>新密码</span>
-						<input type="password"/>
+						<input type="password" name="newpwd" />
 					</p>
 					<p>
-						<span>确认新密码</span>
-						<input type="password"/>
+						<span>确认新密码 </span>
+						<input type="password" name="newpwd1" />
 					</p>
-					<p class="per_info_btn">保存</p>
+					<button  type="button" id="pwd_btu" name="dosubmit" class="per_info_btn">保存</button>
 				</form>
 			</div>
 		</div>
