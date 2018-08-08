@@ -7,9 +7,9 @@
 
 namespace Ht\Controller;
 
-use Think\Controller;
+use Ht\Controller\CommonController;
 
-class BrandController extends Controller
+class BrandController extends CommonController
 {
 //    品牌列表
     public function brand_list()
