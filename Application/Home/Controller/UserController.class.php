@@ -68,7 +68,7 @@ class UserController extends Controller
     {
         $user=cookie('user',null);
         if(empty($user)){
-            $this->success(U('Index/index'),0);
+            $this->display('Index/index');
         }
     }
 

@@ -35,7 +35,39 @@ class IndexController extends Controller
 //    个人中心
     public function personal()
     {
-        $this->display();
+
+        $arr=json_decode(cookie('user_info'),true);
+
+        if (!$arr) {
+          
+        }
+        else
+        {
+            // var_dump($arr[0]);
+            $id=$arr['user_id'];
+            $DB=M('user');
+            $data=$DB->where("user_id= $id ")->find();
+            // echo $DB->getLastSql();die;
+            $this->assign('data',$data);
+        }
+        
+         $this->display();
+    }
+
+    // 用户个人信息修改
+    public function UseSave()
+    {
+        // echo 11;
+        $db=D('user');
+        // $data=$db->select();
+        $arr=I('post.');
+        // var_dump($arr);die;
+        $id=$arr['user_id'];
+        // echo $id;die;
+        $data=$db->where("user_id='$id'")->save($arr);
+        $res=$db->where("user_id='$id'")->find();
+        // var_dump($res);die;
+        echo json_encode($res);
     }
 
 //    留言板
@@ -167,23 +199,6 @@ class IndexController extends Controller
         echo  json_encode($data);
 
 
-    }
-
-
-    // 用户个人信息修改
-    public function UseSave()
-    {
-        // echo 11;
-        $db=D('user');
-        // $data=$db->select();
-        $arr=I('post.');
-        // var_dump($arr);die;
-        $id=$arr['user_id'];
-        // echo $id;die;
-        $data=$db->where("user_id='$id'")->save($arr);
-        $res=$db->where("user_id='$id'")->find();
-        // var_dump($res);die;
-        echo json_encode($res);
     }
 
 
