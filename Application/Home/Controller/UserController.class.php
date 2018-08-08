@@ -32,19 +32,15 @@ class UserController extends Controller
         }
     }
 
-    //   登录
+    //登录
     public function login()
     {
-        $User = M("user"); // 实例化User对象// 查找status值为1name值为think的用户数据
-        $data=$_POST;
-//        $where="where {$data['name']}==user_nickname && {$data['user_pass']}==user_pass || {$data['name']}==user_tel && {$data['user_pass']}==user_pass || {$data['name']}==user_email && {$data['user_pass']}==user_pass";
-        $res=$User->where("'{$data["name"]}'=user_nickname && '{$data["user_pass"]}'=user_pass || '{$data["name"]}'=user_tel && '{$data["user_pass"]}'=user_pass || '{$data["name"]}'=user_email && '{$data["user_pass"]}'=user_pass")->find();
-//       echo $User->getLastSql();
-//       var_dump($res['user_id']);die;
-//        $user=array("$res[user_id]","$res[user_nickname]");
-//        var_dump($user);die;
+        $User = M("user");
+        $user_tel  = I('post.user_tel');    //手机号
+        $user_pass = I('post.user_pass');   //密码
+        $res=$User->where()->find();
         if ($res){
-//            返回值int    1：成功   0：失败
+            //返回值int    1：成功   0：失败
             if (empty($_COOKIE)){
                 $user=array("$res[user_id]","$res[user_nickname]");
                 cookie("user",$user,24*7*3600);
@@ -60,7 +56,7 @@ class UserController extends Controller
         }
     }
 
-//    退出
+    //退出
     public function Singout()
     {
         $user=cookie('user',null);

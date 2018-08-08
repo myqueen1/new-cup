@@ -111,8 +111,6 @@ $(".yan_code").on('click',function(){
 	var back_tel = validate_tel();
 
 	if (back_tel) {
-		
-
         $.ajax({
             url:"{:U('Send/SendMessage')}",
             type:'GET',

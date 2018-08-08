@@ -57,53 +57,11 @@
     </div>
 </div>
 
-<script>
-    $(function () {
-        $(".meau").on("click", function (e) {
-            $(".meau_box").slideToggle();
-            $(document).one("click", function () {
-                $(".meau_box").slideUp();
-            });
-            e.stopPropagation();
-        });
-        $(".meau").on("click", function (e) {
-            e.stopPropagation();
-        });
-
-        $(".sub").click(function () {
-            var name=$("input[name='name']").val();
-            var user_pass=$("input[name='user_pass']").val();
-//            alert(user_pass);
-//            alert("{:U('User/login')}");
-            $.ajax({
-                url:"{:U('User/login')}",
-                type:"POST",
-                data: {
-                    'name':name,
-                    'user_pass':user_pass
-                    },
-                dataType:"json",
-                success:function (e) {
-                    if(e==1){
-                        window.location=("{:U('Index/index')}");
-//                        alert(1);
-                    }else{
-                        window.location=("{:U('Index/index')}");
-//                        alert(2)
-                    }
-                }
-            })
-        });
-    });
-</script>
-
-
 <div>
 
     {__CONTENT__}
 
 </div>
-
 
 <div class="login_bg">
     <div class="login">
@@ -112,33 +70,60 @@
         <form action="" method="post">
             <p class="list">
                 <img src="img/login_pic2.png"/>
-                <input type="text" name="name" placeholder="请输入注册时的邮箱/手机号"/>
+                <input type="text" name="user_tel" placeholder="请输入注册的手机号"/>
             </p>
             <p class="list">
                 <img src="img/login_pic3.png"/>
-                <input type="password" name="user_pass" placeholder="请输入密码"/>
+                <input type="password" name="user_pass" placeholder="请输入您设置的密码"/>
             </p>
-            <a href="find.html">忘记密码?</a>
-            <p>
-                <a href="javascript:void(0)" class="sub">登录</a>
-            </p>
+            <p class="Hint"></p>
+            <p><a href="javascript:void(0)" class="sub">登录</a></p>
         </form>
     </div>
 </div>
-
-
-<!--<div class="footer">-->
-    <!--<div class="footer_con">-->
-        <!--<p>享有 | enjoy</p>-->
-        <!--<img src="img/footer.png"/>-->
-    <!--</div>-->
-    <!--<div class="footer_con2">-->
-        <!--<p>© 2015 dingdongyouli.com All rights reserved.</p>-->
-        <!--<img src="img/footer_p2.jpg"/>-->
-    <!--</div>-->
-
-<!--</div>-->
-
 </body>
+<script>
+$(function () {
+    $(".meau").on("click", function (e) {
+        $(".meau_box").slideToggle();
+        $(document).one("click", function () {
+            $(".meau_box").slideUp();
+        });
+        e.stopPropagation();
+    });
 
+    $(".meau").on("click", function (e) {
+        e.stopPropagation();
+    });
+});
+</script>
+<script>
+$(".sub").click(function () {
+    //获取用户填写验证码
+    var user_tel  = $("input[name='user_tel']").val();
+    var user_pass = $("input[name='user_pass']").val();
+    //编写手机号正则  密码正则
+    var tel_myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+    var pass_myreg= /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
+    //判断是否通过请求 然后再去请求控制器
+    if (tel_myreg.test(user_tel) && pass_myreg.test(user_pass)) {
+
+        $.ajax({ 
+            url:"{:U('User/login')}" , type:"POST",
+            data:{user_tel:user_tel,user_pass:user_pass} , dataType:"json",
+            success:function (comeback) {
+                console.log(comeback)
+                /*if(e==1){
+                    window.location=("{:U('Index/index')}");
+                }else{
+                    window.location=("{:U('Index/index')}");
+                }*/
+            }
+        })
+    } else {
+        $('.Hint');
+        alert('请输入格式正确的手机号 或 密码');
+    };
+});
+</script>
 </html>
