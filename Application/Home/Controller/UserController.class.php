@@ -38,7 +38,7 @@ class UserController extends Controller
         $User = M("user"); // 实例化User对象// 查找status值为1name值为think的用户数据
         $data=$_POST;
 //        $where="where {$data['name']}==user_nickname && {$data['user_pass']}==user_pass || {$data['name']}==user_tel && {$data['user_pass']}==user_pass || {$data['name']}==user_email && {$data['user_pass']}==user_pass";
-        $res=$User->where("'{$data["name"]}'=user_nickname && '{$data["user_pass"]}'=user_pass || '{$data["name"]}'=user_tel && '{$data["user_pass"]}'=user_pass || '{$data["name"]}'=user_email && '{$data["user_pass"]}'=user_pass")->find();
+        $res=$User->where("'{$data["name"]}'=user_tel && '{$data["user_pass"]}'=user_pass")->find();
 //       echo $User->getLastSql();
 //       var_dump($res['user_id']);die;
 //        $user=array("$res[user_id]","$res[user_nickname]");
@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $user=cookie('user',null);
         if(empty($user)){
-            $this->success(U('Index/index'),0);
+            $this->display('Index/index');
         }
     }
 
