@@ -38,22 +38,25 @@
         </ul>
     </div>
     <div class="hea_right">
-        <p>
-            <?php $arr=cookie('user')?>
-            <?php if(empty($arr)){ ?>
-            <a href="{:U('User/register')}">注册</a>|<a class="login_btn">登录</a>
-            <?php }else{ ?>
-            用户名：<a href="{:U('User/personal')}"><?php echo $arr[1] ?></a>
-            <a href="{:U('User/register')}">注册</a>|<a href="{:U('User/Singout')}">退出</a>
-            <?php } ?>
-        </p>
-        <a href="shop_car.html"><p>
-            <i class="iconfont">&#xe600;</i>
-            <span>0件</span>
-        </p>
+        
+<?php 
+    $user_info = json_decode(cookie('user_info'),true);
+    if(empty($user_info)){ 
+?>
+    <p>
+        <a href="{:U('User/register')}">注册</a>|<a class="login_btn">登录</a>
+    </p>
+<?php }else{ ?>
+    <p>
+        用户名：
+        <a href="{:U('User/personal')}"><?php echo $user_info['user_nickname'] ?></a>
+        <a href="javascript:void(0);" class="loginOut">退出</a>
+        <a href="">
+            <p><i class="iconfont">&#xe600;</i><span>0件</span></p>
         </a>
-
-
+    </p>
+<?php } ?>
+        
     </div>
 </div>
 
@@ -127,5 +130,15 @@ $(".sub").click(function () {
         $('.Hint').html('<font color="red" size="1">请输入格式正确的手机号 或 密码</font>');
     };
 });
+</script>
+<script>
+$('.loginOut').on('click',function(){
+    if (confirm("你确定退出登录吗？")) { 
+        $.ajax({url:"{:U('User/Singout')}",type:"GET",success:function (comeback) {
+                window.location.reload();
+            }
+        })
+    }
+})
 </script>
 </html>

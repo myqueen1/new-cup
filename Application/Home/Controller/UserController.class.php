@@ -66,10 +66,7 @@ class UserController extends Controller
     //退出
     public function Singout()
     {
-        $user=cookie('user',null);
-        if(empty($user)){
-            $this->display('Index/index');
-        }
+        $user_info = cookie('user_info',null);
     }
 
 
