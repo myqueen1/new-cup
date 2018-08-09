@@ -1,0 +1,38 @@
+/*
+*  author: YDC
+*  home.css
+*  http://www.yidianc.com/
+*/
+.ydc-release-form-group-input {
+    position: relative;
+}
+.ydc-reg-form-input .ydc-form-control{
+    width: 100%;
+    height: 38px;
+    padding: 8px 12px;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    box-shadow: none;
+    border-radius: 0;
+    height: 40px;
+    box-sizing: border-box;
+    font-size: 12px;
+    color: #333;
+}
+.ydc-form-control {
+    width: 78%;
+    height: 40px;
+    padding: 8px 12px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.ydc-reg-form-input .ydc-form-control:hover{
+    border-color:#ff6980;
+}
