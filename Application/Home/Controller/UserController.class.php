@@ -75,30 +75,12 @@ class UserController extends Controller
 
     }
 
-    //修改密码
-    public function Pwd(){
-        if(IS_AJAX){
-            $user_pass=I("post.user_pass");
-            $newpwd=I("post.newpwd");
-            $newpwd1=I("post.newpwd1");
-            if($newpwd!=$newpwd1){
-                $data['status']=-2;
-                $data['info']="两次密码不一致";
-                $this->ajaxReturn($data);
-                return;
-            }
-           if($oldPwd!=$_SESSION['pwd']){
-               $data['status']=-1;
-               $data['info']="原始密码错误";
-               $this->ajaxReturn($data);
-               return;
-           }else{
-               $data['status'] = 0;
-               $data['info'] = "输入正确";
-               $this->ajaxReturn($data);
-               return;
-           }
-        }
+    //核对旧密码
+    public function VerificationOld(){
+        $user_info = cookie('user');
+        echo json_encode($user_info);die;
+
+        $oldpass = I('post.oldpwd');
     }
 
 }
