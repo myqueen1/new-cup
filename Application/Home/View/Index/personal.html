@@ -196,4 +196,59 @@ function validate_old(){
 	})
 }
 </script>
+<script>
+	// alert($);
+	$(function(){
+		// alert(1);
+		$(document).on('click',".per_info_btn",function(){
+			var user_id=$("input[name='user_id']").val();
+			var user_nickname=$("input[name='user_nickname']").val();
+			// alert(id);
+			var user_email=$("input[name='user_email']").val();
+			var user_tel=$("input[name='user_tel']").val();
+            $.ajax({
+            	url:"{:U('Index/UseSave')}",
+            	type:'POST',
+            	data:
+            	{
+            		'user_id':user_id,
+            		'user_nickname':user_nickname,
+            		'user_email':user_email,
+            		'user_tel':user_tel,
+            	},
+            	dataType:'json',
+            	success:function(e)
+            	{
+            		// alert(e);
+                  if (e=='') 
+                  {
+                     window.location.reload();
+                  }
+                  else
+                  {
+                     var str='<form>';
+                     str+='<p>';
+                     str+='<span>昵称</span>';
+                     str+='<input type="text" name="user_nickname" value="'+e.user_nickname+'"/>';
+                     str+='<span>修改</span></p>';
+                     str+='<p>';
+                     str+='<span>邮箱地址</span>';
+                     str+='<input type="text" name="user_email" value="'+e.user_email+'"/>';
+                     str+='<span>修改</span></p>';
+                     str+='<p>';
+                     str+='<span>手机号码</span>';
+                     str+='<input type="text" name="user_tel" value="'+e.user_tel+'"/>';
+                     str+='<span>修改</span></p>';
+                     str+='<input type="hidden" name="user_id" value="'+e.user_id+'"/>';
+                     str+='<p class="per_info_btn">保存</p>';
+                     str+='</form>';
+                  }
+                  $(".per_info").html(str);
+            	}
+
+            	
+            })
+		})
+	})
+</script>
 </html>
