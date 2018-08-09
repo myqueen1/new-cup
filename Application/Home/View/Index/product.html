@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
+<body>
 <center>
-    <input type="text" name="search_goods" class="bb">
-    <button class="sou">搜索</button>
-</center>
-<center>
+<div class="ydc-release-form-group-input">
+<form action=""></form>
+    <input type="text" class="ydc-form-control" name="search_goods" title="输入商品名称,搜索商品. . . ." placeholder="🔍    输入您想要购买的商品名称试一试吧  .  .  .  . ">
+
+</div>   
     <?php foreach($hot_goods as $val){ ?>
     <a href="javascript:void(0)" class="sous" style="color: red"><?php echo $val['search_name'] ?></a>&nbsp;
     <?php } ?>
 </center>
 
-
-<body>
 
 <div class="product">
     <?php foreach($type as $val){ ?>
@@ -45,43 +45,46 @@
 <script>
     //搜索
     $(function () {
-        $(".sou").click(function () {
-            var names=$("input[name='search_goods']").val();
-            $.ajax({
-                url:"{:U('Index/searchGoods')}",
-                type:"POST",
-                data:{
-                    'names':names,
-                },
-                dataType:"json",
-                success:function (res) {
-                    if(res==''){
-                        alert('查询商品或类型不存在');
-                        window.location.reload();
+        $(".ydc-form-control").bind('keypress',function (event) {
+            if (event.keyCode == "13") {
+                var names=$("input[name='search_goods']").val();
+                //alert(names)
+                $.ajax({
+                    url:"{:U('Index/searchGoods')}",
+                    type:"POST",
+                    data:{
+                        'names':names,
+                    },
+                    dataType:"json",
+                    success:function (res) {
+                        if(res==''){
+                            alert('查询商品或类型不存在');
+                            window.location.reload();
+                        }
+                        var str='';
+                        $.each(res,function (k,v){
+
+                            str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
+                            str+='<li>';
+                            str+='<img src="__ROOT__'+v.goods_cover+'"/>';
+                            str+='<div class="proli_bg">';
+                            str+='<div class="proli_bg_box">';
+                            str+='<div class="proli_top">';
+                            str+='<p>本周特推</p>';
+                            str+='<p>'+v.goods_name+'</p>';
+                            str+='</div>';
+                            str+='<p>'+v.goods_price+'</p>';
+                            str+='</div>';
+                            str+='</div>';
+                            str+='</li>';
+                            str+='</a>';
+
+                        });
+                        $(".product ul").html(str);
+                        $(".bb").val("");
                     }
-                    var str='';
-                    $.each(res,function (k,v){
-
-                        str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
-                        str+='<li>';
-                        str+='<img src="__ROOT__'+v.goods_cover+'"/>';
-                        str+='<div class="proli_bg">';
-                        str+='<div class="proli_bg_box">';
-                        str+='<div class="proli_top">';
-                        str+='<p>本周特推</p>';
-                        str+='<p>'+v.goods_name+'</p>';
-                        str+='</div>';
-                        str+='<p>'+v.goods_price+'</p>';
-                        str+='</div>';
-                        str+='</div>';
-                        str+='</li>';
-                        str+='</a>';
-
-                    });
-                    $(".product ul").html(str);
-                    $(".bb").val("");
-                }
-            })
+                })
+            };
         });
 
 
