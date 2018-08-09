@@ -47,25 +47,86 @@
 				</ul>
 			</div>
 			<div class="per_box per_info" style="display: none;">
-				<form action="" method="post">
+				<form>
 					<p>
 						<span>昵称</span>
-						<input type="text" value="八月"/>
+						<input type="text" name="user_nickname" value="<?php echo $data['user_nickname']?>"/>
 						<span>修改</span>
 					</p>
 					<p>
 						<span>邮箱地址</span>
-						<input type="email" value="1017848476@qq.com"/>
+						<input type="text" name="user_email" value="<?php echo $data['user_email']?>"/>
 						<span>修改</span>
 					</p>
 					<p>
 						<span>手机号码</span>
-						<input type="tel" value="15281083076" />
+						<input type="text" name="user_tel" value="<?php echo $data['user_tel']?>" />
 						<span>修改</span>
+						<input type="hidden" name="user_id" value="<?php echo $data['user_id']?>">
 					</p>
 					<p class="per_info_btn">保存</p>
 				</form>
 			</div>
+
+
+<script>
+	// alert($);
+	$(function(){
+		// alert(1);
+		$(document).on('click',".per_info_btn",function(){
+			var user_id=$("input[name='user_id']").val();
+			var user_nickname=$("input[name='user_nickname']").val();
+			// alert(id);
+			var user_email=$("input[name='user_email']").val();
+			var user_tel=$("input[name='user_tel']").val();
+            $.ajax({
+            	url:"{:U('Index/UseSave')}",
+            	type:'POST',
+            	data:
+            	{
+            		'user_id':user_id,
+            		'user_nickname':user_nickname,
+            		'user_email':user_email,
+            		'user_tel':user_tel,
+            	},
+            	dataType:'json',
+            	success:function(e)
+            	{
+            		// alert(e);
+                  if (e=='') 
+                  {
+                     window.location.reload();
+                  }
+                  else
+                  {
+                     var str='<form>';
+                     str+='<p>';
+                     str+='<span>昵称</span>';
+                     str+='<input type="text" name="user_nickname" value="'+e.user_nickname+'"/>';
+                     str+='<span>修改</span></p>';
+                     str+='<p>';
+                     str+='<span>邮箱地址</span>';
+                     str+='<input type="text" name="user_email" value="'+e.user_email+'"/>';
+                     str+='<span>修改</span></p>';
+                     str+='<p>';
+                     str+='<span>手机号码</span>';
+                     str+='<input type="text" name="user_tel" value="'+e.user_tel+'"/>';
+                     str+='<span>修改</span></p>';
+                     str+='<input type="hidden" name="user_id" value="'+e.user_id+'"/>';
+                     str+='<p class="per_info_btn">保存</p>';
+                     str+='</form>';
+                  }
+                  $(".per_info").html(str);
+            	}
+
+            	
+            })
+		})
+	})
+</script>
+
+
+
 			<div class="per_box per_coupon" style="display: none;">
 				<ul class="per_couponul">
 					<li class="active">未使用(4)</li>

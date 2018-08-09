@@ -1,95 +1,39 @@
 <!DOCTYPE html>
 <html>
+<center>
+    <input type="text" name="search_goods" class="bb">
+    <button class="sou">搜索</button>
+</center>
+<center>
+    <?php foreach($hot_goods as $val){ ?>
+    <a href="javascript:void(0)" class="sous" style="color: red"><?php echo $val['search_name'] ?></a>&nbsp;
+    <?php } ?>
+</center>
 
 
 <body>
 
 <div class="product">
-    <ul>
-        <a href="{:U('Index/buy')}">
+    <?php foreach($type as $val){ ?>
+    <a href="javascript:void(0)" class="goods_t" tid="<?php echo $val['type_id'] ?>"><?php echo $val['type_name'] ?></a>
+    <?php } ?>
+    <ul class=".aa">
+        <?php foreach($data as $key=>$val){ ?>
+        <a href="{:U('Index/buy')}?id=<?php echo $val['goods_id'] ?>">
             <li>
-                <img src="img/pro_pic1.png"/>
+                <img src="__ROOT__<?php echo $val['goods_cover'] ?>"/>
                 <div class="proli_bg">
                     <div class="proli_bg_box">
                         <div class="proli_top">
                             <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
+                            <p><?php echo $val['goods_name'] ?></p>
                         </div>
-                        <p>99.00</p>
+                        <p><?php echo $val['goods_price'] ?></p>
                     </div>
                 </div>
             </li>
         </a>
-        <a href="{:U('Index/buy')}">
-            <li>
-                <img src="img/pro_pic2.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <a href="{:U('Index/buy')}">
-            <li>
-                <img src="img/pro_pic3.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <a href="{:U('Index/buy')}">
-            <li>
-                <img src="img/pro_pic4.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <a href="{:U('Index/buy')}">
-            <li>
-                <img src="img/pro_pic3.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <a href="{:U('Index/buy')}">
-            <li>
-                <img src="img/pro_pic4.png"/>
-                <div class="proli_bg">
-                    <div class="proli_bg_box">
-                        <div class="proli_top">
-                            <p>本周特推</p>
-                            <p>叮咚叮咚礼盒50G</p>
-                        </div>
-                        <p>99.00</p>
-                    </div>
-                </div>
-            </li>
-        </a>
+        <?php } ?>
     </ul>
 </div>
 
@@ -97,3 +41,128 @@
 </body>
 
 </html>
+
+<script>
+    //搜索
+    $(function () {
+        $(".sou").click(function () {
+            var names=$("input[name='search_goods']").val();
+            $.ajax({
+                url:"{:U('Index/searchGoods')}",
+                type:"POST",
+                data:{
+                    'names':names,
+                },
+                dataType:"json",
+                success:function (res) {
+                    if(res==''){
+                        alert('查询商品或类型不存在');
+                        window.location.reload();
+                    }
+                    var str='';
+                    $.each(res,function (k,v){
+
+                        str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
+                        str+='<li>';
+                        str+='<img src="__ROOT__'+v.goods_cover+'"/>';
+                        str+='<div class="proli_bg">';
+                        str+='<div class="proli_bg_box">';
+                        str+='<div class="proli_top">';
+                        str+='<p>本周特推</p>';
+                        str+='<p>'+v.goods_name+'</p>';
+                        str+='</div>';
+                        str+='<p>'+v.goods_price+'</p>';
+                        str+='</div>';
+                        str+='</div>';
+                        str+='</li>';
+                        str+='</a>';
+
+                    });
+                    $(".product ul").html(str);
+                    $(".bb").val("");
+                }
+            })
+        });
+
+
+        //热词
+        $(".sous").click(function () {
+            var names=$(this).html();
+            $.ajax({
+                url:"{:U('Index/searchGoods')}",
+                type:"POST",
+                data:{
+                    'names':names,
+                },
+                dataType:"json",
+                success:function (res) {
+                    if(res==''){
+                        alert('查询商品或类型不存在');
+                        window.location.reload();
+                    }
+                    var str='';
+                    $.each(res,function (k,v){
+
+                        str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
+                        str+='<li>';
+                        str+='<img src="__ROOT__'+v.goods_cover+'"/>';
+                        str+='<div class="proli_bg">';
+                        str+='<div class="proli_bg_box">';
+                        str+='<div class="proli_top">';
+                        str+='<p>本周特推</p>';
+                        str+='<p>'+v.goods_name+'</p>';
+                        str+='</div>';
+                        str+='<p>'+v.goods_price+'</p>';
+                        str+='</div>';
+                        str+='</div>';
+                        str+='</li>';
+                        str+='</a>';
+
+                    });
+                    $(".product ul").html(str);
+                    $(".bb").val("");
+                }
+            })
+        });
+
+
+        $(".goods_t").click(function () {
+            var id=$(this).attr("tid");
+            $.ajax({
+                url:"{:U('Index/typeGoods')}",
+                type:"POST",
+                data:{
+                    'id':id,
+                },
+                dataType:"json",
+                success:function (res) {
+                    if(res==''){
+                        alert('查询商品或类型不存在');
+                        window.location.reload();
+                    }
+                    var str='';
+                    $.each(res,function (k,v){
+
+                        str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
+                        str+='<li>';
+                        str+='<img src="__ROOT__'+v.goods_cover+'"/>';
+                        str+='<div class="proli_bg">';
+                        str+='<div class="proli_bg_box">';
+                        str+='<div class="proli_top">';
+                        str+='<p>本周特推</p>';
+                        str+='<p>'+v.goods_name+'</p>';
+                        str+='</div>';
+                        str+='<p>'+v.goods_price+'</p>';
+                        str+='</div>';
+                        str+='</div>';
+                        str+='</li>';
+                        str+='</a>';
+
+                    });
+                    $(".product ul").html(str);
+                }
+            })
+        })
+
+    })
+</script>
