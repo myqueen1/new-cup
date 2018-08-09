@@ -82,10 +82,15 @@ class UserController extends Controller
 
     //核对旧密码
     public function VerificationOld(){
-        $user_info = cookie('user');
-        echo json_encode($user_info);die;
-
+        $user_info = cookie('user_info');
         $oldpass = I('post.oldpwd');
+        $result    = $UserModel->field('user_id,user_pass')
+                               ->where("user_id = '".$user_id."'and user_pass = '".$user_pass."'")
+                               ->find();
+        console.log($oldpass);die;
+        //if($result){
+            //$comeback = $this->SetCookie($result);
+        //}
     }
 
 }

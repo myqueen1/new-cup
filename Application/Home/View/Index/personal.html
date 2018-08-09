@@ -41,26 +41,28 @@
 				<li>8800</li>
 				<li>已完成</li>
 				<p>送货地址：xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+
 			</ul>
 		</div>
 		<div class="per_box per_info" style="display: none;">
-			<form action="" method="post">
+			<form>
 				<p>
 					<span>昵称</span>
-					<input type="text" value="八月"/>
+					<input type="text" name="user_nickname" value="{$data.user_nickname}"/>
 					<span>修改</span>
 				</p>
 				<p>
 					<span>邮箱地址</span>
-					<input type="email" value="1017848476@qq.com"/>
+					<input type="text" name="user_email" value="{$data.user_email}"/>
 					<span>修改</span>
 				</p>
 				<p>
 					<span>手机号码</span>
-					<input type="tel" value="15281083076" />
+					<input type="text" name="user_tel" value="{$data.user_tel}" />
 					<span>修改</span>
+					<input type="hidden" name="user_id" value="{$data.user_id}">
 				</p>
-				<p class="per_info_btn">保存</p>
+				<p class="per_info_btn" id="update">保存</p>
 			</form>
 		</div>
 		<div class="per_box per_coupon" style="display: none;">
@@ -69,6 +71,7 @@
 				<li>已使用(1)</li>
 				<li>已过期(2)</li>
 			</ul>
+
 			<div class="per_coupon_box">
 				<div class="per_coupon_list">
 					<p>￥40</p>
@@ -116,7 +119,6 @@
 		</div>
 		<div class="per_box per_info" style="display: none;">
 			<form action="{:U('User/Pwd')}" method="post">
-			<input type="hidden" name="user_id" value="{$user_id}" id="uid" />
 				<p>
 					<span>旧密码</span>
 					<input type="password" id="oldpwd" onblur="validate_old()" disabled value="*********"/>
@@ -136,71 +138,56 @@
 	</div>
 </body>
 <script>
-$(function(){
-	$(".per_couponul li").click(function(){
-		$(".per_couponul li").removeClass("active");
-		$(this).addClass("active");
-		$(".per_coupon_box").hide();
-		$(".per_coupon_box").eq($(".per_couponul li").index(this)).fadeIn();
+	$(function(){
+		$(".per_couponul li").click(function(){
+			$(".per_couponul li").removeClass("active");
+			$(this).addClass("active");
+			$(".per_coupon_box").hide();
+			$(".per_coupon_box").eq($(".per_couponul li").index(this)).fadeIn();
+		});
+		$(".per_nav li").click(function(){
+			$(".per_nav li").removeClass("active");
+			$(this).addClass("active");
+			$(".per_box").hide();
+			$(".per_box").eq($(".per_nav li").index(this)).fadeIn();
+		});
+		$(".per_nav2 li").click(function(){
+			$(".per_nav2 li").removeClass("active");
+			$(this).addClass("active");
+			$(".per_box").hide();
+			$(".per_box").eq($(".per_nav2 li").index(this)).fadeIn();
+		});
 	});
-	$(".per_nav li").click(function(){
-		$(".per_nav li").removeClass("active");
-		$(this).addClass("active");
-		$(".per_box").hide();
-		$(".per_box").eq($(".per_nav li").index(this)).fadeIn();
-	});
-	$(".per_nav2 li").click(function(){
-		$(".per_nav2 li").removeClass("active");
-		$(this).addClass("active");
-		$(".per_box").hide();
-		$(".per_box").eq($(".per_nav2 li").index(this)).fadeIn();
-	});
-});
 </script>
-
 <script>
-	function validate_pwd() {
-		var oldpwd = $("#oldpwd").val();
-		var newpwd = $("#newpwd").val();
-		var newpwd1 = $("#newpwd1").val();
+	//开始修改密码 点击事件
+	$('#start').on('click',function(){
+		//移除 oldpwd 禁用属性/设置空值/新增 oldpwd提示语/修改button提示语并改变ID
+		$('#oldpwd').removeAttr('disabled');
+		$('#oldpwd').val('');
+		$('#oldpwd').attr('placeholder','请输入您的旧密码');
+		$(this).attr('id','verification');
+		$(this).html('验证旧密码');
+	})
 
-		if((oldpwd && newpwd && newpwd1)!='' ){
-	        $("#tishi").html("<font color='red' size='2'>密码不能为空</font>");
-	    }else{
+	//验证旧密码事件
+	function validate_old(){
+		var oldpwd = $('#oldpwd').val();
 
-	    }
+		$.ajax({
+			url:"{:U('User/VerificationOld')}",
+			dataType:'json',type:'POST',
+			data:{oldpwd:oldpwd},
+			success:function(come){
+				console.log(come)
+			}
+		})
 	}
 </script>
 <script>
-//开始修改密码 点击事件
-$('#start').on('click',function(){
-	//移除 oldpwd 禁用属性/设置空值/新增 oldpwd提示语/修改button提示语并改变ID
-	$('#oldpwd').removeAttr('disabled');
-	$('#oldpwd').val('');
-	$('#oldpwd').attr('placeholder','请输入您的旧密码');
-	$(this).attr('id','verification');
-	$(this).html('验证旧密码');
-})
-
-//验证旧密码事件
-function validate_old(){
-	var oldpwd = $('#oldpwd').val();
-
-	$.ajax({
-		url:"{:U('User/VerificationOld')}",
-		dataType:'json',type:'POST',
-		data:{oldpwd:oldpwd},
-		success:function(come){
-			console.log(come)
-		}
-	})
-}
-</script>
-<script>
-	// alert($);
 	$(function(){
 		// alert(1);
-		$(document).on('click',".per_info_btn",function(){
+		$(document).on('click',"#update",function(){
 			var user_id=$("input[name='user_id']").val();
 			var user_nickname=$("input[name='user_nickname']").val();
 			// alert(id);
@@ -240,13 +227,11 @@ function validate_old(){
                      str+='<input type="text" name="user_tel" value="'+e.user_tel+'"/>';
                      str+='<span>修改</span></p>';
                      str+='<input type="hidden" name="user_id" value="'+e.user_id+'"/>';
-                     str+='<p class="per_info_btn">保存</p>';
+                     str+='<p class="per_info_btn" id="update">保存</p>';
                      str+='</form>';
                   }
                   $(".per_info").html(str);
             	}
-
-            	
             })
 		})
 	})
