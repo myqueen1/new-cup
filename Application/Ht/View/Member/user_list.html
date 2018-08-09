@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>会员列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <base href="__PUBLIC__/backend/"/>
+    <link href="style/adminStyle.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery.js"></script>
+    <script src="js/public.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div class="page-title">
+        <span class="modular fl"><i class="user"></i><em>会员列表</em></span>
+        <!--<span class="modular fr"><a href="add_user.html" class="pt-link-btn">+添加新会员</a></span>-->
+    </div>
+    <div class="operate">
+        <form method="post" action="{:U('Member/user_list')}">
+            <!--<select class="inline-select">-->
+                <!--<option>选择会员等级</option>-->
+                <!--<option>白金会员</option>-->
+                <!--<option>黄金会员</option>-->
+            <!--</select>-->
+            <input type="text" name="text" value="{$text}" class="textBox length-long" placeholder="输入会员昵称、手机号码..."/>
+            <input type="submit" value="查询" class="tdBtn"/>
+        </form>
+    </div>
+    <table class="list-style Interlaced">
+        <tr>
+            <th>编号</th>
+            <th>会员昵称</th>
+            <th>邮件地址</th>
+            <th>手机号码</th>
+            <th>是否验证</th>
+            <!--<th>可用资金</th>-->
+            <!--<th>冻结资金</th>-->
+            <th>注册日期</th>
+            <th>操作</th>
+        </tr>
+        <foreach name="list" item="vo">
+            <tr>
+                <td>
+                    <input type="checkbox" name="checkbox" value="{$vo.user_id}"/>
+                    <span class="middle"></span>
+                </td>
+                <td class="center">{$vo.user_nickname}</td>
+                <td class="center">{$vo.user_email}</td>
+                <td class="center">{$vo.user_tel}</td>
+                <td class="center"><img src="images/yes.gif"/></td>
+
+                <!--<td class="center">-->
+                <!--<span>-->
+                <!--<i>￥</i>-->
+                <!--<b>{$vo.user_nickname}￥￥￥￥￥￥￥</b>-->
+                <!--</span>-->
+                <!--</td>-->
+                <!--<td class="center">-->
+                <!--<span>-->
+                <!--<i>￥</i>-->
+                <!--<b>{$vo.user_nickname}￥￥￥￥￥￥￥</b>-->
+                <!--</span>-->
+                <!--</td>-->
+
+                <td class="center">{$vo.user_time}</td>
+                <td class="center">
+                    <a href="{:U('Member/edit_user')}?user_id={$vo.user_id}" class="inline-block" title="编辑"><img src="images/icon_edit.gif"/></a>
+                    <!--<a href="account.html" class="inline-block" title="资金管理"><img src="images/icon_account.gif"/></a>-->
+                    <a href="{:U('Member/del')}?user_id={$vo.user_id}&p=<?php echo I('get.p');?>" class="inline-block delete"
+                       title="删除"><img src="images/icon_drop.gif"/></a>
+                </td>
+            </tr>
+        </foreach>
+    </table>
+    <!-- BatchOperation -->
+    <div style="overflow:hidden;">
+        <!-- Operation -->
+        <div class="BatchOperation fl">
+            <input type="checkbox" id="del"/>
+            <label for="del" class="btnStyle middle">全选</label>
+            <input type="button" value="批量删除" class="btnStyle delete"/>
+        </div>
+        <!-- turn page -->
+        <div class="turnPage center fr">
+            {$page}
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.js"></script>
+<script>
+    // 全选反选
+    $(function () {
+        //实现全选反选
+        $("#del").on('click', function () {
+            $(".list-style input:checkbox").prop("checked", $(this).prop('checked'));
+        })
+        $(".list-style input:checkbox").on('click', function () {
+            //当选中的长度等于checkbox的长度的时候,就让控制全选反选的checkbox设置为选中,否则就为未选中
+            if ($(".list-style input:checkbox").length === $(".list-style input:checked").length) {
+                $("#del").prop("checked", true);
+            } else {
+                $("#del").prop("checked", false);
+            }
+        })
+    })
+
+    // 批删
+    $(document).on('click', '.delete', function () {
+        var checkedNum = $("input[name='checkbox']:checked").length;
+        // 批量选择
+        if (confirm("确定要删除所选项目？")) {
+            var che = $("input[name='checkbox']:checked");
+            var ids = new Array();
+            for (var a = 0; a < che.length; a++) {
+                ids[a] = che[a].value;
+            }
+            $.ajax({
+                type: "POST",
+                url: "{:U('Member/del')}?p=<?php echo I('get.p');?>",
+                data: {'ids': ids},
+                success: function (result) {
+                    if (result) {
+                        alert('删除成功');
+                        location.href = "{:U('Member/user_list')}?p=<?php echo I('get.p');?>";
+                    } else {
+                        alert('删除失败');
+                        location.href = "{:U('Member/user_list')}?p=<?php echo I('get.p');?>";
+                    }
+                }
+            });
+        }
+    })
+
+    // 删除
+    $(document).on('click', '.delete', function () {
+        event.preventDefault()
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            success: function (result) {
+                if (result) {
+                    alert('删除成功');
+                    location.href = "{:U('Member/user_list')}?p=<?php echo I('get.p');?>";
+                } else {
+                    alert('删除失败');
+                    location.href = "{:U('Member/user_list')}?p=<?php echo I('get.p');?>";
+                }
+            }
+        });
+    })
+</script>
+
+</body>
+</html>
