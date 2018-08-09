@@ -51,15 +51,15 @@
 		<div class="buy_img">
 			<div class="page">
 				<div class="middle_img">
-					<img src="<?php echo $data['goods_cover'] ?>" style="display: block;">
+					<img src="__ROOT__<?php echo $data['goods_cover'] ?>" style="display: block;">
 					<?php foreach($Img as $val){ ?>
-					<img src="<?php echo $val['detailed_path'] ?>">
+					<img src="__ROOT__<?php echo $val['detailed_path'] ?>">
 					<?php } ?>
 				</div>
 				<div class="small_img">
-					<img src="<?php echo $data['goods_cover'] ?>" class="active">
+					<img src="__ROOT__<?php echo $data['goods_cover'] ?>" class="active">
 					<?php foreach($Img as $val){ ?>
-					<img src="<?php echo $val['detailed_path'] ?>">
+					<img src="__ROOT__<?php echo $val['detailed_path'] ?>">
 					<?php } ?>
 				</div>
 			</div>

@@ -21,7 +21,7 @@
         <?php foreach($data as $key=>$val){ ?>
         <a href="{:U('Index/buy')}?id=<?php echo $val['goods_id'] ?>">
             <li>
-                <img src="<?php echo $val['goods_cover'] ?>"/>
+                <img src="__ROOT__<?php echo $val['goods_cover'] ?>"/>
                 <div class="proli_bg">
                     <div class="proli_bg_box">
                         <div class="proli_top">
@@ -64,7 +64,7 @@
 
                         str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
                         str+='<li>';
-                        str+='<img src="'+v.goods_cover+'"/>';
+                        str+='<img src="__ROOT__'+v.goods_cover+'"/>';
                         str+='<div class="proli_bg">';
                         str+='<div class="proli_bg_box">';
                         str+='<div class="proli_top">';
@@ -105,7 +105,7 @@
 
                         str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
                         str+='<li>';
-                        str+='<img src="'+v.goods_cover+'"/>';
+                        str+='<img src="__ROOT__'+v.goods_cover+'"/>';
                         str+='<div class="proli_bg">';
                         str+='<div class="proli_bg_box">';
                         str+='<div class="proli_top">';
@@ -145,7 +145,7 @@
 
                         str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
                         str+='<li>';
-                        str+='<img src="'+v.goods_cover+'"/>';
+                        str+='<img src="__ROOT__'+v.goods_cover+'"/>';
                         str+='<div class="proli_bg">';
                         str+='<div class="proli_bg_box">';
                         str+='<div class="proli_top">';
