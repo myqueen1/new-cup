@@ -202,9 +202,10 @@ $('.res_btn').on('click',function(){
 						data:{tel:telphone,pass:pwd1},
 						success:function(come){
 							if (come == 1) {
-								//alert('注册成功，请稍后。。。')
-								$("#res_form").html("注册成功").fadeTo(3000).hide();
-								window.location.href="{:U('Index/index')}"
+								$("#tishi").html("<font color='green' size='2'>注册成功</font>");
+								setTimeout(function(){
+			                        window.location.href = "{:U('Index/index')}";
+			                    },1500)
 								
 							} else{
 								$('.tip').html("<font color='red'>系统错误，请稍后重试！</font>")

@@ -24,7 +24,7 @@ class UserController extends Controller
 
             if ($result) {
                 //拼接 储存所必须 id 和手机号
-                $arr = array('id'=>$result , 'user_tel'=>$data['user_tel']);
+                $arr = array('user_id'=>$result , 'user_tel'=>$data['user_tel']);
                 $this->SetCookie($arr);
 
                 $this->ajaxReturn(1);
@@ -82,15 +82,45 @@ class UserController extends Controller
 
     //核对旧密码
     public function VerificationOld(){
-        $user_info = cookie('user_info');
-        $oldpass = I('post.oldpwd');
-        $result    = $UserModel->field('user_id,user_pass')
-                               ->where("user_id = '".$user_id."'and user_pass = '".$user_pass."'")
-                               ->find();
-        console.log($oldpass);die;
-        //if($result){
-            //$comeback = $this->SetCookie($result);
-        //}
+        if (IS_AJAX) {
+            $oldpass  = MD5(I('post.oldpwd'));    //接收的旧密码
+            $user_info= json_decode(cookie('user_info'),true);    //获取COOKIE中用户ID
+
+            if (!empty($user_info)) {
+                $user_id = $user_info['user_id'];
+
+                $usermodel = D('user');
+                $result = $usermodel->field('user_pass')
+                                    ->where("user_id = '$user_id' and user_pass = '$oldpass'")
+                                    ->find();
+
+                if(!empty($result)) echo json_encode("success");    //核对成功
+                if(empty($result)) echo json_encode("error");  //核对失败
+            } else {
+                die('去你妈逼,正常操作不行???');
+            }
+        }
     }
 
+    //ajax 修改密码
+    public function AjaxUpdatePass(){
+        if (IS_AJAX) {
+            $newpass  = MD5(I('post.newpass'));    //接收的旧密码
+            $user_info= json_decode(cookie('user_info'),true);    //获取COOKIE中用户ID
+
+            if (!empty($user_info)) {
+                $user_id = $user_info['user_id'];
+
+                $usermodel = D('user');
+                $result = $usermodel->where("user_id = '$user_id'")->setField('user_pass',$newpass);
+
+                if(!empty($result)) echo json_encode("success");    //核对成功
+                if(empty($result)) echo json_encode("error");  //核对失败
+            } else {
+                die('去你妈逼,正常操作不行???');
+            }
+        }else {
+            die('去你妈逼,正常操作不行???');
+        }
+    }
 }

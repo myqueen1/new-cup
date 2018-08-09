@@ -129,10 +129,11 @@
 				</p>
 				<p>
 					<span>确认新密码 </span>
-					<input type="password" id="newpwd1" disabled onkeyup="validate_pwd()"/>
+					<input type="password" id="newpwd1" disabled onkeyup="validate_pass()"/>
 				</p>
 				<center><span id="tishi"></span></center>
 				<p class="per_info_btn" id="start">开始修改密码</p>
+				<p class="per_info_btn" id="end" style="display:none">确认修改密码</p>
 			</form>
 		</div>
 	</div>
@@ -160,29 +161,97 @@
 	});
 </script>
 <script>
+var oldpassword = null;
 	//开始修改密码 点击事件
 	$('#start').on('click',function(){
-		//移除 oldpwd 禁用属性/设置空值/新增 oldpwd提示语/修改button提示语并改变ID
+		//移除 oldpwd 禁用属性/设置空值/新增 oldpwd提示语/修改button提示语
 		$('#oldpwd').removeAttr('disabled');
 		$('#oldpwd').val('');
 		$('#oldpwd').attr('placeholder','请输入您的旧密码');
-		$(this).attr('id','verification');
-		$(this).html('验证旧密码');
+		$(this).hide();
 	})
 
 	//验证旧密码事件
 	function validate_old(){
 		var oldpwd = $('#oldpwd').val();
+		var mreg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
 
-		$.ajax({
-			url:"{:U('User/VerificationOld')}",
-			dataType:'json',type:'POST',
-			data:{oldpwd:oldpwd},
-			success:function(come){
-				console.log(come)
-			}
-		})
+		if (mreg.test(oldpwd)) {
+			$.ajax({
+				url:"{:U('User/VerificationOld')}",
+				type:'POST',data:{'oldpwd':oldpwd},dataType:'json',
+				success:function(come){
+					if (come == 'error') {
+						$('#tishi').html("<font color='red' size='2'>旧密码不正确,请核对...</font>");
+					}
+					if (come == 'success') {
+						//上锁
+						$('#tishi').html("<font color='green' size='2'>请设置您的新密码</font>");	
+						$('#oldpwd').attr('disabled','disabled');
+						//赋值给公共成员属性
+						oldpassword = oldpwd;
+
+						$('#newpwd').removeAttr('disabled');
+						$('#newpwd1').removeAttr('disabled');
+					};
+				}
+			})
+		} else {
+			$("#tishi").html("<font color='red' size='2'>密码格式不正确,请核对</font>");
+		};
 	}
+
+	//验证两次密码方法
+	function validate_pass() {
+	    var pwd1 = $("#newpwd").val();
+	    var pwd2 = $("#newpwd1").val();
+	    var mreg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
+
+	   	if (pwd1 == oldpassword) {
+	   		$("#tishi").html("<font color='red' size='2'>新密码与旧密码不能相同</font>");
+	   	} else{
+	   		if (mreg.test(pwd1)) {
+		    	//对比两次输入的密码 
+			    if(pwd1 == pwd2){
+			        $("#tishi").html("");
+			        $('#newpwd').attr('disabled','disabled');
+			        $('#newpwd1').attr('disabled','disabled');
+			        $('#start').hide();
+			        $('#end').show();
+			        return true;
+			    }else {
+			        $("#tishi").html("<font color='red' size='2'>两次密码不相同</font>");
+			        return false;
+			    }
+		    } else {
+		    	$("#tishi").html("<font color='red' size='2'>密码不能为纯数字或空！</font>");
+		    	return false;
+		    };
+	   	};  
+	}
+
+	//AJAX 修改密码
+	$('#end').on('click',function(){
+		var newpassword = $('#newpwd1').val();
+		if (confirm("你确定要修改密码吗？")) { 
+			$.ajax({
+					url:"{:U('User/AjaxUpdatePass')}",
+					type:'POST',data:{'newpass':newpassword},dataType:'json',
+					success:function(come){
+						if (come == 'error') {
+							$('#tishi').html("<font color='red' size='2'>系统错误,请稍后重试...</font>");
+						}
+						if (come == 'success') {
+
+							$('#tishi').html("<font color='green' size='2'>修改成功,请牢记您的新密码</font>");	
+							setTimeout(function(){
+		                        window.location.reload();//刷新当前页面.
+		                    },1500)
+						};
+					}
+				})
+		}
+	})
 </script>
 <script>
 	$(function(){
