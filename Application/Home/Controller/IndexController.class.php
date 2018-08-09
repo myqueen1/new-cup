@@ -102,6 +102,14 @@ class IndexController extends Controller
             ->select();
 //        echo $db->getLastSql();die;
 
+        //剔除没有封面的商品
+        foreach ($data as $key => $value) {
+            $url = 'http://www.cup1.com'.$value['goods_cover'];
+            if(!@fopen( $url, 'r' ) ){ 
+                unset($data[$key]);
+            }
+        }
+
         //热词展示
         $search=M("search");
         $hot_goods=$search->order('search_num desc')->limit(5)->select();
@@ -109,7 +117,7 @@ class IndexController extends Controller
 
         //商品首页展示
         $this->assign('data',$data);
-
+        //print_r($data);die;
         //商品类型
         $tdb=M("type");
         $type=$tdb->select();
@@ -118,31 +126,31 @@ class IndexController extends Controller
         $this->display();
     }
 
-//    商品详情
+    //商品详情
     public function buy()
     {
 
-        $id=I('get.id');
-        $db=M('goods_detailed');
+        $goods_id   = I('get.id');
+        $goodsmodel = D('goods_detailed');
 
-        $data=$db
-            ->join('five_goods on five_goods_detailed.goods_id=five_goods.goods_id')
-            ->where("five_goods_detailed.goods_id={$id}")->find();
-//        print_r($data);die;
-//      echo $db->getLastSql();die;
-//        print_r($data);die;
-        $ImgDb=M('goods_img');
-        $Img=$ImgDb->where("goods_id={$id}")->select();
+        $result = $goodsmodel->join('five_goods on five_goods_detailed.goods_id=five_goods.goods_id')
+                             ->where("five_goods_detailed.goods_id='$goods_id'")
+                             ->find();
+        //print_r($data);die;echo $db->getLastSql();die;print_r($data);die;
 
-        $this->assign('data',$data);
-        $this->assign('Img',$Img);
+        $imgmodel = M('goods_img');
+        $ImgPath  = $imgmodel->where("goods_id = '$goods_id'")
+                             ->select();
+
+        $this->assign('data',$result);
+        $this->assign('Img',$ImgPath);
         $this->display();
 
     }
 
 
-    /*
-     *content  商品搜索  根据商品类型或者名称进行搜索
+    /**
+     * @content  商品搜索  根据商品类型或者名称进行搜索
      * 传参方式 post
      * @param  搜索参数 string
      * 返回值 Json
@@ -151,32 +159,26 @@ class IndexController extends Controller
 
     public function searchGoods()
     {
+        $goods  = I("post.names");
+        $search = M("search");
 
-        //goods_name like '%$goods%'
-        $db=M('goods');
-//        $res=$db->where('goods_id=1')->();
-//        echo $db->getLastSql();die;
-        $goods=I("post.names");
-        $search=M("search");
-
+        $goodsmodel = M('goods');
         if(empty($goods)){
-            $data=$db
-                ->join("five_brand on five_goods.brand_id=five_brand.brand_id")
-                ->join("five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id")
-                ->where("1=1")->select();
-//            echo $db->getLastSql();die;
-//            return json_encode($data);
+            $data=$goodsmodel->join("five_brand on five_goods.brand_id=five_brand.brand_id")
+                             ->join("five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id")
+                             ->where("1=1")->select();
+                //echo $db->getLastSql();die;
+                //return json_encode($data);
         }else{
-            $data=$db
-                ->join("five_brand on five_goods.brand_id=five_brand.brand_id")
-                ->join("five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id")
-                ->where("goods_name like '%$goods%' || brand_name like '%$goods%'")
-                ->select();
+            $data=$goodsmodel->join("five_brand on five_goods.brand_id=five_brand.brand_id")
+                             ->join("five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id")
+                             ->where("goods_name like '%$goods%' || brand_name like '%$goods%'")
+                             ->select();
 
-            /*
-             *content 热词添加
+            /**
+             * @content 热词添加
              * @param string
-             * 返回值  类型：数组  排序方式 降序
+             * @return  类型：数组  排序方式 降序
              */
             $s_data=$search->where("search_name='$goods'")->find();
             if(empty($s_data)){
@@ -197,15 +199,12 @@ class IndexController extends Controller
         }
 
         echo  json_encode($data);
-
-
     }
 
 
-    /*
-     *content 商品分类筛选
-     * 参数 id  int
-     * @param  返回值 json
+    /**
+     * @content 商品分类筛选
+     * @param 参数 id int 返回值 json
      */
 
     public function typeGoods()
