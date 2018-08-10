@@ -10,12 +10,11 @@ namespace Ht\Model;
 
 use Think\Model;
 
-class BrandModel extends Model
+class TypeModel extends Model
 {
     public function delet($where)
     {
         return $this->where($where)->delete();
-
     }
 
 //    查找多条

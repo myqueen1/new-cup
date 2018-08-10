@@ -30,18 +30,21 @@ class BrandController extends CommonController
     {
         if (IS_POST) {
             $data = I('post.');
-            $brand_name = $data['brand_name'];
-            $brand_url = $data['brand_url'];
-            $brand = D('brand');
-            if (empty($brand_name)) {
-                echo "<script>alert('品牌不能为空');location.href='add_brand'</script>";
-            } elseif (empty($brand_url)) {
-                echo "<script>alert('品牌官网不能为空');location.href='add_brand'</script>";
-            } elseif ($brand->select_one("`brand_name`='$brand_name'")) {
-                echo "<script>alert('添加的品牌已存在');location.href='add_brand'</script>";
+
+            $rules = array(
+                array('brand_name', 'require', '品牌名称不能为空！'), // 品牌不能为空
+                array('brand_name', '', '品牌名称已经存在！', 1, 'unique', 1), // 验证用户名是否已经存在
+                array('brand_url', 'require', '品牌网址不能为空！'), // 品牌不能为空
+                array('brand_url', '/^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/', '请输入正确网址！'),
+            );
+
+            $brand = D("brand"); // 实例化brand对象
+            if (!$brand->validate($rules)->create()) {
+                // 如果创建失败 表示验证没有通过 输出错误提示信息
+                $this->error($brand->getError());
             } else {
-                $data = I('post.');
-                $imag = $brand->upload($_FILES);
+                // 验证通过 可以进行其他数据操作
+                $imag = $this->upload($_FILES);
                 $img = $imag['brand_logo']['savepath'] . $imag['brand_logo']['savename'];
                 $data['brand_logo'] = $img;
                 if ($brand->add_all($data)) {
@@ -49,7 +52,7 @@ class BrandController extends CommonController
                 } else {
                     echo "<script>alert('添加失败');location.href='add_category'</script>";
                 }
-            };
+            }
             die;
         }
         $this->display();
@@ -83,5 +86,20 @@ class BrandController extends CommonController
         }
     }
 
+    //文件长传
+    public function upload()
+    {
+        $upload = new \Think\Upload();// 实例化上传类
+        $upload->maxSize = 3145728;// 设置附件上传大小
+        $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+        $upload->savePath = '/Public/Uploads/'; // 设置附件上传目录    // 上传文件
+        $upload->rootPath = "./";
+        $info = $upload->upload();
+        if (!$info) {// 上传错误提示错误信息
+            $this->error($upload->getError());
+        } else {// 上传成功
+            return $info;
+        }
+    }
 
 }

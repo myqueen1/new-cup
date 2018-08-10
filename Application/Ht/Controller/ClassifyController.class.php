@@ -7,9 +7,7 @@
 
 namespace Ht\Controller;
 
-use Think\Controller;
-
-class ClassifyController extends Controller
+class ClassifyController extends CommonController
 {
 //    分类列表
     public function product_category()
@@ -30,19 +28,21 @@ class ClassifyController extends Controller
     {
         if (IS_POST) {
             $data = I('post.');
-            $type_name = $data['type_name'];
-            $type = M('type');
-            if (empty($type_name)) {
-                $this->error('分类名不能为空');
-            } elseif ($type->where("`type_name`='$type_name'")->find()) {
-                $this->error('添加的分类已存在');
+            $rules = array(
+                array('type_name', '', '帐号已经存在！', 0, 'unique', 1), // 在新增的时候验证name字段是否唯一
+                array('type_name', 'require', '不能为空！', 1),
+            );
+            $type = D("type"); // 实例化type对象
+            if (!$type->validate($rules)->create()) {     // 如果创建失败 表示验证没有通过 输出错误提示信息
+                $this->error($type->getError());
             } else {
-                if ($type->add($data)) {
-                    $this->success('添加成功', 'product_category');
+                // 验证通过 可以进行其他数据操作
+                if ($type->add_all($data)) {
+                    $this->success('添加成功', 'product_category', 1);
                 } else {
                     $this->error('添加失败');
                 }
-            };
+            }
             die;
         }
         $this->display();
@@ -59,8 +59,8 @@ class ClassifyController extends Controller
             $type_id = I('get.type_id');
             $where = "`type_id`=" . $type_id;
         }
-        $type = M('type');
-        if ($type->where($where)->delete()) {
+        $type = D('type');
+        if ($type->delet($where)) {
             echo true;
         } else {
             echo false;
