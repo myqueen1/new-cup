@@ -1,22 +1,63 @@
 <!DOCTYPE html>
 <html>
-<center>
-    <input type="text" name="search_goods" class="bb">
-    <button class="sou">搜索</button>
-</center>
-<center>
-    <?php foreach($hot_goods as $val){ ?>
-    <a href="javascript:void(0)" class="sous" style="color: red"><?php echo $val['search_name'] ?></a>&nbsp;
-    <?php } ?>
-</center>
+<!--样式-->
+<style>
+    .soua{
+        width: 100%;
+        height: 100px;
+    }
+    .sousuo{
+        line-height: 60px;
+    }
+    .sousuo  .bb{
+
+        text-align: center;
+    }
+    .nav{
+        border-bottom: 1px solid #cccccc;
+        height: 60px;
+        width: 100%;
+        text-align: center;
+        line-height: 60px;
+        margin-bottom: 20px;
+        background: #a0b7d4;
+    }
+    .nav a{
+        margin-left: 60px;
+        font-weight: bold;
+        color: black;
+
+    }
+    .product {
+        width: 1200px;
+        height: auto;
+        margin: auto;
+    }
+
+</style>
+
+<div class="soua">
+    <center class="sousuo">
+        <input type="text" name="search_goods" class="bb" placeholder="搜索你需要的内容" >
+        <input type="button" class="sou" value="搜索">
+    </center>
+    <center >
+        <?php foreach($hot_goods as $val){ ?>
+        <a href="javascript:void(0)" class="sous" style="color: red"><?php echo $val['search_name'] ?></a>&nbsp;
+        <?php } ?>
+    </center>
+</div>
+
 
 
 <body>
 
 <div class="product">
-    <?php foreach($type as $val){ ?>
-    <a href="javascript:void(0)" class="goods_t" tid="<?php echo $val['type_id'] ?>"><?php echo $val['type_name'] ?></a>
-    <?php } ?>
+    <div class="nav">
+        <?php foreach($type as $val){ ?>
+        <a href="javascript:void(0)" class="goods_t" tid="<?php echo $val['type_id'] ?>"><?php echo $val['type_name'] ?></a>
+        <?php } ?>
+    </div>
     <ul class=".aa">
         <?php foreach($data as $key=>$val){ ?>
         <a href="{:U('Index/buy')}?id=<?php echo $val['goods_id'] ?>">
