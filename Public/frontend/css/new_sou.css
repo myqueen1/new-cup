@@ -4,12 +4,13 @@
 *  http://www.yidianc.com/
 */
 .ydc-release-form-group-input {
+    margin-top:10px;
+    margin-bottom:10px;
     position: relative;
 }
 .ydc-reg-form-input .ydc-form-control{
     width: 100%;
     height: 38px;
-    padding: 8px 12px;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
@@ -25,8 +26,8 @@
     color: #333;
 }
 .ydc-form-control {
-    width: 78%;
-    height: 40px;
+    width: 98%;
+    height: 30px;
     padding: 8px 12px;
     background-color: #fff;
     border: 2px solid #ccc;
@@ -35,4 +36,35 @@
 }
 .ydc-reg-form-input .ydc-form-control:hover{
     border-color:#ff6980;
+}
+.soua{
+    width: 100%;
+    height: 100px;
+}
+.sousuo{
+    line-height: 60px;
+}
+.sousuo  .bb{
+
+    text-align: center;
+}
+.nav{
+    border-bottom: 1px solid #cccccc;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    line-height: 60px;
+    margin-bottom: 20px;
+    background: #a0b7d4;
+}
+.nav a{
+    margin-left: 60px;
+    font-weight: bold;
+    color: black;
+
+}
+.product {
+    width: 1200px;
+    height: auto;
+    margin: auto;
 }

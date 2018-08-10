@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html>
 <body>
-<center>
-<div class="ydc-release-form-group-input">
-<form action=""></form>
-    <input type="text" class="ydc-form-control" name="search_goods" title="输入商品名称,搜索商品. . . ." placeholder="🔍    输入您想要购买的商品名称试一试吧  .  .  .  . ">
-
-</div>   
-    <?php foreach($hot_goods as $val){ ?>
-    <a href="javascript:void(0)" class="sous" style="color: red"><?php echo $val['search_name'] ?></a>&nbsp;
-    <?php } ?>
-</center>
-
-
 <div class="product">
-    <?php foreach($type as $val){ ?>
-    <a href="javascript:void(0)" class="goods_t" tid="<?php echo $val['type_id'] ?>"><?php echo $val['type_name'] ?></a>
-    <?php } ?>
+    <div class="ydc-release-form-group-input">
+        <input type="text" class="ydc-form-control" name="search_goods" title="输入商品名称,搜索商品. . . ." placeholder="🔍    输入您想要购买的商品名称试一试吧  .  .  .  . ">
+    </div>
+    <div class="nav">
+        <?php foreach($type as $val){ ?>
+        <a href="javascript:void(0)" class="goods_t" tid="<?php echo $val['type_id'] ?>"><?php echo $val['type_name'] ?></a>
+        <?php } ?>
+    </div>
     <ul class=".aa">
         <?php foreach($data as $key=>$val){ ?>
         <a href="{:U('Index/buy')}?id=<?php echo $val['goods_id'] ?>">

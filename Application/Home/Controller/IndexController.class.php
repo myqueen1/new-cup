@@ -102,18 +102,12 @@ class IndexController extends Controller
             ->select();
 //        echo $db->getLastSql();die;
 
-        //剔除没有封面的商品
-        foreach ($data as $key => $value) {
-            $url = 'http://www.cup1.com'.$value['goods_cover'];
-            if(!@fopen( $url, 'r' ) ){ 
-                unset($data[$key]);
-            }
-        }
-
         //热词展示
         $search=M("search");
         $hot_goods=$search->order('search_num desc')->limit(5)->select();
         $this->assign('hot_goods',$hot_goods);
+
+        $data = $this->Eliminate($data);
 
         //商品首页展示
         $this->assign('data',$data);
@@ -198,7 +192,7 @@ class IndexController extends Controller
             }
         }
 
-        echo  json_encode($data);
+        echo  json_encode($this->Eliminate($data));
     }
 
 
@@ -215,6 +209,21 @@ class IndexController extends Controller
             ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
             ->where("type_id='$id'")
             ->select();
-        echo json_encode($data);
+        echo json_encode($this->Eliminate($data));
+    }
+
+    /**
+     *   @param $result array 
+     *   @content 剔除图片路径有问题的数据
+    */
+    public function Eliminate($result){
+        //剔除没有封面的商品
+        foreach ($result as $key => $value) {
+            $url = 'http://www.cup1.com'.$value['goods_cover'];
+            if(!@fopen( $url, 'r' ) ){ 
+                unset($result[$key]);
+            }
+        }
+        return $result;
     }
 }

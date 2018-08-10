@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+	.min,.add{
+		width: 35px;
+		height: 30px;
+		float: left;
+	}
+	.join-money{
+		width: 40px;
+		height: 34px;
+		float: left;
+		text-align: center;
+	}
+
+</style>
 
 <head>
 	<meta charset="utf-8" />
@@ -11,6 +25,7 @@
 	<link rel="stylesheet" href="css/demo.css" />
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/fen.css" />
+	<link rel="stylesheet" href="css/base.css" />
 	<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
 	<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
 	<script type="text/javascript" src="js/swiper.min.js"></script>
@@ -69,23 +84,116 @@
 			<p class="p2">订购价：￥
 				<font style="font-size: 23px;"><?php echo $data['goods_price'] ?></font>
 			</p>
-			<p class="buy_p3">
-				规格：
-				<span class="active">塑料</span>
-				<span >玻璃</span>
-				<span >不锈钢</span>
-			</p>
-			<p class="p4 buy_p4">
-				尺码：
-				<span class="active">M10</span>
-				<span >M13</span>
-				<span >M16</span>
-			</p>
+
+
+			<!--规格属性-->
+			<div class="sys_item_spec">
+				<dl class="clearfix iteminfo_parameter sys_item_specpara buy_p3" data-sid="1" >
+					<dt>规格：</dt>
+					<dd>
+						<ul class="sys_spec_text">
+							<li><a href="javascript:void(0)" title="塑料">塑料</a><i></i></li>
+							<li><a href="javascript:void(0)" title="玻璃">玻璃</a><i></i></li>
+							<li><a href="javascript:void(0)" title="不锈钢">不锈钢</a><i></i></li>
+						</ul>
+					</dd>
+				</dl>
+				<dl class="clearfix iteminfo_parameter sys_item_specpara buy_p4" data-sid="2">
+					<dt>尺码:</dt>
+					<dd>
+						<ul class="sys_spec_text">
+							<li><a href="javascript:void(0)" title="M10">M10</a><i></i></li>
+							<li><a href="javascript:void(0)" title="M13">M13</a><i></i></li>
+							<li><a href="javascript:void(0)" title="M16">M16</a><i></i></li>
+						</ul>
+					</dd>
+				</dl>
+			</div>
+
+
+
+			<script>
+                $(function(){
+                    $(".sys_item_spec .sys_item_specpara").each(function(){
+                        var i=$(this);
+                        var p=i.find("ul>li");
+                        p.click(function(){
+                            if(!!$(this).hasClass("selected")){
+                                $(this).removeClass("selected");
+                                i.removeAttr("data-attrval");
+                            }else{
+                                $(this).addClass("selected").siblings("li").removeClass("selected");
+                                i.attr("data-attrval",$(this).attr("data-aid"))
+                            }
+                        })
+                    })
+                })
+			</script>
+
+			<!--<p class="buy_p3">-->
+				<!--规格：-->
+				<!--&lt;!&ndash;<span class="active">塑料</span>&ndash;&gt;-->
+				<!--&lt;!&ndash;<span >玻璃</span>&ndash;&gt;-->
+				<!--&lt;!&ndash;<span >不锈钢</span>&ndash;&gt;-->
+
+			<!--</p>-->
+			<!--<p class="p4 buy_p4">-->
+				<!--尺码：-->
+				<!--<span class="active">M10</span>-->
+				<!--<span >M13</span>-->
+				<!--<span >M16</span>-->
+			<!--</p>-->
 			<p class="p3">商品数量：</p>
+
 			<p class="p5">
-				<span class="num">-</span>
-				<input type="text" value="1" />
-				<span class="num">+</span>
+				<!--<span class="num">-</span>-->
+				<!--<input type="text" value="1" />-->
+				<!--<span class="num">+</span>-->
+
+				<button class="addBtn min" type="button" />-</button>
+				<input class="join-money" type="text" value="1">
+				<button class="addBtn add" type="button" />+</button>
+
+
+
+			<script>
+                var t = $(".join-money");
+                var m = $(".allMoney").text();
+                var mm = $(".allMoney");
+                function updateMoney(){
+                    var tt = t.val();
+                    var total =  m*tt;   //输入框中的份额数与每份金额数相乘得到总金额
+                    mm.text(total);
+                    if(t.val()<=0){
+                        mm.text(m);
+                    }
+                }
+                $(function(){
+                    $(".add").click(function() {
+                        t.val(parseInt(t.val()) + 1); //点击加号输入框数值加1
+                        updateMoney();  //显示总金额
+                    });
+                    $(".min").click(function(){
+                        t.val(parseInt(t.val())-1); //点击减号输入框数值减1
+                        if(t.val()<=0){
+                            t.val(parseInt(t.val())+1); //最小值为1
+                        }
+                        updateMoney();
+                    });
+                    $(".join-money").keyup(function(){
+                        var c=$(this);
+                        if(/[^\d]/.test(c.val())){//替换非数字字符
+                            var amount=c.val().replace(/[^\d]/g,'');
+                            $(this).val(amount);
+                        }
+                        updateMoney();  //手动输入数值金额随之改变
+                    });
+                });
+
+			</script>
+
+
+
 			</p>
 			<span>花束设计</span>
 			<p class="p6">
@@ -129,7 +237,7 @@
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 			<?php foreach($Img as $val){ ?>
-			<div class="swiper-slide"><span><img src="<?php echo $val['detailed_path'] ?>" width="700px;" height="500px;"></span></div>
+			<div class="swiper-slide"><span><img src="__ROOT__<?php echo $val['detailed_path'] ?>" width="700px;" height="500px;"></span></div>
 			<?php } ?>
 		</div>
 	</div>
