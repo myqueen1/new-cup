@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <body>
 <div class="product">
@@ -13,14 +14,14 @@
         <?php foreach($data as $key=>$val){ ?>
         <a href="{:U('Index/buy')}?id=<?php echo $val['goods_id'] ?>">
             <li>
-                <img src="__ROOT__<?php echo $val['goods_cover'] ?>"/>
+                <img src="{$val.goods_cover}" height="500"/>
                 <div class="proli_bg">
                     <div class="proli_bg_box">
                         <div class="proli_top">
                             <p>本周特推</p>
-                            <p><?php echo $val['goods_name'] ?></p>
+                            <p>{$val.goods_name}</p>
                         </div>
-                        <p><?php echo $val['goods_price'] ?></p>
+                        <p>￥ {$val.goods_price}</p>
                     </div>
                 </div>
             </li>
@@ -28,7 +29,12 @@
         <?php } ?>
     </ul>
 </div>
+
+
 </body>
+
+</html>
+
 <script>
     //搜索
     $(function () {
@@ -53,14 +59,14 @@
 
                             str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
                             str+='<li>';
-                            str+='<img src="__ROOT__'+v.goods_cover+'"/>';
+                            str+='<img src="'+v.goods_cover+'" height="500"/>';
                             str+='<div class="proli_bg">';
                             str+='<div class="proli_bg_box">';
                             str+='<div class="proli_top">';
                             str+='<p>本周特推</p>';
                             str+='<p>'+v.goods_name+'</p>';
                             str+='</div>';
-                            str+='<p>'+v.goods_price+'</p>';
+                            str+='<p>￥ '+v.goods_price+'</p>';
                             str+='</div>';
                             str+='</div>';
                             str+='</li>';
@@ -95,12 +101,12 @@
 
                         str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
                         str+='<li>';
-                        str+='<img src="__ROOT__'+v.goods_cover+'"/>';
+                        str+='<img src="'+v.goods_cover+'" height="500"/>';
                         str+='<div class="proli_bg">';
                         str+='<div class="proli_bg_box">';
                         str+='<div class="proli_top">';
                         str+='<p>本周特推</p>';
-                        str+='<p>'+v.goods_name+'</p>';
+                        str+='<p>￥ '+v.goods_name+'</p>';
                         str+='</div>';
                         str+='<p>'+v.goods_price+'</p>';
                         str+='</div>';
@@ -135,12 +141,12 @@
 
                         str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
                         str+='<li>';
-                        str+='<img src="__ROOT__'+v.goods_cover+'"/>';
+                        str+='<img src="'+v.goods_cover+'" height="500"/>';
                         str+='<div class="proli_bg">';
                         str+='<div class="proli_bg_box">';
                         str+='<div class="proli_top">';
                         str+='<p>本周特推</p>';
-                        str+='<p>'+v.goods_name+'</p>';
+                        str+='<p>￥ '+v.goods_name+'</p>';
                         str+='</div>';
                         str+='<p>'+v.goods_price+'</p>';
                         str+='</div>';
@@ -156,4 +162,3 @@
 
     })
 </script>
-</html>

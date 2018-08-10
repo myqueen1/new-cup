@@ -139,6 +139,24 @@
 	</div>
 </body>
 <script>
+	$(function () {
+	    $(".meau").on("click", function (e) {
+	        $(".meau_box").slideToggle();
+	        $(document).one("click", function () {
+	            $(".meau_box").slideUp();
+	        });
+	        e.stopPropagation();
+	    });
+	    $(".close").click(function(){
+	        $(".login_bg").fadeOut();
+	    });
+
+	    $(".meau").on("click", function (e) {
+	        e.stopPropagation();
+	    });
+	});
+</script>
+<script>
 	$(function(){
 		$(".per_couponul li").click(function(){
 			$(".per_couponul li").removeClass("active");

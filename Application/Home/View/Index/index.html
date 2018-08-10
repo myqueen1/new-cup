@@ -1,97 +1,36 @@
 <!DOCTYPE html>
 <html>
-
-	<head>
-		<meta charset="utf-8" />
-		<title>叮咚有礼</title>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="renderer" content="webkit">
-		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-		<base href="__PUBLIC__/frontend/">
-		<link rel="stylesheet" href="css/demo.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/fen.css" />
-		<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-		<![endif]-->
-	</head>
-
-	<body>
-		<div class="box1">
-			<img src="img/s1.jpg" class="pc_h" />
-			<img src="img/mobile_h.jpg" class="mobile_h" />
-			<!--定位1-->
-			<div class="ding"></div>
-		</div>
-		<div class="conpou">
-			<div class="conpou_box">
-				<img src="img/close.png" class="gb"/>
-				<img src="img/code_pic.png" />
-				<input type="text" placeholder="请输入专属吗码,例：CC520"/>
-				<a href="message.html">查看模版案例>></a>
-				<p>确定</p>
-			</div>
-		</div>
-		
-		<div class="img_box">
-			<img src="img/z1.gif" class="pc" />
-			<img src="img/mobile.jpg" class="mobile" />
-			<!--定位2-->
-			<a href="product.html">
-				<div class="ding2"></div>
-			</a>
-		</div>
-
-		<div class="login_bg">
-			<div class="login">
-				<img src="img/close.png" class="close" />
-				<img src="img/login.png" style="margin: 25px 0px;" />
-				<form action="" method="post">
-					<p class="list">
-						<img src="img/login_pic2.png" />
-						<input type="text" placeholder="请输入注册时的邮箱/手机号" />
-					</p>
-					<p class="list">
-						<img src="img/login_pic3.png" />
-						<input type="password" placeholder="请输入注册时的邮箱/手机号" />
-					</p>
-					<a href="find.html">忘记密码?</a>
-					<p>
-						<a href="register.html">注册</a>
-						<a>登录</a>
-					</p>
-				</form>
-			</div>
-		</div>
-		<script type="text/javascript">
-			$(function() {
-				$(".ding").click(function() {
-					$(".conpou").fadeIn();
-				});
-				$(".gb").click(function() {
-					$(".conpou").fadeOut();
-				});
-				$(".close").click(function() {
-					$(".login_bg").fadeOut();
-				});
-				$(".login_btn").click(function() {
-					$(".login_bg").slideDown();
-					$(".meau_box").slideUp();
-				});
-				$(".meau").on("click", function(e) {
-					$(".meau_box").slideToggle();
-					$(document).one("click", function() {
-						$(".meau_box").fadeOut();
-					});
-					e.stopPropagation();
-				});
-				$(".meau").on("click", function(e) {
-					e.stopPropagation();
-				});
-			});
-		</script>
-	</body>
-
+<head>
+	<meta charset="utf-8" />
+	<title>叮咚有礼</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
+	<base href="__PUBLIC__/frontend/">
+	<link rel="stylesheet" href="css/demo.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/fen.css" />
+	<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="box1">
+		<img src="img/s1.jpg" class="pc_h" />
+		<img src="img/mobile_h.jpg" class="mobile_h" />
+	</div>
+	<div class="img_box">
+		<img src="img/z1.gif" class="pc" />
+	</div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		$(".login_btn").click(function() {
+			$(".login_bg").slideDown();
+			$(".meau_box").slideUp();
+		});
+	});
+</script>
 </html>
