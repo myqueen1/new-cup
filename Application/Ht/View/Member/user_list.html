@@ -66,7 +66,7 @@
                 <td class="center">
                     <a href="{:U('Member/edit_user')}?user_id={$vo.user_id}" class="inline-block" title="编辑"><img src="images/icon_edit.gif"/></a>
                     <!--<a href="account.html" class="inline-block" title="资金管理"><img src="images/icon_account.gif"/></a>-->
-                    <a href="{:U('Member/del')}?user_id={$vo.user_id}&p=<?php echo I('get.p');?>" class="inline-block delete"
+                    <a href="{:U('Member/del')}?user_id={$vo.user_id}&p=<?php echo I('get.p');?>" class="inline-block block"
                        title="删除"><img src="images/icon_drop.gif"/></a>
                 </td>
             </tr>
@@ -133,7 +133,7 @@
     })
 
     // 删除
-    $(document).on('click', '.delete', function () {
+    $(document).on('click', '.block', function () {
         event.preventDefault()
         var url = $(this).attr('href');
         $.ajax({
