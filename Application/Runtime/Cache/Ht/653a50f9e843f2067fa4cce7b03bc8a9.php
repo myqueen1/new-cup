@@ -39,6 +39,20 @@
         </li>
 
         <li class="menu-list-title">
+            <span>会员管理</span>
+            <i>◢</i>
+        </li>
+        <li>
+            <ul class="menu-children">
+                <li><a href="<?php echo U('Member/user_list');?>" title="会员列表" target="mainCont">会员列表</a></li>
+                <!--<li><a href="<?php echo U('Member/add_user');?>" title="添加会员" target="mainCont">添加会员</a></li>-->
+                   <!--<li><a href="<?php echo U('Member/user_rank');?>" title="会员等级" target="mainCont">会员等级</a></li>-->
+                <li><a href="<?php echo U('Member/user_message');?>" title="会员留言" target="mainCont">会员留言</a></li>
+            </ul>
+        </li>
+
+
+        <li class="menu-list-title">
             <span>订单管理</span>
             <i>◢</i>
         </li>

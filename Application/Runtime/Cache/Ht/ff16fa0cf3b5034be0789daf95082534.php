@@ -162,6 +162,8 @@
         })
     })
 
+
+     // 批删
     $(document).on('click', '#delete', function () {
         var checkedNum = $("input[name='checkbox']:checked").length;
         if (checkedNum == 0) {

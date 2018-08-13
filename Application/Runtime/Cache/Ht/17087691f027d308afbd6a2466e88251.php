@@ -14,7 +14,7 @@
  </div>
  <div class="fr top-link">
   <a href="admin_list.html" target="mainCont" title="DeathGhost"><i class="adminIcon"></i><span>管理员：<?php echo ($name); ?></span></a>
-  <a href="#"  title="安全退出" style="background:rgb(60,60,60);"><i class="quitIcon"></i><span>安全退出</span></a>
+  <a href="<?php echo U('Login/exit_log');?>" target="_parent" title="安全退出" style="background:rgb(60,60,60);"><i class="quitIcon"></i><span>安全退出</span></a>
  </div>
 </div>
 </body>
