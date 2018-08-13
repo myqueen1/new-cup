@@ -218,4 +218,21 @@ class GoodsController extends Controller
             echo json_encode(self::$message,JSON_UNESCAPED_UNICODE);
         }
     }
+    // 修改商品价格
+    public function price()
+    {
+        $goods_id = I('get.goods_id');
+        $price = I('get.price');
+        $data['goods_price'] = trim($price,"￥");
+        if (floor($data['goods_price'])) {
+            $re = M('goods_detailed')->where("goods_id=".$goods_id)->save($data);
+            if ($re) {
+                echo 1;
+            } else {
+                echo 3;
+            }
+        } else {
+           echo 2;
+        }
+    }
 }
