@@ -1,109 +1,59 @@
 <?php
 /**
- * 说    明:
- * 创建用户: 马燕 王晓雪
- * 创建日期: 2018/8/2
- * 创建时间: 9:19
+ *  @author 马燕 王晓雪
+ *  @datetime 2018/8/2
  */
-
 namespace Home\Controller;
 
 use Think\Controller;
 
-class UserController extends Controller
+class UserController extends HeadController
 {
-    //注册
-    public function register()
+    //    个人中心
+    public function personal()
     {
-        if(IS_AJAX) {
-            $data['user_tel']  = I('post.tel');
-            $data['user_pass'] = MD5(I('post.pass'));
+        $user_info = json_decode(cookie('user_info'),true);
+        $user_id   = $user_info['user_id'];
 
-            $user_model = D('user');
-            $result = $user_model->add($data);
-
-            if ($result) {
-                //拼接 储存所必须 id 和手机号
-                $arr = array('user_id'=>$result , 'user_tel'=>$data['user_tel']);
-                $this->SetCookie($arr);
-
-                $this->ajaxReturn(1);
-            } else {
-                $this->ajaxReturn(0);
-            }
-        }else{
-            $this->display();
-        }
-    }
-
-    //登录
-    public function login()
-    {
-        
-        $user_tel  = I('get.user_tel');  //手机号
-        $user_pass = MD5(I('get.user_pass'));   //密码
-
-        $UserModel = M("user");
-        $result    = $UserModel->field('user_id,user_nickname,user_tel,user_email')
-                               ->where("user_tel = '".$user_tel."'and user_pass = '".$user_pass."'")
+        $usermodel = D('user');
+        $user_info = $usermodel->field('user_id,user_nickname,head_img,user_tel,user_email,user_sex')
+                               ->where("user_id= '$user_id'")
                                ->find();
-
-        //判断返回值 并 存储COOKIE
-        if ($result){
-            //调用设置COOKIE方法
-            $comeback = $this->SetCookie($result);
-
-            if ($comeback) {
-                echo json_encode("1");
-            } else {
-                echo json_encode("0");
-            }
-        }else{
-            echo json_encode("0");
-        }
+                            //echo $usermodel->getLastSql();die;
+        $this->assign('user_info',$user_info);
+        $this->display();
     }
 
-    //退出
-    public function Singout()
+
+    /**
+     *   @param $oldpass MD5(string)   接收MD5加密的密码,然后 核对密码正确性 
+     *   @return success/error json_encode
+    */
+    public function VerificationOld()
     {
-        $user_info = cookie('user_info',null);
-    }
-
-
-    //存储COOKIE
-    public function SetCookie($data){
-        if (empty($data)) {
-            return false;
-        } else {
-            cookie('user_info',json_encode($data));
-            return true;
-        }
-    }
-
-    //核对旧密码
-    public function VerificationOld(){
         if (IS_AJAX) {
             $oldpass  = MD5(I('post.oldpwd'));    //接收的旧密码
             $user_info= json_decode(cookie('user_info'),true);    //获取COOKIE中用户ID
+            $user_id  = $user_info['user_id'];
 
-            if (!empty($user_info)) {
-                $user_id = $user_info['user_id'];
+            $usermodel = D('user');
+            $result = $usermodel->field('user_pass')
+                                ->where("user_id = '$user_id' and user_pass = '$oldpass'")
+                                ->find();
 
-                $usermodel = D('user');
-                $result = $usermodel->field('user_pass')
-                                    ->where("user_id = '$user_id' and user_pass = '$oldpass'")
-                                    ->find();
-
-                if(!empty($result)) echo json_encode("success");    //核对成功
-                if(empty($result)) echo json_encode("error");  //核对失败
-            } else {
-                die('去你妈逼,正常操作不行???');
-            }
+            if(!empty($result)) echo json_encode("success");    //核对成功
+            if(empty($result)) echo json_encode("error");       //核对失败
+        } else {
+            echo self::PutOutMessage('error','请求方式错误,正在返回!');
         }
     }
 
-    //ajax 修改密码
-    public function AjaxUpdatePass(){
+    /**
+     *   @param $newpass MD5(string)  接收设置的新密码,更新数据库密码字段
+     *   @return success/error json_encode 
+    */
+    public function AjaxUpdatePass()
+    {
         if (IS_AJAX) {
             $newpass  = MD5(I('post.newpass'));    //接收的旧密码
             $user_info= json_decode(cookie('user_info'),true);    //获取COOKIE中用户ID
@@ -112,15 +62,33 @@ class UserController extends Controller
                 $user_id = $user_info['user_id'];
 
                 $usermodel = D('user');
-                $result = $usermodel->where("user_id = '$user_id'")->setField('user_pass',$newpass);
+                $result = $usermodel->where("user_id = '$user_id'")
+                                    ->setField('user_pass',$newpass);
 
                 if(!empty($result)) echo json_encode("success");    //核对成功
                 if(empty($result)) echo json_encode("error");  //核对失败
-            } else {
-                die('去你妈逼,正常操作不行???');
             }
         }else {
-            die('去你妈逼,正常操作不行???');
+            echo self::PutOutMessage('error','请求方式错误,正在返回!');
         }
+    }
+
+
+    /**
+     *  @param 用户个人信息修改
+    */ 
+    public function UseSave()
+    {
+        $arr=I('post.');
+
+        $usermodel = D('user');
+        $id=$arr['user_id'];
+        $data=$db->where("user_id='$id'")->save($arr);
+        $res=$db->where("user_id='$id'")->find();
+        echo json_encode($res);
+    }
+
+    public function ShoppingCart(){
+        $this->display('');
     }
 }

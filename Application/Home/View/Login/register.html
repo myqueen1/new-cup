@@ -63,26 +63,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="login_bg">
-		<div class="login">
-			<img src="img/close.png" class="close"/>
-			<img src="img/login.png" style="margin: 25px 0px;"/>
-			<form action="" method="post">
-				<p class="list">
-					<img src="img/login_pic2.png"/>
-					<input type="text" placeholder="请输入注册时的邮箱/手机号"/>
-				</p>
-				<p class="list">
-					<img src="img/login_pic3.png"/>
-					<input type="password" placeholder="请输入注册时的邮箱/手机号"/>
-				</p>
-				<p>
-					<a href="register.html" >注册</a>
-					<a>登录</a>
-				</p>
-			</form>
-		</div>
-	</div>
 </body>
 <script type="text/javascript">
     $(function(){
@@ -112,14 +92,12 @@ $(".yan_code").on('click',function(){
 
 	if (back_tel) {
         $.ajax({
-            url:"{:U('Send/SendMessage')}",
-            type:'GET',
-            dataType:'json',
+            url:"{:U('Send/SendMessage')}",type:'GET',dataType:'json',
             data:{telphone:telphone},
             success:function(comeback){
             	console.log(comeback)
 
-            	if(comeback.status == '200'){
+            	if(comeback.code == 'success'){
             		$('.yan_code').html("验证码已发送...")
 					$(".yan_code").unbind();
             	} else{
@@ -198,17 +176,17 @@ $('.res_btn').on('click',function(){
 				if (comeback == 1) {
 					//将数据发送到后台入库
 					$.ajax({
-						url:"{:U('User/register')}",dataType:'json',type:'POST',
+						url:"{:U('Login/register')}",dataType:'json',type:'POST',
 						data:{tel:telphone,pass:pwd1},
 						success:function(come){
-							if (come == 1) {
-								$("#tishi").html("<font color='green' size='2'>注册成功</font>");
+							if (come.code == 'success') {
+								$("#tishi").html("<font color='green' size='2'>"+come.msg+"</font>");
 								setTimeout(function(){
 			                        window.location.href = "{:U('Index/index')}";
 			                    },1500)
 								
 							} else{
-								$('.tip').html("<font color='red'>系统错误，请稍后重试！</font>")
+								$('.tip').html("<font color='red'>"+come.msg+"</font>")
 							};
 						}
 					})

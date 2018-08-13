@@ -12,7 +12,7 @@
     </div>
     <ul class=".aa">
         <?php foreach($data as $key=>$val){ ?>
-        <a href="{:U('Index/buy')}?id=<?php echo $val['goods_id'] ?>">
+        <a href="{:U('Goods/buy')}?id=<?php echo $val['goods_id'] ?>">
             <li>
                 <img src="{$val.goods_cover}" height="500"/>
                 <div class="proli_bg">
@@ -43,7 +43,7 @@
                 var names=$("input[name='search_goods']").val();
                 //alert(names)
                 $.ajax({
-                    url:"{:U('Index/searchGoods')}",
+                    url:"{:U('Goods/searchGoods')}",
                     type:"POST",
                     data:{
                         'names':names,
@@ -57,7 +57,7 @@
                         var str='';
                         $.each(res,function (k,v){
 
-                            str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
+                            str+='<a href="'+"{:U('Goods/buy')}?id="+v.goods_id+'">';
                             str+='<li>';
                             str+='<img src="'+v.goods_cover+'" height="500"/>';
                             str+='<div class="proli_bg">';
@@ -85,11 +85,9 @@
         $(".sous").click(function () {
             var names=$(this).html();
             $.ajax({
-                url:"{:U('Index/searchGoods')}",
+                url:"{:U('Goods/searchGoods')}",
                 type:"POST",
-                data:{
-                    'names':names,
-                },
+                data:{'names':names,},
                 dataType:"json",
                 success:function (res) {
                     if(res==''){
@@ -99,7 +97,7 @@
                     var str='';
                     $.each(res,function (k,v){
 
-                        str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
+                        str+='<a href="'+"{:U('Goods/buy')}?id="+v.goods_id+'">';
                         str+='<li>';
                         str+='<img src="'+v.goods_cover+'" height="500"/>';
                         str+='<div class="proli_bg">';
@@ -125,7 +123,7 @@
         $(".goods_t").click(function () {
             var id=$(this).attr("tid");
             $.ajax({
-                url:"{:U('Index/typeGoods')}",
+                url:"{:U('Goods/typeGoods')}",
                 type:"POST",
                 data:{
                     'id':id,
@@ -139,7 +137,7 @@
                     var str='';
                     $.each(res,function (k,v){
 
-                        str+='<a href="'+"{:U('Index/buy')}?id="+v.goods_id+'">';
+                        str+='<a href="'+"{:U('Goods/buy')}?id="+v.goods_id+'">';
                         str+='<li>';
                         str+='<img src="'+v.goods_cover+'" height="500"/>';
                         str+='<div class="proli_bg">';
@@ -159,6 +157,5 @@
                 }
             })
         })
-
     })
 </script>

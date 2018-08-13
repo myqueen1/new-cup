@@ -2,7 +2,7 @@
 <html>
 <body>
 	<div class="personal">
-		<p class="title">我的账户<span>您好，kore.倩</span></p>
+		<p class="title">我的账户<span>您好，{$user_info.user_nickname}</span></p>
 		<ul class="per_nav">
 			<li class="active">我的订单</li>
 			<li>基本信息</li>
@@ -48,19 +48,34 @@
 			<form>
 				<p>
 					<span>昵称</span>
-					<input type="text" name="user_nickname" value="{$data.user_nickname}"/>
+					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
+					<span>修改</span>
+				</p>
+				<p>
+					<span>昵称</span>
+					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
+					<span>修改</span>
+				</p>
+				<p>
+					<span>昵称</span>
+					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
+					<span>修改</span>
+				</p>
+				<p>
+					<span>昵称</span>
+					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
 					<span>修改</span>
 				</p>
 				<p>
 					<span>邮箱地址</span>
-					<input type="text" name="user_email" value="{$data.user_email}"/>
+					<input type="text" name="user_email" value="{$user_info.user_email}"/>
 					<span>修改</span>
 				</p>
 				<p>
 					<span>手机号码</span>
-					<input type="text" name="user_tel" value="{$data.user_tel}" />
+					<input type="text" name="user_tel" value="{$user_info.user_tel}" />
 					<span>修改</span>
-					<input type="hidden" name="user_id" value="{$data.user_id}">
+					<input type="hidden" name="user_id" value="{$user_info.user_id}">
 				</p>
 				<p class="per_info_btn" id="update">保存</p>
 			</form>

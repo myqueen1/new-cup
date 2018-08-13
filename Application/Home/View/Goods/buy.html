@@ -5,7 +5,7 @@
 </head>
 	<div class="buy">
 		<p class="crumb">
-			<a href="{:U('Index/product')}">首页</a>>
+			<a href="{:U('Goods/product')}">首页</a>>
 			<a>{$data.brand_name}</a>>{$data.goods_name} 水杯
 		</p>
 		<div class="buy_info">
@@ -54,12 +54,14 @@
 				</p>
 				<p class="p7">
 					<?php if (!isset($_COOKIE['user_info'])) { ?>
-						<a class='login_btn'>加入购物车</a>
+						<a class='login_btn' href="javascript:void(0);">加入购物车</a>
+                        <a class='login_btn' href="javascript:void(0);">立即购买</a>
 					<?php } else { ?>
 						<a class='btn-buy'>加入购物车</a>
+                        <a href="javascript:void(0);">立即购买</a>
 					<?php } ?>
 					
-					<a href="fill_order.html">立即购买</a>
+					
 				</p>
 			</div>
 		</div>
@@ -197,7 +199,7 @@
     });
 </script>
 <script>
-	//暂时不知何物.....
+	//加入购物车的点击效果.....
     $('.btn-buy').bind('click',function(){
         var img = $(".middle_img").find('img');
         var flyElm = img.clone().css('opacity', 0.75);
