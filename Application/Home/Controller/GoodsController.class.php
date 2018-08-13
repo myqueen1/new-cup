@@ -21,6 +21,7 @@ class GoodsController extends ComeController
                              ->join('five_type on five_goods.type_id=five_type.type_id')
                              ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
                              ->where("goods_status = '2'")
+                             ->limit(1,2)
                              //->join('five_goods_img on five_goods_detailed.goods_id=five_goods_img.goods_id')
                              ->select();
 
@@ -38,8 +39,8 @@ class GoodsController extends ComeController
         //商品类型
         $typemodel = D("type");
         $typedata  = $typemodel->select();
-        $this->assign('type',$typedata);
 
+        $this->assign('type',$typedata);
         $this->display();
     }
 
@@ -48,20 +49,25 @@ class GoodsController extends ComeController
     {
 
         $goods_id   = I('get.id');
-        $goodsmodel = D('goods_detailed');
+        if (is_numeric($goods_id)) {
+            $goodsmodel = D('goods_detailed');
 
-        $result = $goodsmodel->join('five_goods on five_goods_detailed.goods_id=five_goods.goods_id')
-                             ->where("five_goods_detailed.goods_id='$goods_id'")
-                             ->find();
-        //print_r($data);die;echo $db->getLastSql();die;print_r($data);die;
+            $result = $goodsmodel->join('five_goods on five_goods_detailed.goods_id=five_goods.goods_id')
+                                 ->where("five_goods_detailed.goods_id='$goods_id'")
+                                 ->find();
+            //print_r($data);die;echo $db->getLastSql();die;print_r($data);die;
 
-        $imgmodel = M('goods_img');
-        $ImgPath  = $imgmodel->where("goods_id = '$goods_id'")
-                             ->select();
+            $imgmodel = M('goods_img');
+            $ImgPath  = $imgmodel->where("goods_id = '$goods_id'")
+                                 ->select();
 
-        $this->assign('data',$result);
-        $this->assign('Img',$ImgPath);
-        $this->display();
+            $this->assign('data',$result);
+            $this->assign('Img',$ImgPath);
+            $this->display();
+        } else {
+            //没有商品ID的情况下抛出异常
+            layout(false);$this->error();
+        }
     }
 
     /**
@@ -132,8 +138,8 @@ class GoodsController extends ComeController
     }
 
     /**
-     *   @param $result array 
-     *   @content 剔除图片路径有问题的数据
+     *   @param $result array 剔除图片路径有问题的数据,返回图片路径没有问题的数组
+     *   @return $result array  
     */
     public function Eliminate($result){
         //剔除没有封面的商品

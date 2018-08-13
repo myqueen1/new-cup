@@ -6,22 +6,7 @@ use Think\Controller;
 
 class IndexController extends ComeController
 {
-    //杯之密语
-    public function blog()
-    {
-        $this->display();
-    }
-
-    //杯之密语列表
-    public function blog_list()
-    {
-        $this->display();
-    }
-
-
-    //重置密码
-    public function find()
-    {
+    public function index(){
         $this->display();
     }
 
@@ -31,9 +16,8 @@ class IndexController extends ComeController
         $this->display();
     }
 
-    //订单
-    public function fill_order()
-    {
-        $this->display();
+    public function PlayGame(){
+        layout(false);
+        $this->display('Common/game');
     }
 }

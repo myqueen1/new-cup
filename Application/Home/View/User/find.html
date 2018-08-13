@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="register">
+	<p class="res_title">重置密码</p>
+	<div class="res_box" style="height: 420px;">
+		<ul class="res_nav">
+			<li class="active" style="width: 50%;">
+				<i class="iconfont">&#xe602;</i>
+				<span>手机验证</span>
+			</li>
+			<li style="width: 50%;">
+				<i class="iconfont">&#xe603;</i>
+				<span>邮箱验证</span>
+			</li>
+		</ul>
+		<div class="res_form" style="height:328px;">
+			<form action="" method="post" style="border: none;">
+				<p class="res_list">
+					<span>手机号码</span>
+					<input type="tel" />
+				</p>
+				<p class="res_list">
+					<span>登录帐号</span>
+					<input type="tel" />
+				</p>
+				<p class="tip">仅支持中国大陆地区手机号码！</p>
+				<p class="res_list" style="margin-top: 0px;">
+					<span>手机验证码</span>
+					<input type="text" style="width: 70px;"/>
+					<span class="yan_code">获取验证码</span>
+				</p>
+				<p class="res_list">
+					<span>设置密码</span>
+					<input type="password" />
+				</p>
+				<p class="res_list">
+					<span>确认密码</span>
+					<input type="password" />
+				</p>
+				<p class="res_btn">提交</p>
+			</form>
+			<!--<p>已有账号？请<a style="color: #AE191B;" class="login_btn">直接登录</a></p>-->
+		</div>
+		<div class="res_form" style="padding-top: 40px;display: none;">
+			<form action="" method="post" style="border: none;">
+				<p class="res_list">
+					<span>邮箱地址</span>
+					<input type="email" />
+				</p>
+				<p class="res_list" style="margin-top: 10px;">
+					<span>验证码</span>
+					<input type="text" style="width: 70px;"/>
+					<span class="yan_code">获取验证码</span>
+				</p>
+				<p class="res_list">
+					<span>设置密码</span>
+					<input type="tel" />
+				</p>
+				<p class="res_list">
+					<span>确认密码</span>
+					<input type="tel" />
+				</p>
+				<p class="res_btn">提交</p>
+			</form>
+			<!--<p>已有账号？请<a style="color: #AE191B;" class="login_btn">直接登录</a></p>-->
+		</div>
+	</div>
+</div>
+<div class="login_bg">
+	<div class="login">
+		<img src="img/close.png" class="close"/>
+		<img src="img/login.png" style="margin: 25px 0px;"/>
+		<form action="" method="post">
+			<p class="list">
+				<img src="img/login_pic2.png"/>
+				<input type="text" placeholder="请输入注册时的邮箱/手机号"/>
+			</p>
+			<p class="list">
+				<img src="img/login_pic3.png"/>
+				<input type="password" placeholder="请输入注册时的邮箱/手机号"/>
+			</p>
+			<a href="find.html">忘记密码?</a>
+			<p>
+				<a href="register.html">注册</a>
+				<a>登录</a>
+			</p>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".close").click(function(){
+			$(".login_bg").fadeOut();
+		});
+		$(".login_btn").click(function(){
+			$(".login_bg").slideDown();
+			$(".meau_box").slideUp();
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		$(".res_nav").children("li").click(function(){
+			$(".res_nav").children("li").stop().removeClass("active");
+			$(this).stop().addClass("active");
+			$(".res_form").stop().slideUp();
+			$(".res_form").eq($(".res_nav").children("li").index(this)).stop().slideDown();
+		});
+	});
+</script>
+<div class="footer">
+	<div class="footer_con">
+		<p>享有 | enjoy</p>
+		<img src="img/footer.png" />
+	</div>
+	<div class="footer_con2">
+		<p>© 2015 dingdongyouli.com All rights reserved.</p>
+		<img src="img/footer_p2.jpg" />
+	</div>
+</div>
+</body>
+
+</html>

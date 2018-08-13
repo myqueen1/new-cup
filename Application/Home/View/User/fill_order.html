@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="order">
+	<p class="p1">填写并确认订单</p>
+	<div class="order_b1">
+		<p class="title">收货人信息</p>
+		<div class="old_add">
+			<div class="info">
+				<p>张明</p>
+				<p>成都市某县区某地方某个街道成都市某县区某 地方某个街道4-1-301</p>
+				<p>15281082255</p>
+				<!--<img src="img/order_p1.png" />-->
+			</div>
+			<div class="add" id="add">
+				<img src="img/order_p2.png" />
+			</div>
+		</div>
+		<div class="new_add" style="display: none;">
+			<p class="p1">新增地址</p>
+			<img src="img/close.png" class="close"/>
+			<form action="" method="post">
+				<p>
+					<span class="tl"><font color="#D70000" style="margin-right: 5px;">*</font>收货人</span>
+					<input type="text" />
+				</p>
+				<p>
+					<span class="tl"><font color="#D70000" style="margin-right: 5px;">*</font>所在地区</span>
+					<select name="">
+						<option value="">请选择省份</option>
+					</select>
+					<select name="">
+						<option value="">请选择市</option>
+					</select>
+					<select name="">
+						<option value="">请选择区</option>
+					</select>
+				</p>
+				<p>
+					<span class="tl"><font color="#D70000" style="margin-right: 5px;">*</font>详细地址</span>
+					<input type="text" style="width: 500px;"/>
+				</p>
+				<p>
+					<span class="tl"><font color="#D70000" style="margin-right: 5px;">*</font>联系电话</span>
+					<input type="tel" />
+				</p>
+				<p>
+					<span class="tl">邮编</span>
+					<input type="text" />
+				</p>
+				<p>
+					<input type="checkbox" />
+					<span class="tl" style="width: 90px;">设为常用地址</span>
+				</p>
+				<p class="add_btn">保存</p>
+			</form>
+		</div>
+	</div>
+	<div class="order_b1">
+		<p class="title">对TA说</p>
+		<!--没有保存的-->
+		<div class="say">
+			<a href="message2.html"><div class="say_box">
+				<img src="img/order_p3.jpg" />
+				<img src="img/order_p1.png" class="img2" />
+			</div></a>
+			<a href="message.html"><p class="say_btn">在线预览</p></a>
+		</div>
+		<!--没有保存的-->
+		<!--保存之后出现二维码-->
+		<div class="say" style="display: none;">
+			<div class="" style="float: left;">
+				<a href="message2.html">
+					<div class="say_box" style="float: none;">
+						<img src="img/order_p3.jpg" />
+						<img src="img/order_p1.png" class="img2" />
+					</div>
+				</a>
+				<a href="message.html">
+					<p class="say_btn" style="float: none;margin-left: 12px;margin-top: 18px;">在线预览</p>
+				</a>
+			</div>
+			<p style="float: right;">
+				<img src="img/erwei.png" style="height: 109px;"/>
+				<span style="display: block;margin-top: 15px;">专属码：cc520</span>
+			</p>
+		</div>
+		<!--保存之后出现二维码-->
+		<p class="say_info">文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明</p>
+	</div>
+	
+	<div class="order_b1">
+		<p class="title">支付方式</p>
+		<div class="pay active">
+			<img src="img/pay_way1.png" style="margin-top: 3px;"/>
+			<img src="img/order_p1.png" class="img2" style="display:block;"/>
+		</div>
+		<div class="pay">
+			<img src="img/pay_way2.png" style="margin-top: 10px;"/>
+			<img src="img/order_p1.png" class="img2" />
+		</div>
+	</div>
+	<script>
+			$(function(){
+				$("#add").click(function(){
+					$(".old_add").hide();
+					$(".new_add").fadeIn();
+				});
+				$(".add_btn").click(function(){
+					$(".new_add").hide();
+					$(".old_add").fadeIn();
+				});
+				$(".close").click(function(){
+					$(".new_add").hide();
+					$(".old_add").fadeIn();
+				});
+				$(".pay").click(function(){
+					$(".pay").removeClass("active");
+					$(".pay").find(".img2").hide();
+					$(this).addClass("active");
+					$(this).find(".img2").show();
+				});
+			});
+		</script>
+	<div class="order_b1">
+		<p class="title">商品与配送方式<a href="shop_car.html" style="color:#474747;">[返回购物车]</a></p>
+		<div class="song">
+			<p class="pic"><img src="img/order_pic5.jpg"/></p>
+			<p class="name">泉立方防串染色母片</p>
+			<p class="num"><font color="#3CA5F1">￥49</font>*1</p>
+			<p class="totle">￥49</p>
+		</div>
+	</div>
+	
+	<div class="order_b1">
+		<p class="title">使用优惠券</p>
+		<p class="conpou1">可用优惠券(5)</p>
+		<!--没有可用优惠券-->
+		<!--<p class="conpou2">无可用优惠券</p>-->
+		<!--没有可用优惠券-->
+		<p class="can">
+			<span class="dq">50元优惠卷</span>
+			<img src="img/yhq.png"/>
+			<span class="more">30元优惠卷</span>
+			<span class="more">40元优惠卷</span>
+			<span class="more">60元优惠卷</span>
+			<span class="more">20元优惠卷</span>
+		</p>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			var bool=true;
+			$(".dq").click(function(){
+				if(bool){
+					$(this).parent(".can").children(".more").fadeIn().css("display","block");
+					$(this).parent(".can").children("img").css("transform","rotate(90deg)");
+					bool=false;
+					var bb=true;
+					$(this).parent(".can").children(".more").click(function(){
+						if(bb){
+							$(this).css("border","#000000 1px solid");
+						    bb=false;
+						}else{
+							$(this).css("border","none");
+							bb=true;
+						}
+						
+					});
+				}else{
+					$(this).parent(".can").children(".more").fadeOut();
+					$(this).parent(".can").children("img").css("transform","rotate(0deg)");
+					bool=true;
+				}
+				
+			});
+		});
+	</script>
+	<div class="order_b2">
+		<p>1件商品，共计： 	￥49</p>
+		<p>总运费： 	￥0</p>
+		<p>优惠共计：	-￥0</p>
+	</div>
+	<p class="order_b3">
+		<span>订单总计：<font color="#de0000" style="font-size: 28px;">￥49</font></span>
+		<span>提交订单</span>
+	</p>
+</div>
+<div class="footer">
+	<div class="footer_con">
+		<p>享有 | enjoy</p>
+		<img src="img/footer.png" />
+	</div>
+	<div class="footer_con2">
+		<p>© 2015 dingdongyouli.com All rights reserved.</p>
+		<img src="img/footer_p2.jpg" />
+	</div>
+
+</div>
+</body>
+</html>

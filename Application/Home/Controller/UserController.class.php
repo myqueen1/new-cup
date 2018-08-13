@@ -89,6 +89,18 @@ class UserController extends HeadController
     }
 
     public function ShoppingCart(){
-        $this->display('');
+        $this->display();
+    }
+
+    //订单
+    public function fill_order()
+    {
+        $this->display();
+    }
+
+    //重置密码
+    public function find()
+    {
+        $this->display();
     }
 }
