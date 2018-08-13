@@ -129,11 +129,8 @@ class GoodsController extends CommonController
         $upload->maxSize = $size ;// 设置附件上传大小
         $upload->exts = $type;// 设置附件上传类型
         $upload->savePath = '/Public/Uploads/'; // 设置附件上传根目录
-<<<<<<< HEAD
         $upload->rootPath = './'; // 设置附件上传根目录
-=======
-        $upload->rootPath  =      './'; // 设置附件上传根目录
->>>>>>> bd0aae2ff85e8b93a6ceb6ec66da47e4c08df2a2
+
         $upload->replace = true;
         foreach($_FILES as $key => $value){
             if(count($_FILES[$key]) == count($_FILES[$key],1)){//判断$_FILES变量是否是二维数组

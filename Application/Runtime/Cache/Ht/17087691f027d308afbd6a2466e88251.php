@@ -3,8 +3,9 @@
 <head>
 <title>header</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <base href="/new-cup/Public/backend/">
+ <base href="/Public/backend/">
 <link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.js"></script>
 </head>
 <body>
 <div class="header">
@@ -13,7 +14,7 @@
  </div>
  <div class="fr top-link">
   <a href="admin_list.html" target="mainCont" title="DeathGhost"><i class="adminIcon"></i><span>管理员：<?php echo ($name); ?></span></a>
-  <a href="#" title="安全退出" style="background:rgb(60,60,60);"><i class="quitIcon"></i><span>安全退出</span></a>
+  <a href="#"  title="安全退出" style="background:rgb(60,60,60);"><i class="quitIcon"></i><span>安全退出</span></a>
  </div>
 </div>
 </body>

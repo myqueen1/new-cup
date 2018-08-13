@@ -76,11 +76,7 @@
 					<img src="__PUBLIC__/backend/images/icon_edit.gif"/>
 				</a>&nbsp;&nbsp;&nbsp;
 				<a title="删除" href="{:U('Goods/delAll')}?goods_id={$v.goods_id}" >
-<<<<<<< HEAD
-					<img src="images/icon_drop.gif"/>
-=======
 					<img src="__PUBLIC__/backend/images/icon_trash.gif" />
->>>>>>> bd0aae2ff85e8b93a6ceb6ec66da47e4c08df2a2
 				</a>
 			</td>
 		</tr>
@@ -169,23 +165,13 @@
             }
         })
     })
-<<<<<<< HEAD
-     // 批删
-=======
 
-    // 批删
->>>>>>> yanxusheng
     $(document).on('click', '#delete', function () {
         var checkedNum = $("input[name='checkbox']:checked").length;
         if (checkedNum == 0) {
             alert("请选择至少一项！");
             return;
         }
-<<<<<<< HEAD
-// // 批量选择
-=======
-		// 批量选择
->>>>>>> yanxusheng
         if (confirm("确定要删除所选项目？")) {
             var che = $("input[name='checkbox']:checked");
             var goods_id = new Array();
