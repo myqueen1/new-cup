@@ -9,7 +9,7 @@ namespace Ht\Controller;
 
 use Think\Controller;
 
-class GoodsController extends Controller
+class GoodsController extends CommonController
 {
     private static $message = [];
 
@@ -107,6 +107,8 @@ class GoodsController extends Controller
                 }
                 
             $data['goods_time'] = date("Y-m-d H:i:s", time());
+            // $cons = strip_tags($data['goods_content']);
+            // echo strip_tags("<p>阿萨德</p>");
             $re = D('goods_detailed')->add($data);
             if ($re) {
                 $this->redirect('Goods/product_list', '', 0, '页面跳转中...');
@@ -128,6 +130,7 @@ class GoodsController extends Controller
         $upload->exts = $type;// 设置附件上传类型
         $upload->savePath = '/Public/Uploads/'; // 设置附件上传根目录
         $upload->rootPath = './'; // 设置附件上传根目录
+
         $upload->replace = true;
         foreach($_FILES as $key => $value){
             if(count($_FILES[$key]) == count($_FILES[$key],1)){//判断$_FILES变量是否是二维数组
@@ -217,5 +220,48 @@ class GoodsController extends Controller
             }
             echo json_encode(self::$message,JSON_UNESCAPED_UNICODE);
         }
+    }
+
+    // 修改
+    public function save_goods()
+    {
+        $id = I("get.goods_id");
+        $goods = M('goods')->where("goods_id=".$id)->find();
+        $detailed = M('goods_detailed')->where("goods_id=".$id)->find();
+        // echo M('goods')->getLastSql();die;
+        // $imgs =  M('goods_img')->where('goods_id='.$id)->select();
+        $type = M('type')->select();
+        $brand = M('brand')->select();
+        $this->assign('v',$goods);
+        $this->assign('d',$detailed);
+        // $this->assign('imgs',$imgs);
+        $this->assign('type',$type);
+        $this->assign('brand',$brand); 
+        $this->display();
+    }
+    // 接值 修改数据
+    public function save_goods_do()
+    {
+        //goods表修改
+        $goods_id = I('post.goods_id');
+        $goods['goods_name'] = I('post.goods_name');
+        $goods['brand_id'] = I('post.brand_id');
+        $goods['type_id'] = I('post.type_id');
+            M('goods')->where("goods_id=".$goods_id)->save($goods);
+            $detailed['goods_stock'] = I('post.goods_stock');
+            $detailed['goods_original'] = I('post.goods_original');
+            $detailed['goods_price'] = I('post.goods_price');
+            $detailed['goods_content'] = I('post.goods_content');
+            $detailed['goods_keywords'] = I('post.goods_keywords');
+            $detailed['goods_time'] = date("Y-m-d H:i:s",time());
+            $goods_cover = $_FILES['goods_cover'];
+            if ($goods_cover['error']!=4) {
+                $imag = $this->upload();
+                $detailed['goods_cover'] = $imag['goods_cover']['savepath'].$imag['goods_cover']['savename'];
+                M('goods_detailed')->where("goods_id=".$goods_id)->save($detailed);
+            } else {
+                M('goods_detailed')->where("goods_id=".$goods_id)->save($detailed);
+            }
+        $this->redirect('Goods/product_list', '', 0, '页面跳转中...');
     }
 }
