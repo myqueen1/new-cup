@@ -67,6 +67,11 @@ class LoginController extends Controller
         }
         $this->display();
     }
+    public function set()
+    {
+        cookie(null,'userinfo');
+        $this->redirect('Index/index',"", 0, '列表...');
+    }
 }
 
 ?>
