@@ -29,7 +29,7 @@ class ClassifyController extends CommonController
         if (IS_POST) {
             $data = I('post.');
             $rules = array(
-                array('type_name', '', '帐号已经存在！', 0, 'unique', 1), // 在新增的时候验证name字段是否唯一
+                array('type_name', '', '已经存在！', 0, 'unique', 1), // 在新增的时候验证name字段是否唯一
                 array('type_name', 'require', '不能为空！', 1),
             );
             $type = D("type"); // 实例化type对象
