@@ -24,12 +24,12 @@
             <th>操作</th>
         </tr>
         <foreach name="list" item="vo">
-            <tr>
+            <tr leave_id="{$vo.id}">
                 <td class="center">{$vo.user_nickname}</td>
                 <td class="center">{$vo.time}</td>
-                <td class="center">
+                <td class="center status">
                     <if condition="$vo.status eq 0 ">
-                        未回复
+                        <font style="color: red">未回复</font>
                         <else/>
                         已回复
                     </if>
@@ -40,7 +40,7 @@
                     </div>
                 </td>
                 <td width="300">
-                    <div style="width:400px;height:50px;overflow:scroll;overflow-x:hidden;">
+                    <div class="answer" style="width:400px;height:50px;overflow:scroll;overflow-x:hidden;">
                         {$vo.answer}
                     </div>
                 </td>
