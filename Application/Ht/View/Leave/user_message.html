@@ -41,12 +41,12 @@
                 </td>
                 <td width="300">
                     <div style="width:400px;height:50px;overflow:scroll;overflow-x:hidden;">
-
+                        {$vo.answer}
                     </div>
                 </td>
                 <td class="center">
-                    <a href="{:U('Leave/reply_message')}" class="inline-block" title="回复"><img src="images/icon_title.gif"/></a>
-                    <a class="inline-block" title="移除"><img src="images/icon_drop.gif"/></a>
+                    <a href="{:U('Leave/reply_message')}?id={$vo.id}" class="inline-block" title="回复"><img src="images/icon_title.gif"/></a>
+                    <a href="{:U('Leave/delet')}?id={$vo.id}" class="inline-block block" title="移除"><img src="images/icon_drop.gif"/></a>
                 </td>
             </tr>
         </foreach>
@@ -57,11 +57,26 @@
     <div style="overflow:hidden;">
         <!-- turn page -->
         <div class="turnPage center fr">
-            <a>第一页</a>
-            <a>1</a>
-            <a>最后一页</a>
+            {$page}
         </div>
     </div>
 </div>
+<script>
+    $(document).on('click','.block',function () {
+        event.preventDefault()
+        var url=$(this).attr('href');
+        $.ajax({
+            url:url,
+            success:function(result){
+                if (result){
+                    alert('删除成功');
+                    location.href = "{:U('Leave/user_message')}?p=<?php echo I('get.p');?>";
+                } else {
+                    alert('删除失败');
+                    location.href = "{:U('Leave/user_message')}?p=<?php echo I('get.p');?>";
+                }
+            }});
+    })
+</script>
 </body>
 </html>
