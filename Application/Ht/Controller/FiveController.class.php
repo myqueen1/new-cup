@@ -11,6 +11,7 @@ use Think\Controller;
 
 class FiveController extends Controller
 {
+    private static $message = [];
     //轮播图列表
     public function advertising_list()
     {
@@ -54,7 +55,26 @@ class FiveController extends Controller
                 return $info;
             }
     }
+    //显示修改
+    public function ShowUp()
+    {
+         if (IS_AJAX) {
+            $is_show   = I('get.is_show');
+            $goods_id = I('get.id');
 
+            $goods_extension = D('goods_extension');
+            $result = $goods_extension->where("goods_id = '$goods_id'")
+                                     ->setField('is_show',$is_show);
+            if ($result) {
+                self::$message['status'] = 'success';
+                self::$message['message'] = '修改成功！';
+            } else {
+                self::$message['status'] = 'error';
+                self::$message['message'] = '系统错误，请稍后重试！';
+            }
+            echo json_encode(self::$message,JSON_UNESCAPED_UNICODE);
+        }
+    }
 
 
 }

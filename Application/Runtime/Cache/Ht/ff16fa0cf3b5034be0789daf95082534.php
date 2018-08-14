@@ -71,11 +71,12 @@
 				<?php } ?>
 			</td>
 			<td class="center">
-				<a href="edit_product.html" title="添加商品规格">
+				<!-- <a href="edit_product.html" title="添加商品规格"> -->
+				<a href="<?php echo U('Goods/save_goods');?>?goods_id=<?php echo ($v["goods_id"]); ?>" title="编辑">
 					<img src="/new-cup/Public/backend/images/icon_edit.gif"/>
 				</a>&nbsp;&nbsp;&nbsp;
 				<a title="删除" href="<?php echo U('Goods/delAll');?>?goods_id=<?php echo ($v["goods_id"]); ?>" >
-					<img src="/new-cup/Public/backend/images/icon_drop.gif"/>
+					<img src="/new-cup/Public/backend/images/icon_trash.gif" />
 				</a>
 			</td>
 		</tr><?php endforeach; endif; ?>
@@ -163,6 +164,7 @@
         })
     })
 
+
      // 批删
     $(document).on('click', '#delete', function () {
         var checkedNum = $("input[name='checkbox']:checked").length;
@@ -170,7 +172,6 @@
             alert("请选择至少一项！");
             return;
         }
-		// 批量选择
         if (confirm("确定要删除所选项目？")) {
             var che = $("input[name='checkbox']:checked");
             var goods_id = new Array();

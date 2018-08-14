@@ -1,19 +1,18 @@
 <?php
 /**
- * 说    明:
  * 创建用户: 马燕
  * 创建日期: 2018/8/2
- * 创建时间: 9:19
  */
-
 namespace Home\Controller;
 
 use Think\Controller;
 
-class SendController extends Controller
+class SendController extends ComeController
 {
-	private static $message = [];
-
+	/**
+	 *   @param $telphone string 接收手机号码,判断唯一性的情况下生成验证码
+	 *   @return $result json 
+	*/
 	public function SendMessage(){
 		//接收手机号
 		$telphone=I('get.telphone');
@@ -22,47 +21,37 @@ class SendController extends Controller
 		$result = $user_model->where("user_tel = '$telphone'")->find();
 
 		if ($result) {
-			self::$message['status'] = '404';
-			self::$message['msg'] = '手机号已存在，请直接登陆!';
-
-			echo json_encode(self::$message,JSON_UNESCAPED_UNICODE);die;
+			echo self::PutOutMessage('error','改手机号已注册,请直接登录');
 		} else {
 			//生成验证码
 			$code=rand(99999,999999);	
 			//调用存储session信息方法,存储验证码
-			echo $this->storage($code);
+			echo self::storage($code);
 		}
 	}
 
-
-	//存储session信息
-	public function storage($code){
-		//判断验证码是否为纯数字
-		if(is_numeric($code)){
-			
-			if (!session('?code')) {
-				session('code',$code);
-			}else{
-				$code = session('code');
-			}
-
-			self::$message['status'] = '200';
-			self::$message['msg'] = '短信验证码发送成功!'.$code;
+	/**
+	 *   @param $code int[6] 将手机验证码存入session
+	 *   @return $result json 
+	*/
+	private static function storage($code){
+		if (!session('?telphone_code')) {
+			session('telphone_code',$code);
 		}else{
-			self::$message['status'] = '404';
-			self::$message['msg'] = '系统出错请稍后重试!';
+			$code = session('telphone_code');
 		}
-		return json_encode(self::$message,JSON_UNESCAPED_UNICODE);
+		return self::PutOutMessage('success',"短信验证码发送成功!$code");
 	}
 
+	/**
+	 *   @param $code $session_code int
+	 *   @return 0/1 int 	AJAX请求判断验证码的一致性,返回结果
+	*/
 	public function Verification(){
 		$code = I('get.code');
-		$session_code = session('code');
+		$session_code = session('telphone_code');
 
-		if ($code == $session_code) {
-			$this->ajaxReturn(1);
-		} else {
-			$this->ajaxReturn(0);
-		}
+		if ($code == $session_code) $this->ajaxReturn(1);
+		if ($code != $session_code) $this->ajaxReturn(0);
 	}
 }

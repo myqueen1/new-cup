@@ -29,11 +29,11 @@
         <td>
             <img src="__ROOT__{$vo.extension_img}" alt="" width="200"  height="100" >
         </td>
-        <td>
+        <td  ids='{$vo.goods_id}' >
             <if condition="$vo['is_show'] eq 0 ">
-                <img src="__ROOT__/Public/backend/images/no.gif">
+                <img src="__ROOT__/Public/backend/images/no.gif"  value='1' class="isshow" >
                 <else />
-                <img src="__ROOT__/Public/backend/images/yes.gif">
+                <img src="__ROOT__/Public/backend/images/yes.gif"  value='0' class="isshow" >
             </if>
         </td>
         <td class="center">
@@ -60,4 +60,29 @@
   </div>
  </div>
 </body>
+<script>
+$('.isshow').on('click',function(){
+    var is_show = $(this).attr('value');
+    var goods  = $(this).parent().attr('ids');
+    var _this  = $(this);
+
+    $.ajax({
+      url:"{:U('Five/ShowUp')}",
+      dataType:'json',type:'GET',
+      data:{is_show:is_show,id:goods},
+      success:function(res){
+        if (res.status == 'error') {
+          alert(res.message)
+          window.location.href="{:U('Five/advertising_list')}"
+        } else {
+          if (is_show == 1) {
+            _this.attr('src','__PUBLIC__/backend/images/yes.gif')
+          } else {
+            _this.attr('src','__PUBLIC__/backend/images/no.gif')
+          };
+        };
+      }
+    })
+  })
+</script>
 </html>

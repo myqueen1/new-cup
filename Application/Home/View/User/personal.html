@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<div class="personal">
+		<p class="title">我的账户<span>您好，{$user_info.user_nickname}</span></p>
+		<ul class="per_nav">
+			<li class="active">我的订单</li>
+			<li>基本信息</li>
+			<li>我的优惠卷</li>
+			<li>我的留言</li>
+			<li>密码修改</li>
+		</ul>
+		<ul class="per_nav2">
+			<li class="active">订单</li>
+			<li>信息</li>
+			<li>优惠卷</li>
+			<li>留言</li>
+		</ul>
+		<div class="per_box">
+			<ul class="per_navul">
+				<li style="width: 130px;margin-right: 10px;">
+					<input type="checkbox" style="margin-right: 20px;"/>
+					全选
+				</li>
+				<li style="width: 450px;text-align: left;">商品名称</li>
+				<li>单价</li>
+				<li>数量</li>
+				<li>合计</li>
+				<li>专属码</li>
+				<li>状态</li>
+			</ul>
+			<ul class="per_listul">
+				<li style="width: 130px;margin-right: 10px;">
+					<input type="checkbox" style="margin-right: 10px;margin-left: 18px;"/>
+					<img src="img/order_pic5.jpg" style="vertical-align: middle;"/>
+				</li>
+				<li style="width: 450px;text-align: left;">泉立方防串染色母片</li>
+				<li>￥49</li>
+				<li>2</li>
+				<li>￥98</li>
+				<li>8800</li>
+				<li>已完成</li>
+				<p>送货地址：xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+
+			</ul>
+		</div>
+		<div class="per_box per_info" style="display: none;">
+			<form>
+				<p>
+					<span>昵称</span>
+					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
+					<span>修改</span>
+				</p>
+				<p>
+					<span>昵称</span>
+					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
+					<span>修改</span>
+				</p>
+				<p>
+					<span>昵称</span>
+					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
+					<span>修改</span>
+				</p>
+				<p>
+					<span>昵称</span>
+					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
+					<span>修改</span>
+				</p>
+				<p>
+					<span>邮箱地址</span>
+					<input type="text" name="user_email" value="{$user_info.user_email}"/>
+					<span>修改</span>
+				</p>
+				<p>
+					<span>手机号码</span>
+					<input type="text" name="user_tel" value="{$user_info.user_tel}" />
+					<span>修改</span>
+					<input type="hidden" name="user_id" value="{$user_info.user_id}">
+				</p>
+				<p class="per_info_btn" id="update">保存</p>
+			</form>
+		</div>
+		<div class="per_box per_coupon" style="display: none;">
+			<ul class="per_couponul">
+				<li class="active">未使用(4)</li>
+				<li>已使用(1)</li>
+				<li>已过期(2)</li>
+			</ul>
+
+			<div class="per_coupon_box">
+				<div class="per_coupon_list">
+					<p>￥40</p>
+					<p>【消费满200元可用】</p>
+					<p>2016-1-11——2016-2-22</p>
+				</div>
+				<div class="per_coupon_list">
+					<p>￥40</p>
+					<p>【消费满200元可用】</p>
+					<p>2016-1-11——2016-2-22</p>
+				</div>
+				<div class="per_coupon_list">
+					<p>￥40</p>
+					<p>【消费满200元可用】</p>
+					<p>2016-1-11——2016-2-22</p>
+				</div>
+				<div class="per_coupon_list">
+					<p>￥40</p>
+					<p>【消费满200元可用】</p>
+					<p>2016-1-11——2016-2-22</p>
+				</div>
+			</div>
+			<div class="per_coupon_box" style="display: none;">
+				<div class="per_coupon_list per_coupon_old">
+					<p>￥40</p>
+					<p>【消费满200元可用】</p>
+					<p>2016-1-11——2016-2-22</p>
+				</div>
+			</div>
+			<div class="per_coupon_box" style="display: none;">
+				<div class="per_coupon_list per_coupon_old">
+					<p>￥40</p>
+					<p>【消费满200元可用】</p>
+					<p>2016-1-11——2016-2-22</p>
+				</div>
+				<div class="per_coupon_list per_coupon_old">
+					<p>￥40</p>
+					<p>【消费满200元可用】</p>
+					<p>2016-1-11——2016-2-22</p>
+				</div>
+			</div>
+		</div>
+		<div class="per_box" style="display: none;">
+			我的留言
+		</div>
+		<div class="per_box per_info" style="display: none;">
+			<form action="{:U('User/Pwd')}" method="post">
+				<p>
+					<span>旧密码</span>
+					<input type="password" id="oldpwd" onblur="validate_old()" disabled value="*********"/>
+				</p>
+				<p>
+					<span>新密码</span>
+					<input type="password" id="newpwd" disabled/>
+				</p>
+				<p>
+					<span>确认新密码 </span>
+					<input type="password" id="newpwd1" disabled onkeyup="validate_pass()"/>
+				</p>
+				<center><span id="tishi"></span></center>
+				<p class="per_info_btn" id="start">开始修改密码</p>
+				<p class="per_info_btn" id="end" style="display:none">确认修改密码</p>
+			</form>
+		</div>
+	</div>
+</body>
+<script>
+	$(function () {
+	    $(".meau").on("click", function (e) {
+	        $(".meau_box").slideToggle();
+	        $(document).one("click", function () {
+	            $(".meau_box").slideUp();
+	        });
+	        e.stopPropagation();
+	    });
+	    $(".close").click(function(){
+	        $(".login_bg").fadeOut();
+	    });
+
+	    $(".meau").on("click", function (e) {
+	        e.stopPropagation();
+	    });
+	});
+</script>
+<script>
+	$(function(){
+		$(".per_couponul li").click(function(){
+			$(".per_couponul li").removeClass("active");
+			$(this).addClass("active");
+			$(".per_coupon_box").hide();
+			$(".per_coupon_box").eq($(".per_couponul li").index(this)).fadeIn();
+		});
+		$(".per_nav li").click(function(){
+			$(".per_nav li").removeClass("active");
+			$(this).addClass("active");
+			$(".per_box").hide();
+			$(".per_box").eq($(".per_nav li").index(this)).fadeIn();
+		});
+		$(".per_nav2 li").click(function(){
+			$(".per_nav2 li").removeClass("active");
+			$(this).addClass("active");
+			$(".per_box").hide();
+			$(".per_box").eq($(".per_nav2 li").index(this)).fadeIn();
+		});
+	});
+</script>
+<script>
+var oldpassword = null;
+	//开始修改密码 点击事件
+	$('#start').on('click',function(){
+		//移除 oldpwd 禁用属性/设置空值/新增 oldpwd提示语/修改button提示语
+		$('#oldpwd').removeAttr('disabled');
+		$('#oldpwd').val('');
+		$('#oldpwd').attr('placeholder','请输入您的旧密码');
+		$(this).hide();
+	})
+
+	//验证旧密码事件
+	function validate_old(){
+		var oldpwd = $('#oldpwd').val();
+		var mreg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
+
+		if (mreg.test(oldpwd)) {
+			$.ajax({
+				url:"{:U('User/VerificationOld')}",
+				type:'POST',data:{'oldpwd':oldpwd},dataType:'json',
+				success:function(come){
+					if (come == 'error') {
+						$('#tishi').html("<font color='red' size='2'>旧密码不正确,请核对...</font>");
+					}
+					if (come == 'success') {
+						//上锁
+						$('#tishi').html("<font color='green' size='2'>请设置您的新密码</font>");	
+						$('#oldpwd').attr('disabled','disabled');
+						//赋值给公共成员属性
+						oldpassword = oldpwd;
+
+						$('#newpwd').removeAttr('disabled');
+						$('#newpwd1').removeAttr('disabled');
+					};
+				}
+			})
+		} else {
+			$("#tishi").html("<font color='red' size='2'>密码格式不正确,请核对</font>");
+		};
+	}
+
+	//验证两次密码方法
+	function validate_pass() {
+	    var pwd1 = $("#newpwd").val();
+	    var pwd2 = $("#newpwd1").val();
+	    var mreg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
+
+	   	if (pwd1 == oldpassword) {
+	   		$("#tishi").html("<font color='red' size='2'>新密码与旧密码不能相同</font>");
+	   	} else{
+	   		if (mreg.test(pwd1)) {
+		    	//对比两次输入的密码 
+			    if(pwd1 == pwd2){
+			        $("#tishi").html("");
+			        $('#newpwd').attr('disabled','disabled');
+			        $('#newpwd1').attr('disabled','disabled');
+			        $('#start').hide();
+			        $('#end').show();
+			        return true;
+			    }else {
+			        $("#tishi").html("<font color='red' size='2'>两次密码不相同</font>");
+			        return false;
+			    }
+		    } else {
+		    	$("#tishi").html("<font color='red' size='2'>密码不能为纯数字或空！</font>");
+		    	return false;
+		    };
+	   	};  
+	}
+
+	//AJAX 修改密码
+	$('#end').on('click',function(){
+		var newpassword = $('#newpwd1').val();
+		if (confirm("你确定要修改密码吗？")) { 
+			$.ajax({
+					url:"{:U('User/AjaxUpdatePass')}",
+					type:'POST',data:{'newpass':newpassword},dataType:'json',
+					success:function(come){
+						if (come == 'error') {
+							$('#tishi').html("<font color='red' size='2'>系统错误,请稍后重试...</font>");
+						}
+						if (come == 'success') {
+
+							$('#tishi').html("<font color='green' size='2'>修改成功,请牢记您的新密码</font>");	
+							setTimeout(function(){
+		                        window.location.reload();//刷新当前页面.
+		                    },1500)
+						};
+					}
+				})
+		}
+	})
+</script>
+<script>
+	$(function(){
+		// alert(1);
+		$(document).on('click',"#update",function(){
+			var user_id=$("input[name='user_id']").val();
+			var user_nickname=$("input[name='user_nickname']").val();
+			// alert(id);
+			var user_email=$("input[name='user_email']").val();
+			var user_tel=$("input[name='user_tel']").val();
+            $.ajax({
+            	url:"{:U('Index/UseSave')}",
+            	type:'POST',
+            	data:
+            	{
+            		'user_id':user_id,
+            		'user_nickname':user_nickname,
+            		'user_email':user_email,
+            		'user_tel':user_tel,
+            	},
+            	dataType:'json',
+            	success:function(e)
+            	{
+            		// alert(e);
+                  if (e=='') 
+                  {
+                     window.location.reload();
+                  }
+                  else
+                  {
+                     var str='<form>';
+                     str+='<p>';
+                     str+='<span>昵称</span>';
+                     str+='<input type="text" name="user_nickname" value="'+e.user_nickname+'"/>';
+                     str+='<span>修改</span></p>';
+                     str+='<p>';
+                     str+='<span>邮箱地址</span>';
+                     str+='<input type="text" name="user_email" value="'+e.user_email+'"/>';
+                     str+='<span>修改</span></p>';
+                     str+='<p>';
+                     str+='<span>手机号码</span>';
+                     str+='<input type="text" name="user_tel" value="'+e.user_tel+'"/>';
+                     str+='<span>修改</span></p>';
+                     str+='<input type="hidden" name="user_id" value="'+e.user_id+'"/>';
+                     str+='<p class="per_info_btn" id="update">保存</p>';
+                     str+='</form>';
+                  }
+                  $(".per_info").html(str);
+            	}
+            })
+		})
+	})
+</script>
+</html>

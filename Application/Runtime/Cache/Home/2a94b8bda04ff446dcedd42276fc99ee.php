@@ -6,14 +6,14 @@
     <title>55°--BLOG</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
-    <meta name="viewport"
-          content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
     <base href="/new-cup/Public/frontend/">
     <link rel="stylesheet" href="css/demo.css"/>
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/fen.css"/>
     <link rel="stylesheet" href="css/new_sou.css"/>
     <link rel="stylesheet" href="css/base.css" />
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
     <script type="text/javascript" src="js/swiper.min.js"></script>
     <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
@@ -27,13 +27,13 @@
             <a href="<?php echo U('Index/index');?>">
                 <li>首页</li>
             </a>
-            <a href="<?php echo U('Index/product');?>">
+            <a href="<?php echo U('Goods/product');?>">
                 <li>一杯(辈)子</li>
             </a>
             <a href="<?php echo U('Index/blog_list');?>">
                 <li>BLOG</li>
             </a>
-            <a href="<?php echo U('Index/personal');?>">
+            <a href="<?php echo U('User/personal');?>">
                 <li>个人中心</li>
             </a>
             <a href="<?php echo U('Index/message');?>">
@@ -45,13 +45,13 @@
         
 <?php  $user_info = json_decode(cookie('user_info'),true); if(empty($user_info)){ ?>
     <p>
-        <a href="<?php echo U('User/register');?>">注册</a>|<a class="login_btn">登录</a>
+        <a href="<?php echo U('Login/register');?>">注册</a>|<a class="login_btn">登录</a>
     </p>
 <?php }else{ ?>
     <p>
-        <a href="<?php echo U('Index/personal');?>"><?php echo $user_info['user_nickname'] ?></a>
+        <a href="<?php echo U('User/personal');?>"><?php echo $user_info['user_nickname'] ?></a>
         <a href="javascript:void(0);" class="loginOut">退出</a>
-        <a href="<?php echo U('Index/personal');?>">
+        <a href="<?php echo U('User/ShoppingCart');?>">
             <p class="head-shopcart">
                 <i class="iconfont">&#xe600;</i><span>0件</span>
             </p>
@@ -123,66 +123,67 @@
 </div>
 </body>
 <script>
-$(function () {
-    $(".meau").on("click", function (e) {
-        $(".meau_box").slideToggle();
-        $(document).one("click", function () {
+    $(function () {
+        $(".meau").on("click", function (e) {
+            $(".meau_box").slideToggle();
+            $(document).one("click", function () {
+                $(".meau_box").slideUp();
+            });
+            e.stopPropagation();
+        });
+        $(".close").click(function(){
+            $(".login_bg").fadeOut();
+        });
+        $(".login_btn").click(function() {
+            $(".login_bg").slideDown();
             $(".meau_box").slideUp();
         });
-        e.stopPropagation();
-    });
-    $(".close").click(function(){
-        $(".login_bg").fadeOut();
-    });
-    $(".login_btn").click(function() {
-        $(".login_bg").slideDown();
-        $(".meau_box").slideUp();
-    });
 
-    $(".meau").on("click", function (e) {
-        e.stopPropagation();
+        $(".meau").on("click", function (e) {
+            e.stopPropagation();
+        });
     });
-});
 </script>
 <script>
-$(".sub").click(function () {
-    //获取用户填写验证码
-    var user_tel  = $("input[name='user_tel']").val();
-    var user_pass = $("input[name='user_pass']").val();
-    //编写手机号正则  密码正则
-    var tel_myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
-    var pass_myreg= /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
-    //判断是否通过请求 然后再去请求控制器
-    if (tel_myreg.test(user_tel) && pass_myreg.test(user_pass)) {
-        $('.Hint').html('');
-        $.ajax({ 
-            url:"<?php echo U('User/login');?>",type:"GET",dataType:"json",
-            data:{user_tel:user_tel,user_pass:user_pass}, 
-            success:function (comeback) {
-                //console.log(comeback)
-                if(comeback==1){
-                    $('.Hint').html('<font color="green" size="1">登录成功,请稍后....</font>');
-                    setTimeout(function(){
-                        window.location.reload();//刷新当前页面.
-                    },1500)
-                }else{
-                    $('.Hint').html('<font color="red" size="1">手机号 或密码 不正确 请核对后重试!@</font>');
+    $(".sub").click(function () {
+        //获取用户填写验证码
+        var user_tel  = $("input[name='user_tel']").val();
+        var user_pass = $("input[name='user_pass']").val();
+        //编写手机号正则  密码正则
+        var tel_myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        var pass_myreg= /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
+        //判断是否通过请求 然后再去请求控制器
+        if (tel_myreg.test(user_tel) && pass_myreg.test(user_pass)) {
+            $('.Hint').html('');
+            $.ajax({ 
+                url:"<?php echo U('Login/login');?>",type:"POST",dataType:"json",
+                data:{'user_tel':user_tel,'user_pass':user_pass}, 
+                success:function (comeback) {
+                    //console.log(comeback)
+                    if(comeback.code == 'success'){
+                        $('.Hint').html('<font color="green" size="1">'+comeback.msg+'</font>');
+                        setTimeout(function(){
+                            window.location.reload();//刷新当前页面.
+                        },1500)
+                    }else{
+                        $('.Hint').html('<font color="red" size="1">'+comeback.msg+'</font>');
+                    }
                 }
-            }
-        })
-    } else {
-        $('.Hint').html('<font color="red" size="1">请输入格式正确的手机号 或 密码</font>');
-    };
-});
+            })
+        } else {
+            $('.Hint').html('<font color="red" size="1">请输入格式正确的手机号 或 密码</font>');
+        };
+    });
 </script>
 <script>
-$('.loginOut').on('click',function(){
-    if (confirm("你确定退出登录吗？")) { 
-        $.ajax({url:"<?php echo U('User/Singout');?>",type:"GET",success:function (comeback) {
-                window.location.reload();
-            }
-        })
-    }
-})
+    $('.loginOut').on('click',function(){
+        if (confirm("你确定退出登录吗？")) { 
+            $.ajax({url:"<?php echo U('Login/SingOut');?>",type:"GET",
+                success:function (comeback) {
+                    window.location.reload();
+                }
+            })
+        }
+    })
 </script>
 </html>

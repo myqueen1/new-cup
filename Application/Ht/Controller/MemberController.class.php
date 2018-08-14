@@ -41,8 +41,6 @@
 
 namespace Ht\Controller;
 
-use Ht\Controller\CommonController;
-
 class MemberController extends CommonController
 {
     public function user_list()
@@ -74,8 +72,8 @@ class MemberController extends CommonController
             $user_id = I('get.user_id');
             $where = "`user_id`=" . $user_id;
         }
-        $user = M('user');
-        if ($user->where($where)->delete()) {
+        $user = D('user');
+        if ($user->delet($where)) {
             echo true;
         } else {
             echo false;
@@ -86,8 +84,9 @@ class MemberController extends CommonController
     public function edit_user()
     {
         $user_id = I('get.user_id');
-        $user = M('user'); // 实例化user对象
-        $data = $user->find($user_id);
+        $user = D('user'); // 实例化user对象
+        $where = "`user_id`=$user_id";
+        $data = $user->select_one($where);
         $this->assign('user_list', $data);// 赋值分页输出
         $this->display(); // 输出模板
     }
@@ -97,9 +96,9 @@ class MemberController extends CommonController
     {
         $data = I('post.');
         if ($data['user_pass'] == $data['user_pass_ok']) {
-            $user = M('user'); // 实例化user对象
-            $data['user_pass']=md5($data['user_pass']);
-            $res = $user->save($data);
+            $user = D('user'); // 实例化user对象
+            $data['user_pass'] = md5($data['user_pass']);
+            $res = $user->updata($data);
             if ($res) {
                 echo "<script>alert('修改成功');location.href='user_list'</script>";
             } else {
