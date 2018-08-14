@@ -966,3 +966,554 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001435s ]
 INFO: [ app_end ] --END-- [ RunTime:0.001527s ]
 
+[ 2018-08-14T09:24:58+08:00 ] 127.0.0.1 /index.php/Ht/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000320s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000641s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000679s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000057s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000150s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009023s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009072s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000411s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000442s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000505s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000537s ]
+
+[ 2018-08-14T09:24:58+08:00 ] 127.0.0.1 /index.php/Ht/Index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000502s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000862s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000951s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000034s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000082s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010147s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010194s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000205s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000238s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000476s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000515s ]
+
+[ 2018-08-14T09:24:58+08:00 ] 127.0.0.1 /index.php/Ht/Index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000355s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000581s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000625s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000044s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000107s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007717s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000306s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000340s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000673s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000722s ]
+
+[ 2018-08-14T09:24:58+08:00 ] 127.0.0.1 /index.php/Ht/Index/bar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000374s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003842s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004033s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000041s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000090s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012816s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012867s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000286s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000323s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001448s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001564s ]
+
+[ 2018-08-14T09:24:58+08:00 ] 127.0.0.1 /index.php/Ht/Index/menu.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000419s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.010053s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.010112s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000100s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000197s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009904s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009950s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000287s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000317s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000592s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000624s ]
+
+[ 2018-08-14T09:24:59+08:00 ] 127.0.0.1 /index.php/Ht/Goods/product_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000329s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000609s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000647s ]
+ERR: SQLSTATE[HY000] [1049] Unknown database '55'
+
+[ 2018-08-14T09:25:00+08:00 ] 127.0.0.1 /index.php/Ht/Goods/product_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000282s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000423s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000461s ]
+ERR: SQLSTATE[HY000] [1049] Unknown database '55'
+
+[ 2018-08-14T09:25:13+08:00 ] 127.0.0.1 /index.php/Ht/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000360s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000451s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000492s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000051s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000144s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006167s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006207s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000261s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000290s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000490s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000522s ]
+
+[ 2018-08-14T09:25:13+08:00 ] 127.0.0.1 /index.php/Ht/Index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000322s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000524s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000565s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000042s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000101s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006631s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006689s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000229s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000262s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000467s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000504s ]
+
+[ 2018-08-14T09:25:13+08:00 ] 127.0.0.1 /index.php/Ht/Index/menu.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000321s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000475s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000518s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000044s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000091s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009285s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009335s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000240s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000273s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000490s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000529s ]
+
+[ 2018-08-14T09:25:13+08:00 ] 127.0.0.1 /index.php/Ht/Index/bar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000508s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000991s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001040s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000049s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000111s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008860s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008933s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000286s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000324s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000537s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000579s ]
+
+[ 2018-08-14T09:25:13+08:00 ] 127.0.0.1 /index.php/Ht/Index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006223s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000754s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000808s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000104s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000202s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021099s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021210s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000227s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000259s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000471s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000506s ]
+
+[ 2018-08-14T09:25:14+08:00 ] 127.0.0.1 /index.php/Ht/Goods/product_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000293s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000531s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000567s ]
+SQL: SHOW COLUMNS FROM `five_goods` [ RunTime:0.0052s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` WHERE `goods_name` LIKE '%%' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `five_goods` INNER JOIN five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id  WHERE `goods_name` LIKE '%%' ORDER BY five_goods.goods_id LIMIT 0,10   [ RunTime:0.0034s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000132s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000237s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008848s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008890s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000232s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000260s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000631s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000701s ]
+
+[ 2018-08-14T09:25:24+08:00 ] 127.0.0.1 /index.php/Ht/Goods/price.html?goods_id=11&price=%EF%BF%A530
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000323s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000601s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000640s ]
+SQL: SHOW COLUMNS FROM `five_goods_detailed` [ RunTime:0.0044s ]
+SQL: UPDATE `five_goods_detailed` SET `goods_price`='30' WHERE ( goods_id=11 ) [ RunTime:0.0653s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000662s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000697s ]
+
+[ 2018-08-14T09:25:24+08:00 ] 127.0.0.1 /index.php/Ht/Goods/product_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000293s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000534s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000572s ]
+SQL: SHOW COLUMNS FROM `five_goods` [ RunTime:0.0039s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` WHERE `goods_name` LIKE '%%' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `five_goods` INNER JOIN five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id  WHERE `goods_name` LIKE '%%' ORDER BY five_goods.goods_id LIMIT 0,10   [ RunTime:0.0036s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000056s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000095s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009746s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009791s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000236s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000267s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000667s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000716s ]
+
+[ 2018-08-14T09:25:26+08:00 ] 127.0.0.1 /index.php/Ht/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000306s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000544s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000583s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000029s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000073s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006151s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006204s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000192s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000220s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000429s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000460s ]
+
+[ 2018-08-14T09:25:26+08:00 ] 127.0.0.1 /index.php/Ht/Index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000336s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000730s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000773s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000119s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007938s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007984s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000218s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000250s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000479s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000513s ]
+
+[ 2018-08-14T09:25:26+08:00 ] 127.0.0.1 /index.php/Ht/Index/bar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000324s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000593s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000635s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000182s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000438s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008276s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008334s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000269s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000308s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000651s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000770s ]
+
+[ 2018-08-14T09:25:26+08:00 ] 127.0.0.1 /index.php/Ht/Index/menu.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000859s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002781s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002830s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000260s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000617s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018582s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018636s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000234s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000263s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000466s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000496s ]
+
+[ 2018-08-14T09:25:26+08:00 ] 127.0.0.1 /index.php/Ht/Index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000885s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000525s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000580s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000201s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000440s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011428s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011482s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000236s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000267s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000557s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000590s ]
+
+[ 2018-08-14T09:25:27+08:00 ] 127.0.0.1 /index.php/Ht/Goods/product_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000287s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000440s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000478s ]
+SQL: SHOW COLUMNS FROM `five_goods` [ RunTime:0.0043s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` WHERE `goods_name` LIKE '%%' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `five_goods` INNER JOIN five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id  WHERE `goods_name` LIKE '%%' ORDER BY five_goods.goods_id LIMIT 0,10   [ RunTime:0.0039s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000124s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000229s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009375s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009456s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000405s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000471s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000978s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001028s ]
+
+[ 2018-08-14T09:25:34+08:00 ] 127.0.0.1 /index.php/Ht/Goods/price.html?goods_id=11&price=%EF%BF%A5%E9%AB%98%E5%90%88%E9%87%91%E9%92%A2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000589s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000512s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000554s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001276s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001435s ]
+
+[ 2018-08-14T09:25:35+08:00 ] 127.0.0.1 /index.php/Ht/Goods/product_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000290s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000569s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000634s ]
+SQL: SHOW COLUMNS FROM `five_goods` [ RunTime:0.0079s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` WHERE `goods_name` LIKE '%%' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `five_goods` INNER JOIN five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id  WHERE `goods_name` LIKE '%%' ORDER BY five_goods.goods_id LIMIT 0,10   [ RunTime:0.0032s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000075s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000133s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008994s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009079s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000322s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000354s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000758s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000831s ]
+
+[ 2018-08-14T09:25:37+08:00 ] 127.0.0.1 /index.php/Ht/Brand/brand_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000283s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000421s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000457s ]
+SQL: SHOW COLUMNS FROM `five_brand` [ RunTime:0.0044s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_brand` WHERE ( 1=1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `five_brand` WHERE ( 1=1 ) LIMIT 0,5   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000040s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000083s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.026875s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.026931s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000204s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000234s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000457s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000489s ]
+
+[ 2018-08-14T09:25:37+08:00 ] 127.0.0.1 /index.php/Ht/Classify/product_category.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000307s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000537s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000576s ]
+SQL: SHOW COLUMNS FROM `five_type` [ RunTime:0.0036s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_type` WHERE ( 1=1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `five_type` WHERE ( 1=1 ) LIMIT 0,5   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000039s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000080s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022030s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022072s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000187s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000216s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000460s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000491s ]
+
+[ 2018-08-14T09:25:37+08:00 ] 127.0.0.1 /index.php/Ht/Brand/brand_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000324s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.012922s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.012967s ]
+SQL: SHOW COLUMNS FROM `five_brand` [ RunTime:0.0045s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_brand` WHERE ( 1=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `five_brand` WHERE ( 1=1 ) LIMIT 0,5   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000054s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000094s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006569s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006629s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000191s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000221s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000435s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000466s ]
+
+[ 2018-08-14T09:25:39+08:00 ] 127.0.0.1 /index.php/Ht/Goods/recycle_bin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000320s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000572s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000609s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000034s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000073s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019332s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019381s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000181s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000209s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000508s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000538s ]
+
+[ 2018-08-14T09:25:40+08:00 ] 127.0.0.1 /index.php/Ht/Goods/product_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000383s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000716s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000766s ]
+SQL: SHOW COLUMNS FROM `five_goods` [ RunTime:0.0045s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `five_goods` WHERE `goods_name` LIKE '%%' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `five_goods` INNER JOIN five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id  WHERE `goods_name` LIKE '%%' ORDER BY five_goods.goods_id LIMIT 0,10   [ RunTime:0.0034s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000053s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000093s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008407s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008448s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000187s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000216s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000541s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000593s ]
+

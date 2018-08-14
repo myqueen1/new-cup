@@ -3,7 +3,7 @@
 <head>
 <title>后台管理中心起始页面</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/new-cup/Public/backend/style/adminStyle.css" rel="stylesheet" type="text/css" />
+<link href="/Public/backend/style/adminStyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="wrap start-page" style="padding-top:0;height:95%">

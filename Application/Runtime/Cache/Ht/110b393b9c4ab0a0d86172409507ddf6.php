@@ -4,7 +4,7 @@
 <head>
     <title>产品分类</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <base href="/new-cup/Public/backend/"/>
+    <base href="/Public/backend/"/>
     <link href="style/adminStyle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>

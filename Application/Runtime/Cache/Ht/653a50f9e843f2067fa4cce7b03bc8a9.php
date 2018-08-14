@@ -4,7 +4,7 @@
 <head>
     <title>左侧导航</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <base href="/new-cup/Public/backend/">
+    <base href="/Public/backend/">
     <link href="style/adminStyle.css" rel="stylesheet" type="text/css"/>
     <script src="js/jquery.js"></script>
     <script src="js/public.js"></script>

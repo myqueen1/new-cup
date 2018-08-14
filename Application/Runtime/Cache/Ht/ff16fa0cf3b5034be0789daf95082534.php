@@ -3,9 +3,9 @@
 <head>
 	<title>产品列表</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link href="/new-cup/Public/backend/style/adminStyle.css" rel="stylesheet" type="text/css" />
-	<script src="/new-cup/Public/backend/js/jquery.js"></script>
-	<script src="/new-cup/Public/backend/js/public.js"></script>
+	<link href="/Public/backend/style/adminStyle.css" rel="stylesheet" type="text/css" />
+	<script src="/Public/backend/js/jquery.js"></script>
+	<script src="/Public/backend/js/public.js"></script>
 </head>
 <body>
 	<div class="wrap" >
@@ -42,7 +42,7 @@
 				</span>
 			</td>
 			<td class="center pic-area">
-				<img src="/new-cup<?php echo ($v["goods_cover"]); ?>" class="thumbnail"/>
+				<img src="<?php echo ($v["goods_cover"]); ?>" class="thumbnail"/>
 			</td>
 			<td class="td-name">
 				<span class="ellipsis td-name block"><?php echo ($v["goods_name"]); ?></span>
@@ -65,18 +65,18 @@
 			</td>
 			<td class="center" data-id='<?php echo ($v["goods_id"]); ?>'>
 				<?php if($v['is_hot']==1){ ?>
-					<img class="hot_good" data-id='0' src="/new-cup/Public/backend/images/yes.gif"/>
+					<img class="hot_good" data-id='0' src="/Public/backend/images/yes.gif"/>
 				<?php }else{ ?>
-					<img class="hot_good" data-id='1' src="/new-cup/Public/backend/images/no.gif"/>
+					<img class="hot_good" data-id='1' src="/Public/backend/images/no.gif"/>
 				<?php } ?>
 			</td>
 			<td class="center">
 				<!-- <a href="edit_product.html" title="添加商品规格"> -->
 				<a href="<?php echo U('Goods/save_goods');?>?goods_id=<?php echo ($v["goods_id"]); ?>" title="编辑">
-					<img src="/new-cup/Public/backend/images/icon_edit.gif"/>
+					<img src="/Public/backend/images/icon_edit.gif"/>
 				</a>&nbsp;&nbsp;&nbsp;
 				<a title="删除" href="<?php echo U('Goods/delAll');?>?goods_id=<?php echo ($v["goods_id"]); ?>" >
-					<img src="/new-cup/Public/backend/images/icon_trash.gif" />
+					<img src="/Public/backend/images/icon_trash.gif" />
 				</a>
 			</td>
 		</tr><?php endforeach; endif; ?>
@@ -138,9 +138,9 @@
 					window.location.href="<?php echo U('Goods/product_list');?>"
 				} else {
 					if (is_hot == 1) {
-						_this.attr('src','/new-cup/Public/backend/images/yes.gif')
+						_this.attr('src','/Public/backend/images/yes.gif')
 					} else {
-						_this.attr('src','/new-cup/Public/backend/images/no.gif')
+						_this.attr('src','/Public/backend/images/no.gif')
 					};
 				};
 			}
