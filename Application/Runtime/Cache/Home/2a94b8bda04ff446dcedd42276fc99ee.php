@@ -124,27 +124,55 @@
 	</div>
 </div>
 
+<div class="index_product">
+	<div class="product">
+		<ul class=".aa">
+	        <?php foreach($data as $key=>$val){ ?>
+	        <a href="<?php echo U('Goods/buy');?>?id=<?php echo $val['goods_id'] ?>">
+	            <li>
+	                <img src="<?php echo ($val["goods_cover"]); ?>" height="500"/>
+	                <div class="proli_bg">
+	                    <div class="proli_bg_box">
+	                        <div class="proli_top">
+	                            <p>本周特推</p>
+	                            <p><?php echo ($val["goods_name"]); ?></p>
+	                        </div>
+	                        <p>￥ <?php echo ($val["goods_price"]); ?></p>
+	                    </div>
+	                </div>
+	            </li>
+	        </a>
+	        <?php } ?>
+	    </ul>
+	</div>
+</div>
 	<!-- <div class="box1">
 		<img src="img/s1.jpg" class="pc_h" />
 		<img src="img/mobile_h.jpg" class="mobile_h" />
 	</div> -->
-	
+
 	
 
-	<div class="img_box">
-		<img src="img/z1.gif" class="pc" />
-	</div>
-	<div class="ydc-right-banner">
-		<div class="slideshow-container">
-			<a href="https://xihazahuopu.taobao.com/" target="_blank" class="mySlides fade">
-				<img src="/Public/frontend/img/ad1.jpg" style="width:100%">
-			</a>
-			<a href="https://weibo.com/525135676" target="_blank" class="mySlides fade">
-				<img src="/Public/frontend/img/ad2.jpg" style="width:100%">
-			</a>
-			<a href="http://www.a-ui.cn/" target="_blank" class="mySlides fade">
-				<img src="/Public/frontend/img/ad3.jpg" style="width:100%">
-			</a>
+	<div class="footer">
+		<div class="footer_con">
+
+			<div class="ydc-right-banner">
+				<div class="slideshow-container">
+					<a href="www.baidu.com" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad1.jpg" style="width:100%">
+					</a>
+					<a href="" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad2.jpg" style="width:100%">
+					</a>
+					<a href="" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad3.jpg" style="width:100%">
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="footer_con2">
+			<p>© 2015 dingdongyouli.com All rights reserved.</p>
+			<img src="img/footer_p2.jpg" />
 		</div>
 	</div>
 </body>

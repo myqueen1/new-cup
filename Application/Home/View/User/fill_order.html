@@ -56,38 +56,6 @@
 			</form>
 		</div>
 	</div>
-	<div class="order_b1">
-		<p class="title">对TA说</p>
-		<!--没有保存的-->
-		<div class="say">
-			<a href="message2.html"><div class="say_box">
-				<img src="img/order_p3.jpg" />
-				<img src="img/order_p1.png" class="img2" />
-			</div></a>
-			<a href="message.html"><p class="say_btn">在线预览</p></a>
-		</div>
-		<!--没有保存的-->
-		<!--保存之后出现二维码-->
-		<div class="say" style="display: none;">
-			<div class="" style="float: left;">
-				<a href="message2.html">
-					<div class="say_box" style="float: none;">
-						<img src="img/order_p3.jpg" />
-						<img src="img/order_p1.png" class="img2" />
-					</div>
-				</a>
-				<a href="message.html">
-					<p class="say_btn" style="float: none;margin-left: 12px;margin-top: 18px;">在线预览</p>
-				</a>
-			</div>
-			<p style="float: right;">
-				<img src="img/erwei.png" style="height: 109px;"/>
-				<span style="display: block;margin-top: 15px;">专属码：cc520</span>
-			</p>
-		</div>
-		<!--保存之后出现二维码-->
-		<p class="say_info">文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明</p>
-	</div>
 	
 	<div class="order_b1">
 		<p class="title">支付方式</p>
@@ -100,28 +68,30 @@
 			<img src="img/order_p1.png" class="img2" />
 		</div>
 	</div>
+
 	<script>
-			$(function(){
-				$("#add").click(function(){
-					$(".old_add").hide();
-					$(".new_add").fadeIn();
-				});
-				$(".add_btn").click(function(){
-					$(".new_add").hide();
-					$(".old_add").fadeIn();
-				});
-				$(".close").click(function(){
-					$(".new_add").hide();
-					$(".old_add").fadeIn();
-				});
-				$(".pay").click(function(){
-					$(".pay").removeClass("active");
-					$(".pay").find(".img2").hide();
-					$(this).addClass("active");
-					$(this).find(".img2").show();
-				});
+		$(function(){
+			$("#add").click(function(){
+				$(".old_add").hide();
+				$(".new_add").fadeIn();
 			});
-		</script>
+			$(".add_btn").click(function(){
+				$(".new_add").hide();
+				$(".old_add").fadeIn();
+			});
+			$(".close").click(function(){
+				$(".new_add").hide();
+				$(".old_add").fadeIn();
+			});
+			$(".pay").click(function(){
+				$(".pay").removeClass("active");
+				$(".pay").find(".img2").hide();
+				$(this).addClass("active");
+				$(this).find(".img2").show();
+			});
+		});
+	</script>
+	
 	<div class="order_b1">
 		<p class="title">商品与配送方式<a href="shop_car.html" style="color:#474747;">[返回购物车]</a></p>
 		<div class="song">
@@ -132,13 +102,13 @@
 		</div>
 	</div>
 	
-	<div class="order_b1">
+	<!-- <div class="order_b1">
 		<p class="title">使用优惠券</p>
-		<p class="conpou1">可用优惠券(5)</p>
+		<p class="conpou1">可用优惠券(5)</p> -->
 		<!--没有可用优惠券-->
 		<!--<p class="conpou2">无可用优惠券</p>-->
 		<!--没有可用优惠券-->
-		<p class="can">
+		<!-- <p class="can">
 			<span class="dq">50元优惠卷</span>
 			<img src="img/yhq.png"/>
 			<span class="more">30元优惠卷</span>
@@ -146,35 +116,7 @@
 			<span class="more">60元优惠卷</span>
 			<span class="more">20元优惠卷</span>
 		</p>
-	</div>
-	<script type="text/javascript">
-		$(function(){
-			var bool=true;
-			$(".dq").click(function(){
-				if(bool){
-					$(this).parent(".can").children(".more").fadeIn().css("display","block");
-					$(this).parent(".can").children("img").css("transform","rotate(90deg)");
-					bool=false;
-					var bb=true;
-					$(this).parent(".can").children(".more").click(function(){
-						if(bb){
-							$(this).css("border","#000000 1px solid");
-						    bb=false;
-						}else{
-							$(this).css("border","none");
-							bb=true;
-						}
-						
-					});
-				}else{
-					$(this).parent(".can").children(".more").fadeOut();
-					$(this).parent(".can").children("img").css("transform","rotate(0deg)");
-					bool=true;
-				}
-				
-			});
-		});
-	</script>
+	</div> -->
 	<div class="order_b2">
 		<p>1件商品，共计： 	￥49</p>
 		<p>总运费： 	￥0</p>
@@ -194,7 +136,34 @@
 		<p>© 2015 dingdongyouli.com All rights reserved.</p>
 		<img src="img/footer_p2.jpg" />
 	</div>
-
 </div>
 </body>
+<script type="text/javascript">
+/*	$(function(){
+		var bool=true;
+		$(".dq").click(function(){
+			if(bool){
+				$(this).parent(".can").children(".more").fadeIn().css("display","block");
+				$(this).parent(".can").children("img").css("transform","rotate(90deg)");
+				bool=false;
+				var bb=true;
+				$(this).parent(".can").children(".more").click(function(){
+					if(bb){
+						$(this).css("border","#000000 1px solid");
+					    bb=false;
+					}else{
+						$(this).css("border","none");
+						bb=true;
+					}
+					
+				});
+			}else{
+				$(this).parent(".can").children(".more").fadeOut();
+				$(this).parent(".can").children("img").css("transform","rotate(0deg)");
+				bool=true;
+			}
+			
+		});
+	});*/
+</script>
 </html>
