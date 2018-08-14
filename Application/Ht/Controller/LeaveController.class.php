@@ -54,8 +54,8 @@ class LeaveController extends CommonController
     public function reply_do()
     {
         $data = I('post.');
-        $cookie=cookie('user_info');
-        $data['admin_id']=$cookie['id'];
+        $cookie=cookie('userInfo');
+        $data['admin_id']=$cookie['admin_id'];
         $data['status']=1;
         $data['reply_time']=date('Y-m-d H:i:s');
         $leave = D('leave');
