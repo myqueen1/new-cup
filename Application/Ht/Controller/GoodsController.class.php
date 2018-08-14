@@ -222,6 +222,25 @@ class GoodsController extends CommonController
         }
     }
 
+    // 修改商品价格
+    public function price()
+    {
+        $goods_id = I('get.goods_id');
+        $price = I('get.price');
+        $data['goods_price'] = trim($price,"￥");
+        if (floor($data['goods_price'])) {
+            $re = M('goods_detailed')->where("goods_id=".$goods_id)->save($data);
+            if ($re) {
+                echo 1;
+            } else {
+                echo 3;
+            }
+        } else {
+           echo 2;
+        }
+
+    }
+    
     // 修改
     public function save_goods()
     {
@@ -263,5 +282,6 @@ class GoodsController extends CommonController
                 M('goods_detailed')->where("goods_id=".$goods_id)->save($detailed);
             }
         $this->redirect('Goods/product_list', '', 0, '页面跳转中...');
+
     }
 }
