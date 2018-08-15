@@ -20,7 +20,7 @@ class LoginController extends ComeController
 	        $user_pass = MD5(I('post.user_pass'));     //密码
 
 	        $UserModel = D("user");
-	        $result    = $UserModel->field('user_id,user_nickname,user_tel,user_email')
+	        $result    = $UserModel->field('user_id,user_nickname,user_tel,user_email,head_img')
 	                               ->where("user_tel = '".$user_tel."' and user_pass = '".$user_pass."'")
 	                               ->find();
                                    //echo json_encode($UserModel->getLastSql());die;
@@ -32,7 +32,9 @@ class LoginController extends ComeController
 	            echo self::PutOutMessage("error","账号或密码不正确,请核对后重试");
 	        }
 		} else {
-			$this->display('login');
+            $user_info = json_decode(cookie('user_info'),true);
+			if (empty($user_info)) $this->display('login');
+            if (!empty($user_info)) echo "<script>JavaScript:history.go(-1)</script>"; 
 		}
 	}
 
@@ -55,6 +57,7 @@ class LoginController extends ComeController
         if(IS_AJAX) {
             $data['user_tel']  = I('post.tel');
             $data['user_pass'] = MD5(I('post.pass'));
+            $data['user_time'] = date('Y-m-d H:i:s',time());
 
             $user_model = D('user');
             $result = $user_model->add($data);

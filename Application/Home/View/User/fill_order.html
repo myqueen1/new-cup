@@ -5,17 +5,29 @@
 	<p class="p1">填写并确认订单</p>
 	<div class="order_b1">
 		<p class="title">收货人信息</p>
+		
+		<!-- 用户收货地址 -->
 		<div class="old_add">
-			<div class="info">
-				<p>张明</p>
-				<p>成都市某县区某地方某个街道成都市某县区某 地方某个街道4-1-301</p>
-				<p>15281082255</p>
-				<!--<img src="img/order_p1.png" />-->
-			</div>
-			<div class="add" id="add">
-				<img src="img/order_p2.png" />
-			</div>
+			<foreach name="user_address" item="val">
+				<div class="info" data-id="{$val.accept_id}">
+					<p>{$val.accept_name}</p>
+					<p>{$val.accept_address}</p>
+					<p>{$val.accept_tel}</p>
+					<?php if($val['is_default']){ ?>
+						<img src="img/order_p1.png" class="accept_default" data-id="{$val.accept_id}"/>
+					<?php } else { ?>
+						<img src="img/order_p1.png" style="display:none" />
+					<?php } ?>
+				</div>
+			</foreach>
+			<?php if(count($user_address) < 3){ ?>
+				<div class="add" id="add">
+					<img src="img/order_p2.png" />
+				</div>
+			<?php } ?>
 		</div>
+		<!-- 用户收货地址END -->
+		<!-- 新增用户收货地址 -->
 		<div class="new_add" style="display: none;">
 			<p class="p1">新增地址</p>
 			<img src="img/close.png" class="close"/>
@@ -55,90 +67,40 @@
 				<p class="add_btn">保存</p>
 			</form>
 		</div>
-	</div>
-	<div class="order_b1">
-		<p class="title">对TA说</p>
-		<!--没有保存的-->
-		<div class="say">
-			<a href="message2.html"><div class="say_box">
-				<img src="img/order_p3.jpg" />
-				<img src="img/order_p1.png" class="img2" />
-			</div></a>
-			<a href="message.html"><p class="say_btn">在线预览</p></a>
-		</div>
-		<!--没有保存的-->
-		<!--保存之后出现二维码-->
-		<div class="say" style="display: none;">
-			<div class="" style="float: left;">
-				<a href="message2.html">
-					<div class="say_box" style="float: none;">
-						<img src="img/order_p3.jpg" />
-						<img src="img/order_p1.png" class="img2" />
-					</div>
-				</a>
-				<a href="message.html">
-					<p class="say_btn" style="float: none;margin-left: 12px;margin-top: 18px;">在线预览</p>
-				</a>
-			</div>
-			<p style="float: right;">
-				<img src="img/erwei.png" style="height: 109px;"/>
-				<span style="display: block;margin-top: 15px;">专属码：cc520</span>
-			</p>
-		</div>
-		<!--保存之后出现二维码-->
-		<p class="say_info">文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明</p>
+		<!-- 新增用户收货地址END -->
 	</div>
 	
 	<div class="order_b1">
-		<p class="title">支付方式</p>
-		<div class="pay active">
+		<p class="title">支付方式&nbsp;&nbsp;&nbsp;
+			<span class="pay_info">暂不支持微信支付</span>
+		</p>
+		<div class="pay" data-id="1">
 			<img src="img/pay_way1.png" style="margin-top: 3px;"/>
-			<img src="img/order_p1.png" class="img2" style="display:block;"/>
+			<img src="img/order_p1.png" class="img2" style="display:none;"/>
 		</div>
-		<div class="pay">
+		<div class="pay" data-id="2">
 			<img src="img/pay_way2.png" style="margin-top: 10px;"/>
 			<img src="img/order_p1.png" class="img2" />
 		</div>
 	</div>
-	<script>
-			$(function(){
-				$("#add").click(function(){
-					$(".old_add").hide();
-					$(".new_add").fadeIn();
-				});
-				$(".add_btn").click(function(){
-					$(".new_add").hide();
-					$(".old_add").fadeIn();
-				});
-				$(".close").click(function(){
-					$(".new_add").hide();
-					$(".old_add").fadeIn();
-				});
-				$(".pay").click(function(){
-					$(".pay").removeClass("active");
-					$(".pay").find(".img2").hide();
-					$(this).addClass("active");
-					$(this).find(".img2").show();
-				});
-			});
-		</script>
+
 	<div class="order_b1">
-		<p class="title">商品与配送方式<a href="shop_car.html" style="color:#474747;">[返回购物车]</a></p>
+		<p class="title">商品与配送方式<a href="{:U('User/ShoppingCart')}" style="color:#474747;">[返回购物车]</a></p>
 		<div class="song">
-			<p class="pic"><img src="img/order_pic5.jpg"/></p>
-			<p class="name">泉立方防串染色母片</p>
-			<p class="num"><font color="#3CA5F1">￥49</font>*1</p>
-			<p class="totle">￥49</p>
+			<p class="pic"><img src="{$goodsdetail.goods_cover}"/></p>
+			<p class="name">{$goodsdetail.goods_name}</p>
+			<p class="num"><font color="#3CA5F1">￥{$goodsdetail.goods_price}</font>*{$goodsdetail.goods_number}</p>
+			<p class="totle">￥{$goodsdetail.goods_sum}</p>
 		</div>
 	</div>
 	
-	<div class="order_b1">
+	<!-- <div class="order_b1">
 		<p class="title">使用优惠券</p>
-		<p class="conpou1">可用优惠券(5)</p>
+		<p class="conpou1">可用优惠券(5)</p> -->
 		<!--没有可用优惠券-->
 		<!--<p class="conpou2">无可用优惠券</p>-->
 		<!--没有可用优惠券-->
-		<p class="can">
+		<!-- <p class="can">
 			<span class="dq">50元优惠卷</span>
 			<img src="img/yhq.png"/>
 			<span class="more">30元优惠卷</span>
@@ -146,43 +108,16 @@
 			<span class="more">60元优惠卷</span>
 			<span class="more">20元优惠卷</span>
 		</p>
-	</div>
-	<script type="text/javascript">
-		$(function(){
-			var bool=true;
-			$(".dq").click(function(){
-				if(bool){
-					$(this).parent(".can").children(".more").fadeIn().css("display","block");
-					$(this).parent(".can").children("img").css("transform","rotate(90deg)");
-					bool=false;
-					var bb=true;
-					$(this).parent(".can").children(".more").click(function(){
-						if(bb){
-							$(this).css("border","#000000 1px solid");
-						    bb=false;
-						}else{
-							$(this).css("border","none");
-							bb=true;
-						}
-						
-					});
-				}else{
-					$(this).parent(".can").children(".more").fadeOut();
-					$(this).parent(".can").children("img").css("transform","rotate(0deg)");
-					bool=true;
-				}
-				
-			});
-		});
-	</script>
+	</div> -->
 	<div class="order_b2">
-		<p>1件商品，共计： 	￥49</p>
+		<p>{$goodsdetail.goods_number}件商品，共计： 	￥{$goodsdetail.goods_sum}</p>
 		<p>总运费： 	￥0</p>
 		<p>优惠共计：	-￥0</p>
 	</div>
 	<p class="order_b3">
-		<span>订单总计：<font color="#de0000" style="font-size: 28px;">￥49</font></span>
-		<span>提交订单</span>
+		<span>订单总计：<font color="#de0000" style="font-size: 28px;">￥{$goodsdetail.goods_sum}</font></span>
+		<span class="Generating_order" data-id="{$goodsdetail.goods_id}">提交订单
+		</span>
 	</p>
 </div>
 <div class="footer">
@@ -194,7 +129,84 @@
 		<p>© 2015 dingdongyouli.com All rights reserved.</p>
 		<img src="img/footer_p2.jpg" />
 	</div>
-
 </div>
 </body>
+<script type="text/javascript">
+	// $(function(){
+	// 	var bool=true;
+	// 	$(".dq").click(function(){
+	// 		if(bool){
+	// 			$(this).parent(".can").children(".more").fadeIn().css("display","block");
+	// 			$(this).parent(".can").children("img").css("transform","rotate(90deg)");
+	// 			bool=false;
+	// 			var bb=true;
+	// 			$(this).parent(".can").children(".more").click(function(){
+	// 				if(bb){
+	// 					$(this).css("border","#000000 1px solid");
+	// 				    bb=false;
+	// 				}else{
+	// 					$(this).css("border","none");
+	// 					bb=true;
+	// 				}
+					
+	// 			});
+	// 		}else{
+	// 			$(this).parent(".can").children(".more").fadeOut();
+	// 			$(this).parent(".can").children("img").css("transform","rotate(0deg)");
+	// 			bool=true;
+	// 		}
+			
+	// 	});
+	// });
+</script>
+<script>
+	var pay_way = null;
+	$(function(){
+		$("#add").click(function(){
+			$(".old_add").hide();
+			$(".new_add").fadeIn();
+		});
+		$(".add_btn").click(function(){
+			$(".new_add").hide();
+			$(".old_add").fadeIn();
+		});
+		$(".close").click(function(){
+			$(".new_add").hide();
+			$(".old_add").fadeIn();
+		});
+		$(".pay").click(function(){
+			$(".pay").removeClass("active");
+			$(".pay").find(".img2").hide();
+			$(this).addClass("active");
+			$(this).find(".img2").show();
+			$('.pay_info').html("暂不支持微信支付");
+			pay_way = $(this).attr('data-id');
+		});
+	});
+</script>
+<script>
+	var accept_id = $('.accept_default').attr('data-id');
+
+	$('.info').on('click',function(){
+		accept_id = $(this).attr('data-id');
+		$('.info').children('img').hide();
+		$(this).children('img').show();
+	})
+</script>
+<script>
+	$('.Generating_order').on('click',function(){
+		var goods_id = $(this).attr('data-id');
+
+		if (goods_id!='' && accept_id!="" && pay_way!="" && pay_way=="1") {
+			var data = "?goods_id="+goods_id+"&accept_id="+accept_id+"&pay_way="+pay_way
+			window.location.href = "{:U('Pay/GeneratingOrder')}"+data
+		};
+		if (pay_way=="") {
+			$('.pay_info').html("<font color='red'>请选择支付方式!</font>");
+		};
+		if (pay_way=="2") {
+			$('.pay_info').html("<font color='red'>暂不支持微信支付!</font>");
+		};
+	})
+</script>
 </html>

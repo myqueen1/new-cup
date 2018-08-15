@@ -18,9 +18,9 @@
     <div class="operate">
         <form method="post" action="{:U('Member/user_list')}">
             <!--<select class="inline-select">-->
-                <!--<option>选择会员等级</option>-->
-                <!--<option>白金会员</option>-->
-                <!--<option>黄金会员</option>-->
+            <!--<option>选择会员等级</option>-->
+            <!--<option>白金会员</option>-->
+            <!--<option>黄金会员</option>-->
             <!--</select>-->
             <input type="text" name="text" value="{$text}" class="textBox length-long" placeholder="输入会员昵称、手机号码..."/>
             <input type="submit" value="查询" class="tdBtn"/>
@@ -32,7 +32,7 @@
             <th>会员昵称</th>
             <th>邮件地址</th>
             <th>手机号码</th>
-            <th>是否验证</th>
+            <!--<th>是否验证</th>-->
             <!--<th>可用资金</th>-->
             <!--<th>冻结资金</th>-->
             <th>注册日期</th>
@@ -47,7 +47,7 @@
                 <td class="center">{$vo.user_nickname}</td>
                 <td class="center">{$vo.user_email}</td>
                 <td class="center">{$vo.user_tel}</td>
-                <td class="center"><img src="images/yes.gif"/></td>
+                <!--<td class="center"><img src="images/yes.gif"/></td>-->
 
                 <!--<td class="center">-->
                 <!--<span>-->
@@ -64,9 +64,11 @@
 
                 <td class="center">{$vo.user_time}</td>
                 <td class="center">
-                    <a href="{:U('Member/edit_user')}?user_id={$vo.user_id}" class="inline-block" title="编辑"><img src="images/icon_edit.gif"/></a>
+                    <a href="{:U('Member/edit_user')}?user_id={$vo.user_id}" class="inline-block" title="编辑"><img
+                            src="images/icon_edit.gif"/></a>
                     <!--<a href="account.html" class="inline-block" title="资金管理"><img src="images/icon_account.gif"/></a>-->
-                    <a href="{:U('Member/del')}?user_id={$vo.user_id}&p=<?php echo I('get.p');?>" class="inline-block block"
+                    <a href="{:U('Member/del')}?user_id={$vo.user_id}&p=<?php echo I('get.p');?>"
+                       class="inline-block block"
                        title="删除"><img src="images/icon_drop.gif"/></a>
                 </td>
             </tr>
@@ -135,19 +137,21 @@
     // 删除
     $(document).on('click', '.block', function () {
         event.preventDefault()
-        var url = $(this).attr('href');
-        $.ajax({
-            url: url,
-            success: function (result) {
-                if (result) {
-                    alert('删除成功');
-                    location.href = "{:U('Member/user_list')}?p=<?php echo I('get.p');?>";
-                } else {
-                    alert('删除失败');
-                    location.href = "{:U('Member/user_list')}?p=<?php echo I('get.p');?>";
+        if (confirm("确定要删除当前用户吗？")) {
+            var url = $(this).attr('href');
+            $.ajax({
+                url: url,
+                success: function (result) {
+                    if (result) {
+                        alert('删除成功');
+                        location.href = "{:U('Member/user_list')}?p=<?php echo I('get.p');?>";
+                    } else {
+                        alert('删除失败');
+                        location.href = "{:U('Member/user_list')}?p=<?php echo I('get.p');?>";
+                    }
                 }
-            }
-        });
+            });
+        }
     })
 </script>
 

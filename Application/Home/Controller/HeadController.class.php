@@ -37,7 +37,7 @@ class HeadController extends Controller
 	{
 		if (!empty($code) && !empty($msg)) {
 			self::$information['code'] = $code;
-			slef::$information['msg']  = $msg;
+			self::$information['msg']  = $msg;
 		}
 		return json_encode(self::$information);
 	}
@@ -52,8 +52,11 @@ class HeadController extends Controller
 		$user_info = json_decode(cookie('user_info'),true);
 
 		if ($condition == 'user_id') {
-			return $user_info['user_id'];
-		} else if ($condition == 'all') { return $user_info; }
+			return $user_info['user_id'];	//仅返回一个用户ID
+
+		} else if ($condition == 'all') { 
+			return $user_info; 		//返回所有COOKIE信息
+		}
 	}
 }
 ?>

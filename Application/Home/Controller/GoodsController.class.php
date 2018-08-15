@@ -21,7 +21,6 @@ class GoodsController extends ComeController
                              ->join('five_type on five_goods.type_id=five_type.type_id')
                              ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
                              ->where("goods_status = '2'")
-                             ->limit(1,2)
                              //->join('five_goods_img on five_goods_detailed.goods_id=five_goods_img.goods_id')
                              ->select();
 
@@ -32,7 +31,7 @@ class GoodsController extends ComeController
         //热词展示
         $searchmodel = D("search");
         $hot_goods = $searchmodel->order('search_num desc')
-                                 ->limit(5)
+                                 ->limit()
                                  ->select();
         $this->assign('hot_goods',$hot_goods);
 

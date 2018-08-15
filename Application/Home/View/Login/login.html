@@ -74,7 +74,7 @@ $("#Login-in").click(function () {
             url:"{:U('Login/login')}",type:"POST",dataType:"json",
             data:{'user_tel':user_tel,'user_pass':user_pass}, 
             success:function (comeback) {
-                //console.log(comeback)
+                console.log(comeback)
                 if(comeback.code == 'success'){
                     $('.Hint').html('<font color="green" size="1">'+comeback.msg+'</font>');
                     setTimeout(function(){
