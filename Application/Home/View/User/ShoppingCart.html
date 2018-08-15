@@ -4,39 +4,52 @@
 	<div class="personal">
 		<p class="title" style="margin-bottom: 30px;">我的购物车</p>
 		<div class="per_box">
-			<ul class="per_navul shop_carul">
-				<li style="width: 130px;margin-right: 10px;">
-					<input type="checkbox" style="margin-right: 20px;"/>
-					全选
+			<ul class="per_navul shop_carul" style="background-color: #F0F8FF;">
+				<li style="width: 30px;margin-left: 30px;">	
+					选择
 				</li>
-				<li style="width: 450px;text-align: left;">商品名称</li>
+				<li style="width: 130px;margin-right: 10px;">
+					商品封面
+					<!-- <input type="checkbox" style="margin-right: 20px;"/>
+					全选 -->
+				</li>
+				<li style="width: 350px;text-align: left;">商品名称</li>
 				<li>样式</li>
 				<li>单价</li>
 				<li>数量</li>
-				<li>合计</li>
+				<li style="width: 130px;margin-left: 15px;">合计</li>
 			</ul>
-			<ul class="per_listul shop_carul" style="padding-top: 10px;box-sizing: border-box;">
-				<li style="width: 130px;margin-right: 10px;">
-					<input type="checkbox" style="margin-right: 10px;margin-left: 18px;"/>
-					<img src="img/order_pic5.jpg" style="vertical-align: middle;"/>
-				</li>
-				<li style="width: 450px;text-align: left;">泉立方防串染色母片</li>
-				<li>M10</li>
-				<li style="color: #3CA5F1;">￥49</li>
-				<li>
-					<p class="p5">
-						<span class="num">-</span>
-						<input type="text" value="1"/>
-						<span class="num">+</span>
-					</p>
-				</li>
-				<li style="color: #3CA5F1;">￥49</li>
-				<li>操作</li>
-			</ul>
+
+			<foreach name="cardata" item="val">
+				<ul class="per_listul shop_carul" style="padding-top: 10px;box-sizing: border-box;">
+					<li style="width: 30px;margin-left: 20px;margin-right: 10px;">	
+						<input type="radio" class="radios" name="radio" value="{$val.goods_id}" style="margin-left: 18px;"/>
+					</li>
+					<li style="width: 130px;margin-right: 10px;margin-left: 10px;">
+						<img src="{$val.goods_cover}" height="70px" style="border-radius:200px;vertical-align: middle;"/>
+					</li>
+					<li style="width: 350px;text-align: left;">{$val.goods_name}</li>
+					<li>{$val.sku_color}</li>
+					<li style="color: #3CA5F1;">￥{$val.goods_price}</li>
+					<li style="margin-right: 10px;margin-left: 10px;">
+						<p class="p5">
+							<span class="num">-</span>
+							<input type="text" value="{$val.sku_number}" disabled/>
+							<span class="num">+</span> 
+						</p>
+					</li>
+					<li style="color: #3CA5F1;">￥{$val.goods_sum}</li>
+					<li>
+						<a class="jie_btn" href="{:U('User/fill_order')}">移除购物车</a>
+					</li>
+					
+				</ul>
+			</foreach>
+
 		</div>
 		<p class="shop_car_totle">
 			不包含运费共计：<span style="font-size: 19px;color: #d20000;">￥147</span>
-			<a class="jie_btn" href="fill_order.html">确认结算</a>
+			<a class="jie_btn" href="{:U('User/fill_order')}">确认结算</a>
 		</p>
 	</div>
 	
@@ -51,4 +64,19 @@
 		</div>
 	</div>
 </body>
+<script>
+	var goods_id = null;
+	$('.radios').on('click',function(){	
+		//遍历所有UL 清除css背景颜色
+		$("ul").siblings('.per_listul').css("background-color","white");
+		//点击事件添加背景颜色  两者不能倒替,否则没有颜色
+		$(this).parents('.per_listul').css("background-color","#FBF6D9");
+		//设置值
+		goods_id = $(this).val();
+	})
+
+	$('.jie_btn').on('click',function(e){
+		
+	})
+</script>
 </html>

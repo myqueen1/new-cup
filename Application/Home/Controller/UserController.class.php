@@ -88,8 +88,47 @@ class UserController extends HeadController
         echo json_encode($res);
     }
 
+    /**
+     *   @param $goods_id int 获取商品ID/用户ID/加入购物车时间/入库保存
+     *   @return $result json_encode(['code','msg']) 
+    */
     public function ShoppingCart(){
-        $this->display();
+        $carmodel = D('car');
+
+        if (IS_AJAX) {
+            $shopdata['user_id']   = self::ReturnUserInfo('user_id');
+            $shopdata['goods_id']  = I('post.goods_id');
+            $shopdata['sku_color'] = I('post.sku_color');
+            $shopdata['sku_number']= I('post.sku_number');
+            $shopdata['be_time']   = date('Y-m-d H:i:s',time());
+            
+            $result = $carmodel->where("user_id = '".$shopdata['user_id']."' and goods_id = '".$shopdata['goods_id']."'")
+                               ->find();
+            if (!$result) {
+                $result = $carmodel->add($shopdata);
+                if($result)  echo self::PutOutMessage('success','加入购物车成功');
+            } else {
+                echo self::PutOutMessage('error','该商品已存在于您的购物车!');
+            }
+        } else {
+            $user_id = self::ReturnUserInfo('user_id');
+            // $sql = "select five_goods.goods_id,goods_name,five_car.sku_number,sku_color,five_goods_detailed.goods_price,goods_cover,goods_status from five_car,five_goods,five_goods_detailed where five_car.goods_id = five_goods.goods_id and five_car.goods_id = five_goods_detailed.goods_id and user_id = '$user_id'";
+            // $carmodel->query($sql);
+            $result = $carmodel->field("five_goods.goods_id,goods_name,five_car.sku_number,sku_color,five_goods_detailed.goods_price,goods_cover,goods_status")
+                               ->join('five_goods on five_car.goods_id = five_goods.goods_id')
+                               ->join('five_goods_detailed on five_car.goods_id = five_goods_detailed.goods_id')
+                               ->where("five_car.user_id = '$user_id'")
+                               ->select();
+
+            foreach ($result as $key => $value) {
+                $result[$key]['goods_sum'] = $value['goods_price']*$value['sku_number'];
+            }
+            //print_r($result);die;
+
+            //echo $carmodel->getLastSql();die;
+            $this->assign('cardata',$result);
+            $this->display();
+        }
     }
 
     //订单

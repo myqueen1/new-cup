@@ -36,9 +36,11 @@
 				</p>
 				<!--规格属性-->
 				<p class="p4 buy_p4">选择颜色：
-					<span class="active">红色</span>
-					<span >黑色</span>
-					<span >纯白</span>
+					<span class="active" data-id='红色'>红色</span>
+					<span data-id='黑色'>黑色</span>
+					<span data-id='纯白'>纯白</span>
+                    <span data-id='藏青色'>藏青色</span>
+                    <span data-id='少女粉'>少女粉</span>
 				</p>
 
 				<p class="p3">选择数量：</p>
@@ -51,13 +53,14 @@
 				<p class="p6">
 					<img src="img/like1.png" class="like"/>
 					<span>999人喜欢</span>
+                    <span class="tishi"></span>
 				</p>
 				<p class="p7">
 					<?php if (!isset($_COOKIE['user_info'])) { ?>
 						<a class='login_btn' href="javascript:void(0);">加入购物车</a>
                         <a class='login_btn' href="javascript:void(0);">立即购买</a>
 					<?php } else { ?>
-						<a class='btn-buy'>加入购物车</a>
+						<a class='btn-buy' data-id="{$data.goods_id}">加入购物车</a>
                         <a href="{:U('User/fill_order')}">立即购买</a>
 					<?php } ?>
 					
@@ -106,6 +109,7 @@
     });
 </script>
 <script>
+var sku_color = '红色';
 	//大图切换 路径 
     $(function() {
         var bool=true;
@@ -140,6 +144,7 @@
             $(this).addClass("active");
         });
         $(".buy_p4 span").click(function() {
+            sku_color = $(this).attr('data-id');
             $(".buy_p4 span").removeClass("active");
             $(this).addClass("active");
         });
@@ -201,26 +206,35 @@
 <script>
 	//加入购物车的点击效果.....
     $('.btn-buy').bind('click',function(){
-        var img = $(".middle_img").find('img');
-        var flyElm = img.clone().css('opacity', 0.75);
-        $('body').append(flyElm);
-        flyElm.css({
-            'z-index': 9000,
-            'display': 'block',
-            'position': 'absolute',
-            'top': img.offset().top +'px',
-            'left': img.offset().left +'px',
-            'width': img.width() +'px',
-            'height': img.height() +'px'
-        });
-        flyElm.animate({
-            top: $('.head-shopcart').offset().top,
-            left: $('.head-shopcart').offset().left,
-            width: 20,
-            height: 32
-        }, 'slow', function() {
-            flyElm.remove();
-        });
+        var goods_id = $(this).attr('data-id');
+        var sku_number = $('.number').val();
+
+        $.ajax({ 
+            url:"{:U('User/ShoppingCart')}",type:"POST",dataType:"json",
+            data:{'goods_id':goods_id,'sku_number':sku_number,'sku_color':sku_color}, 
+            success:function (comeback) {
+                //console.log(comeback)
+                if(comeback.code == 'success'){
+                    var img = $(".middle_img").find('img');
+                    var flyElm = img.clone().css('opacity', 0.75);
+                    $('body').append(flyElm);
+                    flyElm.css({
+                        'z-index': 9000,'display': 'block','position': 'absolute',
+                        'top': img.offset().top +'px','left': img.offset().left +'px',
+                        'width': img.width() +'px','height': img.height() +'px'
+                    });
+                    flyElm.animate({
+                        top: $('.head-shopcart').offset().top,
+                        left: $('.head-shopcart').offset().left,
+                        width: 20,height: 32
+                    }, 'slow', function() {
+                        flyElm.remove();
+                    });
+                }else{
+                    $('.tishi').html('<font color="red" size="1">'+comeback.msg+'</font>');  
+                }
+            }
+        })
     });
 </script>
 </html>
