@@ -29,7 +29,7 @@ class IndexController extends CommonController
         $show       = $Page->show();
         $data = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
                          ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
-                         ->field('order_id,five_address.accept_id,user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,goods_price')
+                         ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,goods_price')
                          ->where($map)->order('order_id')->limit($Page->firstRow.','.$Page->listRows)->group('order_id')->select(); 
                            
         $this->assign('where',$where);
@@ -65,7 +65,8 @@ class IndexController extends CommonController
     {
         $data = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
                          ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
-                         ->field('order_id,five_address.accept_id,user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,goods_price')->select();
+                         ->join("five_goods ON five_order.goods_id = five_goods.goods_id")
+                         ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,goods_price,goods_name')->select();
 
         vendor('Report');  //引入类文件
         vendor('Order');
@@ -77,6 +78,7 @@ class IndexController extends CommonController
 
         foreach($data as $good)
         {
+            //print_r($good);
             $insertData = array(
                 $good['generate_time'],
                 $good['accept_name'],

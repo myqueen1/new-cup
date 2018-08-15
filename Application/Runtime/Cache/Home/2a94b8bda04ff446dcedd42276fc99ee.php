@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-    <base href="/new-cup/Public/frontend/">
+    <base href="/Public/frontend/">
     <link rel="stylesheet" href="css/Index/Indexstyle.css"/>
     <link href="css/Index/Indexstyle.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="css/demo.css"/>
@@ -26,19 +26,19 @@
     <div class="hea_nav">
         <a href="<?php echo U('Index/index');?>"><img src="img/s0.png" class="logo"/></a>
         <ul>
-            <a href="<?php echo U('Index/index');?>">
+            <a href="<?php echo U('Index/index');?>" title="网站首页">
                 <li>首页</li>
             </a>
-            <a href="<?php echo U('Goods/product');?>">
+            <a href="<?php echo U('Goods/product');?>" title="进入商品页">
                 <li>一杯(辈)子</li>
             </a>
-            <a href="<?php echo U('Blog/blog_list');?>">
-                <li>BLOG</li>
-            </a>
-            <a href="<?php echo U('User/personal');?>">
+            <a href="<?php echo U('User/personal');?>" title="您的个人中心">
                 <li>个人中心</li>
             </a>
-            <a href="<?php echo U('Index/message');?>">
+            <a href="<?php echo U('Blog/blog_list');?>" title="指尖蜜语,让我们告诉您杯子的故事">
+                <li>指尖蜜语</li>
+            </a>
+            <a href="<?php echo U('Index/message');?>" title="看看网站留言">
                 <li>留言板</li>
             </a>
         </ul>
@@ -54,9 +54,7 @@
         <a href="<?php echo U('User/personal');?>"><?php echo $user_info['user_nickname'] ?></a>
         <a href="javascript:void(0);" class="loginOut">退出</a>
         <a href="<?php echo U('User/ShoppingCart');?>">
-            <p class="head-shopcart">
-                <i class="iconfont">&#xe600;</i><span>0件</span>
-            </p>
+            <p class="head-shopcart"><i class="iconfont">&#xe600;</i>购物车</p>
         </a>
     </p>
 <?php } ?>
@@ -124,27 +122,55 @@
 	</div>
 </div>
 
+<div class="index_product">
+	<div class="product">
+		<ul class=".aa">
+	        <?php foreach($data as $key=>$val){ ?>
+	        <a href="<?php echo U('Goods/buy');?>?id=<?php echo $val['goods_id'] ?>" target="_blank">
+	            <li>
+	                <img src="<?php echo ($val["goods_cover"]); ?>" height="500"/>
+	                <div class="proli_bg">
+	                    <div class="proli_bg_box">
+	                        <div class="proli_top">
+	                            <p>本周特推</p>
+	                            <p><?php echo ($val["goods_name"]); ?></p>
+	                        </div>
+	                        <p>￥ <?php echo ($val["goods_price"]); ?></p>
+	                    </div>
+	                </div>
+	            </li>
+	        </a>
+	        <?php } ?>
+	    </ul>
+	</div>
+</div>
 	<!-- <div class="box1">
 		<img src="img/s1.jpg" class="pc_h" />
 		<img src="img/mobile_h.jpg" class="mobile_h" />
 	</div> -->
-	
+
 	
 
-	<div class="img_box">
-		<img src="img/z1.gif" class="pc" />
-	</div>
-	<div class="ydc-right-banner">
-		<div class="slideshow-container">
-			<a href="https://xihazahuopu.taobao.com/" target="_blank" class="mySlides fade">
-				<img src="/new-cup/Public/frontend/img/ad1.jpg" style="width:100%">
-			</a>
-			<a href="https://weibo.com/525135676" target="_blank" class="mySlides fade">
-				<img src="/new-cup/Public/frontend/img/ad2.jpg" style="width:100%">
-			</a>
-			<a href="http://www.a-ui.cn/" target="_blank" class="mySlides fade">
-				<img src="/new-cup/Public/frontend/img/ad3.jpg" style="width:100%">
-			</a>
+	<div class="footer">
+		<div class="footer_con">
+
+			<div class="ydc-right-banner">
+				<div class="slideshow-container">
+					<a href="www.baidu.com" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad1.jpg" style="width:100%">
+					</a>
+					<a href="" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad2.jpg" style="width:100%">
+					</a>
+					<a href="" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad3.jpg" style="width:100%">
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="footer_con2">
+			<p>© 2015 dingdongyouli.com All rights reserved.</p>
+			<img src="img/footer_p2.jpg" />
 		</div>
 	</div>
 </body>
@@ -157,6 +183,22 @@
 			$(".meau_box").slideUp();
 		});
 	});
+</script>
+<script type="text/javascript">
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex> slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 3000); // 滚动时间
+    }
 </script>
 </html>
 
@@ -244,21 +286,5 @@
             })
         }
     })
-</script>
-<script type="text/javascript">
-    var slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex> slides.length) {slideIndex = 1}
-        slides[slideIndex-1].style.display = "block";
-        setTimeout(showSlides, 3000); // 滚动时间
-    }
 </script>
 </html>

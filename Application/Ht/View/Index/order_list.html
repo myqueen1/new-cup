@@ -21,7 +21,7 @@
      
           <option <?php if($order_status=='all'){ echo 'selected'; } ?>  value="all"  >请选择...</option>
       
-          <option <?php if($order_status=='0'){ echo 'selected'; } ?>  value="0"   >订单不完善</option>
+          <option <?php if($order_status=='0'){ echo 'selected'; } ?>  value="0"   >订单异常</option>
       
           <option <?php if($order_status=="1"){ echo "selected"; } ?>  value="1"   >未支付</option>
      
@@ -65,7 +65,7 @@
     <td class="center">
      <span>
        <if condition="$v.order_status eq 0"> 
-          订单不完善
+          订单异常
        <elseif condition="$v.order_status eq 1"/>
           未支付
        <elseif condition="$v.order_status eq 2" /> 
@@ -104,7 +104,7 @@
  </div>
  <script>
     $('#report').click(function(){
-      window.open("http://127.0.0.1/new-cup/index.php/Ht/Index/order_report")
+        window.open("{:U('Index/order_report')}")
     })
        // 全选反选
     $(function () {
