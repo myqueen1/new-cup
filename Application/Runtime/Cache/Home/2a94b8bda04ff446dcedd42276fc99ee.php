@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-    <base href="/new-cup/Public/frontend/">
+    <base href="/Public/frontend/">
     <link rel="stylesheet" href="css/Index/Indexstyle.css"/>
     <link href="css/Index/Indexstyle.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="css/demo.css"/>
@@ -157,6 +157,7 @@
 			<div class="ydc-right-banner">
 				<div class="slideshow-container">
 					<a href="www.baidu.com" target="_blank" class="mySlides fade">
+<<<<<<< HEAD
 						<img src="/new-cup/Public/frontend/img/ad1.jpg" style="width:100%">
 					</a>
 					<a href="" target="_blank" class="mySlides fade">
@@ -164,6 +165,15 @@
 					</a>
 					<a href="" target="_blank" class="mySlides fade">
 						<img src="/new-cup/Public/frontend/img/ad3.jpg" style="width:100%">
+=======
+						<img src="/Public/frontend/img/ad1.jpg" style="width:100%">
+					</a>
+					<a href="" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad2.jpg" style="width:100%">
+					</a>
+					<a href="" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad3.jpg" style="width:100%">
+>>>>>>> ef6b02ede1a4661c0810093d3f84906ad41eaa37
 					</a>
 				</div>
 			</div>
