@@ -12,7 +12,7 @@
     </div>
     <ul class=".aa">
         <?php foreach($data as $key=>$val){ ?>
-        <a href="{:U('Goods/buy')}?id=<?php echo $val['goods_id'] ?>">
+        <a href="{:U('Goods/buy')}?id=<?php echo $val['goods_id'] ?>" target="_blank">
             <li>
                 <img src="{$val.goods_cover}" height="500"/>
                 <div class="proli_bg">
@@ -29,12 +29,8 @@
         <?php } ?>
     </ul>
 </div>
-
-
 </body>
-
 </html>
-
 <script>
     //搜索
     $(function () {

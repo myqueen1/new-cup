@@ -26,19 +26,19 @@
     <div class="hea_nav">
         <a href="{:U('Index/index')}"><img src="img/s0.png" class="logo"/></a>
         <ul>
-            <a href="{:U('Index/index')}">
+            <a href="{:U('Index/index')}" title="网站首页">
                 <li>首页</li>
             </a>
-            <a href="{:U('Goods/product')}">
+            <a href="{:U('Goods/product')}" title="进入商品页">
                 <li>一杯(辈)子</li>
             </a>
-            <a href="{:U('Blog/blog_list')}">
-                <li>BLOG</li>
-            </a>
-            <a href="{:U('User/personal')}">
+            <a href="{:U('User/personal')}" title="您的个人中心">
                 <li>个人中心</li>
             </a>
-            <a href="{:U('Index/message')}">
+            <a href="{:U('Blog/blog_list')}" title="指尖蜜语,让我们告诉您杯子的故事">
+                <li>指尖蜜语</li>
+            </a>
+            <a href="{:U('Index/message')}" title="看看网站留言">
                 <li>留言板</li>
             </a>
         </ul>
@@ -57,9 +57,7 @@
         <a href="{:U('User/personal')}"><?php echo $user_info['user_nickname'] ?></a>
         <a href="javascript:void(0);" class="loginOut">退出</a>
         <a href="{:U('User/ShoppingCart')}">
-            <p class="head-shopcart">
-                <i class="iconfont">&#xe600;</i><span>0件</span>
-            </p>
+            <p class="head-shopcart"><i class="iconfont">&#xe600;</i>购物车</p>
         </a>
     </p>
 <?php } ?>
@@ -155,21 +153,5 @@
             })
         }
     })
-</script>
-<script type="text/javascript">
-    var slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex> slides.length) {slideIndex = 1}
-        slides[slideIndex-1].style.display = "block";
-        setTimeout(showSlides, 3000); // 滚动时间
-    }
 </script>
 </html>
