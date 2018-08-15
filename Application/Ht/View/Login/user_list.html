@@ -21,8 +21,10 @@
      <option>白金会员</option>
      <option>黄金会员</option>
     </select> -->
-    <input type="text" class="textBox length-long" placeholder="输入会员昵称、姓名、手机号码..."/>
-    <input type="button" value="查询" class="tdBtn"/>
+    <form action="{:U('Login/user_list')}" method="get" >
+      <input type="text" class="textBox length-long" value="{$where}" name="where" placeholder="输入会员姓名、邮箱..."/>
+      <input type="submit" value="查询" class="tdBtn"/>
+    </form>
    </form>
   </div>
   <table class="list-style Interlaced">
@@ -40,7 +42,7 @@
    <foreach name='user' item='v' >
    <tr>
     <td>
-     <input type="checkbox"/>
+     <input type="checkbox" value="{$v.admin_id}" name="checkbox" />
      <span class="middle">{$v.admin_id}</span>
     </td>
     <td class="center">{$v.admin_name}</td>
@@ -55,9 +57,14 @@
     </td> -->
     <td class="center">{$v.start_time}</td>
     <td class="center">
-     <a href="{:U('Login/edit_user')}" class="inline-block" title="编辑"><img src="images/icon_edit.gif"/></a>
+    <if condition="$cid eq $v.admin_id ">
+        <a href="{:U('Login/edit_user')}?admin_id={$v.admin_id}" class="inline-block" title="编辑"><img src="images/icon_edit.gif"/></a>
+    <else /> 
+         <a href="javascript:void(0)" class="inline-block" title="不可编辑"><img src="images/icon_edit.gif" style="border: 2px red solid;" /></a>
+    </if>
+    
      <!-- <a href="account.html" class="inline-block" title="资金管理"><img src="images/icon_account.gif"/></a> -->
-     <a class="inline-block" title="删除"><img src="images/icon_drop.gif"/></a>
+     <a class="inline-block" href="{:U('Login/admin_del')}?admin_id={$v.admin_id}" title="删除"><img src="images/icon_drop.gif"/></a>
     </td>
    </tr>
    </foreach>
@@ -68,15 +75,53 @@
 	  <div class="BatchOperation fl">
 	   <input type="checkbox" id="del"/>
 	   <label for="del" class="btnStyle middle">全选</label>
-	   <input type="button" value="批量删除" class="btnStyle"/>
+     <input type="button" id="delete" value="批量删除" class="btnStyle"/>
 	  </div>
 	  <!-- turn page -->
 	  <div class="turnPage center fr">
-	   <a>第一页</a>
-	   <a>1</a>
-	   <a>最后一页</a>
+	   {$page}
 	  </div>
   </div>
  </div>
 </body>
+<script>
+  // 全选反选
+    $(function () {
+        //实现全选反选
+        $("#del").on('click', function () {
+            $(".list-style input:checkbox").prop("checked", $(this).prop('checked'));
+        })
+        $(".list-style input:checkbox").on('click', function () {
+            //当选中的长度等于checkbox的长度的时候,就让控制全选反选的checkbox设置为选中,否则就为未选中
+            if ($(".list-style input:checkbox").length === $(".list-style input:checked").length) {
+                $("#del").prop("checked", true);
+            } else {
+                $("#del").prop("checked", false);
+            }
+        })
+    })
+     // 批删
+    $(document).on('click', '#delete', function () {
+        var checkedNum = $("input[name='checkbox']:checked").length;
+        if (checkedNum == 0) {
+            alert("请选择至少一项！");
+            return;
+        }
+        if (confirm("确定要删除所选项目？")) {
+            var che = $("input[name='checkbox']:checked");
+            var admin_id = new Array();
+            for (var a = 0; a < che.length; a++) {
+                admin_id[a] = che[a].value;
+            }
+            $.ajax({
+                type: "POST",
+                url: "{:U('Login/admin_del')}",
+                data: {'admin_id': admin_id},
+                success: function (result) {
+                  window.location.reload();
+                }
+            });
+        }
+    })
+</script>
 </html>

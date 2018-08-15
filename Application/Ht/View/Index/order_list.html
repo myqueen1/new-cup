@@ -14,14 +14,25 @@
     <span class="modular fl"><i class="order"></i><em>订单列表</em></span>
   </div>
   <div class="operate">
-   <form>
+   <form action="{:U('Index/order_list')}" method="get" name="order_list" >
     <img src="images/icon_search.gif"/>
-    <input type="text" class="textBox length-long" placeholder="输入订单编号或收件人姓名..."/>
-    <select class="inline-select">
-     <option>未付款</option>
-     <option>已付款</option>
+    <input type="text" class="textBox length-long" id="where" placeholder="输入订单编号或收件人姓名..." name="where" value="{$where}" />
+    <select class="inline-select" name="order_status" >
+     
+          <option <?php if($order_status=='all'){ echo 'selected'; } ?>  value="all"  >请选择...</option>
+      
+          <option <?php if($order_status=='0'){ echo 'selected'; } ?>  value="0"   >订单不完善</option>
+      
+          <option <?php if($order_status=="1"){ echo "selected"; } ?>  value="1"   >未支付</option>
+     
+          <option <?php if($order_status=="2"){ echo "selected"; } ?>  value="2"   >已付款</option>
+     
+          <option <?php if($order_status=="3"){ echo "selected"; } ?>  value="3"   >等待收货</option>
+      
+          <option <?php if($order_status=="4"){ echo "selected"; } ?>  value="4"  >订单完成</option>
+      
     </select>
-    <input type="button" value="查询" class="tdBtn"/>
+    <input type="submit" value="查询" class="tdBtn"  />
    </form>
   </div>
   <table class="list-style Interlaced">
@@ -33,30 +44,46 @@
     <th>订单状态</th>
     <th>操作</th>
    </tr>
+   <foreach name='data' item='v' >
    <tr>
     <td>
-     <input type="checkbox"/>
-     <a href="order_detail.html">2015041803225</a>
+     <input type="checkbox" class="middle children-checkbox" value="{$v.order_id}" name="checkbox" />
+     <a href="{:U('Index/order_detail')}?order_id={$v.order_id}">{$v.order_number}</a>
     </td>
     <td class="center">
-     <span class="block">DeatGhost</span>
-     <span class="block">2015-04-18 12:00</span>
+  <!--    <span class="block">DeatGhost</span> -->
+     <span class="block">{$v.generate_time}</span>
     </td>
     <td width="450">
-     <span class="block">张三[18309275673]</span>
-     <address>陕西省西安市未央区255号</address>
+     <span class="block">{$v.accept_name} <span style="float: right;margin-right: 30px;" ><b>电话</b>&nbsp;:&nbsp;{$v.accept_tel}</span></span>
+     <address><b>地址</b>&nbsp;:&nbsp;
+     <?php $str= strlen($v['accept_address']);if($str>100){ echo mb_substr($v['accept_address'], 0, 21, 'utf-8').'......'; }else { echo $v['accept_address'];} ?></address>
     </td>
     <td class="center">
-     <span><i>￥</i><b>58.00</b></span>
+     <span><i>￥</i><b>{$v.goods_price}</b></span>
     </td>
     <td class="center">
-     <span>未付款</span>
+     <span>
+       <if condition="$v.order_status eq 0"> 
+          订单不完善
+       <elseif condition="$v.order_status eq 1"/>
+          未支付
+       <elseif condition="$v.order_status eq 2" /> 
+          等待发货
+       <elseif condition="$v.order_status eq 3" /> 
+          等待收货
+       <else /> 
+          订单完成
+       </if>
+     </span>
     </td>
     <td class="center">
-     <a href="order_detail.html" class="inline-block" title="查看订单"><img src="images/icon_view.gif"/></a>
-     <a class="inline-block" title="删除订单"><img src="images/icon_trash.gif"/></a>
+     <a href="{:U('Index/order_detail')}?order_id={$v.order_id}" class="inline-block" title="查看订单"><img src="images/icon_view.gif"/></a>
+     <a class="inline-block" title="删除订单" href="{:U('Index/delAll')}?order_id={$v.order_id}" ><img src="images/icon_trash.gif"/></a>
     </td>
    </tr>
+   </foreach>
+
   </table>
   <!-- BatchOperation -->
   <div style="overflow:hidden;">
@@ -64,17 +91,84 @@
 	  <div class="BatchOperation fl">
 	   <input type="checkbox" id="del"/>
 	   <label for="del" class="btnStyle middle">全选</label>
-	   <input type="button" value="打印订单" class="btnStyle"/>
-	   <input type="button" value="配货" class="btnStyle"/>
-	   <input type="button" value="删除订单" class="btnStyle"/>
+	   <input type="button" id='report' value="导出Excel" class="btnStyle"/>
+     <!-- <button class="btn" id='report'><span class="sel">导出Excel</span></button> -->
+	   <input type="button" value="配货" id="pei" class="btnStyle"/>
+	   <input type="button" id="delete" value="批量删除" class="btnStyle"/>
 	  </div>
 	  <!-- turn page -->
 	  <div class="turnPage center fr">
-	   <a>第一页</a>
-	   <a>1</a>
-	   <a>最后一页</a>
+	   {$page}
 	  </div>
   </div>
  </div>
-</body>
+ <script>
+    $('#report').click(function(){
+      window.open("http://127.0.0.1/new-cup/index.php/Ht/Index/order_report")
+    })
+       // 全选反选
+    $(function () {
+        //实现全选反选
+        $("#del").on('click', function () {
+            $(".list-style input:checkbox").prop("checked", $(this).prop('checked'));
+        })
+        $(".list-style input:checkbox").on('click', function () {
+            //当选中的长度等于checkbox的长度的时候,就让控制全选反选的checkbox设置为选中,否则就为未选中
+            if ($(".list-style input:checkbox").length === $(".list-style input:checked").length) {
+                $("#del").prop("checked", true);
+            } else {
+                $("#del").prop("checked", false);
+            }
+        })
+    })
+
+
+     // 批删
+    $(document).on('click', '#delete', function () {
+        var checkedNum = $("input[name='checkbox']:checked").length;
+        if (checkedNum == 0) {
+            alert("请选择至少一项！");
+            return;
+        }
+        if (confirm("确定要删除所选项目？")) {
+            var che = $("input[name='checkbox']:checked");
+            var order_id = new Array();
+            for (var a = 0; a < che.length; a++) {
+                order_id[a] = che[a].value;
+            }
+            $.ajax({
+                type: "POST",
+                url: "{:U('Index/delAll')}",
+                data: {'order_id': order_id},
+                success: function (result) {
+                  window.location.reload();
+                }
+            });
+        }
+    })
+
+    //配货
+    $(document).on('click', '#pei', function () {
+      var checkedNum = $("input[name='checkbox']:checked").length;
+        if (checkedNum == 0) {
+            alert("请选择至少一项！");
+            return;
+        }
+        if (confirm("确定要全部发货？")) {
+            var che = $("input[name='checkbox']:checked");
+            var order_id = new Array();
+            for (var a = 0; a < che.length; a++) {
+                order_id[a] = che[a].value;
+            }
+            $.ajax({
+                type: "GET",
+                url: "{:U('Index/Upstatus')}",
+                data: {'order_id': order_id,"order_status":3},
+                success: function (result) {
+                  window.location.reload();
+                }
+            });
+        }
+    })
+ </script>
 </html>
