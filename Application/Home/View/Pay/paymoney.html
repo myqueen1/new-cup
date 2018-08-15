@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+<font color='red'>正在生成订单,请不要刷新该页面!!</font>
+<form id="for" action="{$url}">
+	<table>
+<?php foreach($params as $key=>$val){ ?>
+	<tr>
+		<td>
+			<input type="hidden" name="<?php echo $key ?>" value="<?php echo $val ?>">
+		</td>
+	</tr>
+<?php } ?>
+	</table>
+</form>
+</body>
+<script>
+	document.getElementById('for').submit();
+</script>
+</html>

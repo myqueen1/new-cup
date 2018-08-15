@@ -26,19 +26,19 @@
     <div class="hea_nav">
         <a href="<?php echo U('Index/index');?>"><img src="img/s0.png" class="logo"/></a>
         <ul>
-            <a href="<?php echo U('Index/index');?>">
+            <a href="<?php echo U('Index/index');?>" title="网站首页">
                 <li>首页</li>
             </a>
-            <a href="<?php echo U('Goods/product');?>">
+            <a href="<?php echo U('Goods/product');?>" title="进入商品页">
                 <li>一杯(辈)子</li>
             </a>
-            <a href="<?php echo U('Blog/blog_list');?>">
-                <li>BLOG</li>
-            </a>
-            <a href="<?php echo U('User/personal');?>">
+            <a href="<?php echo U('User/personal');?>" title="您的个人中心">
                 <li>个人中心</li>
             </a>
-            <a href="<?php echo U('Index/message');?>">
+            <a href="<?php echo U('Blog/blog_list');?>" title="指尖蜜语,让我们告诉您杯子的故事">
+                <li>指尖蜜语</li>
+            </a>
+            <a href="<?php echo U('Index/message');?>" title="看看网站留言">
                 <li>留言板</li>
             </a>
         </ul>
@@ -54,9 +54,7 @@
         <a href="<?php echo U('User/personal');?>"><?php echo $user_info['user_nickname'] ?></a>
         <a href="javascript:void(0);" class="loginOut">退出</a>
         <a href="<?php echo U('User/ShoppingCart');?>">
-            <p class="head-shopcart">
-                <i class="iconfont">&#xe600;</i><span>0件</span>
-            </p>
+            <p class="head-shopcart"><i class="iconfont">&#xe600;</i>购物车</p>
         </a>
     </p>
 <?php } ?>
@@ -128,7 +126,7 @@
 	<div class="product">
 		<ul class=".aa">
 	        <?php foreach($data as $key=>$val){ ?>
-	        <a href="<?php echo U('Goods/buy');?>?id=<?php echo $val['goods_id'] ?>">
+	        <a href="<?php echo U('Goods/buy');?>?id=<?php echo $val['goods_id'] ?>" target="_blank">
 	            <li>
 	                <img src="<?php echo ($val["goods_cover"]); ?>" height="500"/>
 	                <div class="proli_bg">

@@ -9,7 +9,7 @@ use Think\Controller;
 
 class UserController extends HeadController
 {
-    //    个人中心
+    //个人中心
     public function personal()
     {
         $user_info = json_decode(cookie('user_info'),true);
@@ -112,8 +112,7 @@ class UserController extends HeadController
             }
         } else {
             $user_id = self::ReturnUserInfo('user_id');
-            // $sql = "select five_goods.goods_id,goods_name,five_car.sku_number,sku_color,five_goods_detailed.goods_price,goods_cover,goods_status from five_car,five_goods,five_goods_detailed where five_car.goods_id = five_goods.goods_id and five_car.goods_id = five_goods_detailed.goods_id and user_id = '$user_id'";
-            // $carmodel->query($sql);
+
             $result = $carmodel->field("five_goods.goods_id,goods_name,five_car.sku_number,sku_color,five_goods_detailed.goods_price,goods_cover,goods_status")
                                ->join('five_goods on five_car.goods_id = five_goods.goods_id')
                                ->join('five_goods_detailed on five_car.goods_id = five_goods_detailed.goods_id')
@@ -123,23 +122,83 @@ class UserController extends HeadController
             foreach ($result as $key => $value) {
                 $result[$key]['goods_sum'] = $value['goods_price']*$value['sku_number'];
             }
-            //print_r($result);die;
-
             //echo $carmodel->getLastSql();die;
+            
             $this->assign('cardata',$result);
             $this->display();
         }
     }
 
-    //订单
+    /**
+     *   @param $goods_id string 移除购物车
+     *   @return $result json 
+    */
+    public function Remove()
+    {
+        $goods_id = I('get.goods_id');
+        $user_id  = self::ReturnUserInfo('user_id');
+
+        if (is_numeric($goods_id)) {
+            $carmodel = D('car');
+            $result = $carmodel->where("user_id = '$user_id' and goods_id = '$goods_id'")
+                               ->delete();
+
+            if ($result) echo self::PutOutMessage('success','移除购物车成功');
+            if (!$result) echo self::PutOutMessage('error','系统错误,请稍后重试!');
+        } else {
+            echo self::PutOutMessage('error','系统错误,请稍后重试!');
+        }
+    }
+
+    /**
+     *   @param $goods_id $user_id string 
+     *   @return $result json   根据$goods_id,$user_id 下单
+    */
     public function fill_order()
     {
-        $this->display();
+        $goods_id = I('get.goods_id');  //接收商品ID
+        $goods_number = I('get.goods_number');  //接收商品数量
+
+        if (is_numeric($goods_id) && is_numeric($goods_number)) {    //判断合法性
+            //判断商品状态
+            $detailmodel = D('goods_detailed');
+            $status = $detailmodel->field('goods_status')
+                                  ->where("goods_id = '$goods_id'")
+                                  ->find();
+                                  //print_r($status);die;
+            if ($status['goods_status'] == '2') {   //商品状态正常
+                //获取收货地址
+                $user_id = self::ReturnUserInfo('user_id');
+                $addressmodel = D('address');
+                $user_address = $addressmodel->where("user_id = '$user_id'")
+                                             ->select();
+
+                //获取商品详细信息
+                $goodsmodel  = D('goods');
+                $goodsdetail = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
+                                          ->join('five_goods_detailed on five_goods_detailed.goods_id = five_goods.goods_id')
+                                          ->where("five_goods.goods_id = '$goods_id'")
+                                          ->find();
+
+                $goodsdetail['goods_number'] = $goods_number;
+                $goodsdetail['goods_sum']    = $goods_number*$goodsdetail['goods_price'];
+                //print_r($goodsdetail);die;
+
+                $this->assign('goodsdetail',$goodsdetail);
+                $this->assign('user_address',$user_address);
+                $this->display();
+            } else {
+                layout(false);$this->error();   //商品状态 抛出异常
+            }                   
+        } else {
+            //商品ID不是数字的情况下 抛出异常
+            layout(false);$this->error();
+        }
     }
 
     //重置密码
-    public function find()
-    {
-        $this->display();
-    }
+    // public function find()
+    // {
+    //     $this->display();
+    // }
 }

@@ -61,10 +61,8 @@
                         <a class='login_btn' href="javascript:void(0);">立即购买</a>
 					<?php } else { ?>
 						<a class='btn-buy' data-id="{$data.goods_id}">加入购物车</a>
-                        <a href="{:U('User/fill_order')}">立即购买</a>
+                        <a href="{:U('User/fill_order')}?goods_id={$data.goods_id}&goods_number=1">立即购买</a>
 					<?php } ?>
-					
-					
 				</p>
 			</div>
 		</div>

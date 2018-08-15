@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body><br>
+	<center>
+		<span style="display:none;" class="reminder">12132</span>
+	</center>
 	<div class="personal">
 		<p class="title" style="margin-bottom: 30px;">我的购物车</p>
 		<div class="per_box">
@@ -21,35 +24,39 @@
 			</ul>
 
 			<foreach name="cardata" item="val">
-				<ul class="per_listul shop_carul" style="padding-top: 10px;box-sizing: border-box;">
+				<ul class="per_listul shop_carul" style="padding-top: 10px;box-sizing: border-box;" data-id="{$val.goods_id}">
 					<li style="width: 30px;margin-left: 20px;margin-right: 10px;">	
 						<input type="radio" class="radios" name="radio" value="{$val.goods_id}" style="margin-left: 18px;"/>
 					</li>
 					<li style="width: 130px;margin-right: 10px;margin-left: 10px;">
-						<img src="{$val.goods_cover}" height="70px" style="border-radius:200px;vertical-align: middle;"/>
+						<a href="{:U('Goods/buy')}?id={$val.goods_id}" target="_blank">
+							<img src="{$val.goods_cover}" height="70px" style="border-radius:200px;vertical-align: middle;"/>
+						</a>
 					</li>
-					<li style="width: 350px;text-align: left;">{$val.goods_name}</li>
+					<li style="width: 350px;text-align: left;">
+						<a href="{:U('Goods/buy')}?id={$val.goods_id}" target="_blank">{$val.goods_name}</a>
+					</li>
 					<li>{$val.sku_color}</li>
 					<li style="color: #3CA5F1;">￥{$val.goods_price}</li>
-					<li style="margin-right: 10px;margin-left: 10px;">
+					<li style="margin-right: 10px;margin-left: 10px;" class="goods_number" data-id="{$val.sku_number}">
 						<p class="p5">
 							<span class="num">-</span>
 							<input type="text" value="{$val.sku_number}" disabled/>
 							<span class="num">+</span> 
 						</p>
 					</li>
-					<li style="color: #3CA5F1;">￥{$val.goods_sum}</li>
+					<li style="color: #3CA5F1;" class="price_sum" data-id="{$val.goods_sum}">￥{$val.goods_sum}</li>
 					<li>
-						<a class="jie_btn" href="{:U('User/fill_order')}">移除购物车</a>
+						<a class="remove_car" href="javascript:void(0);">移除购物车</a>
 					</li>
-					
 				</ul>
 			</foreach>
 
 		</div>
 		<p class="shop_car_totle">
-			不包含运费共计：<span style="font-size: 19px;color: #d20000;">￥147</span>
-			<a class="jie_btn" href="{:U('User/fill_order')}">确认结算</a>
+			不包含运费共计：
+			<span style="font-size: 19px;color: #d20000;" class="sum_price">￥ 0</span>
+			<a class="jie_btn" href="javascript:void(0);">确认结算</a>
 		</p>
 	</div>
 	
@@ -65,18 +72,56 @@
 	</div>
 </body>
 <script>
-	var goods_id = null;
+	var goods_id  = null;
+	var sum_price = null;
+	var goods_number = null;
+	//点击改变背景颜色
 	$('.radios').on('click',function(){	
 		//遍历所有UL 清除css背景颜色
 		$("ul").siblings('.per_listul').css("background-color","white");
 		//点击事件添加背景颜色  两者不能倒替,否则没有颜色
 		$(this).parents('.per_listul').css("background-color","#FBF6D9");
 		//设置值
-		goods_id = $(this).val();
+		goods_id  = $(this).val();
+		goods_number = $(this).parents('.per_listul').children('.goods_number').attr('data-id');
+		//计算总价格
+		sum_price = $(this).parents('.per_listul').children('.price_sum').attr('data-id');
+		$('.sum_price').html("￥ "+sum_price);
 	})
 
+	//跳转结算页
 	$('.jie_btn').on('click',function(e){
-		
+		if (goods_id == null || goods_number == null) {
+			e.preventDefault()
+			$('.reminder').fadeIn().css("color","#00EE00").html("<font size='3'>请选择一个您想要结算的商品吧!</font>");
+			setTimeout(function(){
+                $('.reminder').fadeOut();
+            },1500)
+		} else {
+			//alert(goods_number)
+			window.location.href = "{:U('User/fill_order')}?goods_id="+goods_id+"&goods_number="+goods_number;
+		}
+	})
+
+	//移除购物车
+	$('.remove_car').on('click',function(){
+		var good_id = $(this).parents('.per_listul').attr('data-id');
+		var _this   = $(this);
+		$.ajax({
+			url:"{:U('User/Remove')}",type:"GET",dataType:"json",
+			data:{'goods_id':good_id},success:function (comeback) {
+                console.log(comeback)
+                if(comeback.code == 'success'){
+                    $('.reminder').fadeIn().css("color","#00EE00").html("<font size='3'>"+comeback.msg+"</font>");
+                    setTimeout(function(){
+                    	_this.parents('.per_listul').remove();
+                        $('.reminder').fadeOut();
+                    },2000)
+                }else{
+                    $('.reminder').fadeIn().css("color","#CD2626").html("<font size='3'>"+comeback.msg+"</font>");
+                }
+            }
+        })
 	})
 </script>
 </html>
