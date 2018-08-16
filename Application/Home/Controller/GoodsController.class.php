@@ -143,7 +143,7 @@ class GoodsController extends ComeController
     public function Eliminate($result){
         //剔除没有封面的商品
         foreach ($result as $key => $value) {
-            $url = 'http://www.cup1.com'.$value['goods_cover'];
+            $url = 'http://127.0.0.1/new-cup/index.php'.$value['goods_cover'];
             if(!@fopen( $url, 'r' ) ){ 
                 unset($result[$key]);
             }

@@ -21,7 +21,7 @@ class PayController extends HeadController
             $order['pay_way']   = I('get.pay_way');
             $order['user_id']   = self::ReturnUserInfo('user_id');
             $order['generate_time'] = date('Y-m-d H:i:s',time());
-            $order['goods_order']   = $order['goods_id'].$order['user_id'].date('YmdHis',time()).$order['pay_way'].rand(99999,1000000);
+            $order['order_number']  = $order['goods_id'].$order['user_id'].date('YmdHis',time()).$order['pay_way'].rand(99999,1000000);
             $order['order_remarks'] = "55° 水杯网店";
 
             foreach($order as $key => $value){

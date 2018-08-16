@@ -1,11 +1,10 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>订单详情</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
  <base href="__PUBLIC__/backend/"/>
 <link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
- <script src="js/jquery.js"></script>
 </head>
 <body>
  <div class="wrap">
@@ -18,7 +17,6 @@
   <dl class="orderDetail">
    <dt class="order-h">订单详情</dt>
    <dd>
-   <input type="hidden" name="order_id" id="order_id" value="{$v.order_id}" />
     <ul>
      <li>
       <span class="h-cont h-right">收件人姓名：</span>
@@ -73,7 +71,7 @@
      </tr>
      <tr>
       <td><img src="__ROOT__{$v.goods_cover}" class="thumbnail"/></td>
-      <td>{$v.goods_name}</td>
+      <td>这里是产品名称哦</td>
       <td>
        <span>
         <i>￥</i>
@@ -84,7 +82,7 @@
       <td>
        <span>
         <i>￥</i>
-        <em><?php echo $v['goods_price']*1?></em>
+        <em>0.00</em>
        </span>
       </td>
      </tr>
@@ -93,7 +91,7 @@
        <div class="fr">
         <span style="font-size:15px;font-weight:bold;">
          <i>订单共计金额：￥</i>
-         <b><?php echo $v['goods_price']?></b>
+         <b>0.00</b>
         </span>
        </div>
       </td>
@@ -114,33 +112,12 @@
       <!-- Operation -->
 	  <div class="BatchOperation">
 	   <input type="button" value="打印订单" class="btnStyle"/>
-     <if condition="$v.order_status eq 3"> 
-     <else />
 	   <input type="button" value="配送" class="btnStyle"/>
-	   <input type="button" value="发货" id="fahuo" class="btnStyle"/>
-	   <!-- <input type="button" value="取消订单" class="btnStyle"/> -->
-     </if>
-     <input type="button" value="返回订单列表" id="fan" class="btnStyle"/>
+	   <input type="button" value="发货" class="btnStyle"/>
+	   <input type="button" value="取消订单" class="btnStyle"/>
 	  </div>
    </dd>
   </dl>
  </div>
 </body>
-<script>
-    $('#fahuo').click(function(){
-      var order_id = $('#order_id').val();
-      var order_status = 3;
-      $.ajax({
-        url:"{:U('Index/Upstatus')}?order_id="+order_id+"&order_status="+order_status,
-        type:"get",
-        success:function(res){
-          // alert(res)
-          window.location.href="{:U('Index/order_list')}";
-        }
-      })
-    })
-    $('#fan').click(function(){
-        window.location.href="{:U('Index/order_list')}";
-    })
-</script>
 </html>
