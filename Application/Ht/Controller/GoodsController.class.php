@@ -249,12 +249,6 @@ class GoodsController extends CommonController
         $detailed = M('goods_detailed')->where("goods_id=".$id)->find();
         $type = M('type')->select();
         $brand = M('brand')->select();
-        $content_01 = $detailed["goods_content"];//从数据库获取富文本content
-        $content_02 = htmlspecialchars_decode($content_01);//把一些预定义的 HTML 实体转换为字符
-        $content_03 = str_replace("&nbsp;","",$content_02);//将空格替换成空
-        $contents = strip_tags($content_03);//函数剥去字符串中的 HTML、XML 以及 PHP 的标签,获取纯文本内容
-        $con = mb_substr($contents, 0, 100,"utf-8");//返回字符串中的前100字符串长度的字符
-        $detailed['goods_content'] = $con;
         $this->assign('v',$goods);
         $this->assign('d',$detailed);
         $this->assign('type',$type);
