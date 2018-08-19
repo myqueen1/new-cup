@@ -24,7 +24,6 @@ class HeadController extends Controller
 	{
 		$user_info = cookie('user_info');
 		if (empty($user_info)){
-			layout(false);
 			$this->success('亲爱的用户,请先登录然后重试...',U('Login/login'));die;
 		}
 	}

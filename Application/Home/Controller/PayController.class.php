@@ -41,8 +41,9 @@ class PayController extends HeadController
 
                 $order['goods_name']  = $result['goods_name'];
                 $order['goods_price'] = $result['goods_price'];
-                
+                //print_r($order);die;
                 $params = self::order_pay($order);
+                //print_r($params);die;
                 $this->assign('url','https://mapi.alipay.com/gateway.do');
                 $this->assign('params',$params);
                 $this->display('paymoney');
@@ -77,7 +78,7 @@ class PayController extends HeadController
                         'body'          => ''                   //备注
                     );
         
-        $params['out_trade_no'] = $order['goods_order'];    //商户网站唯一订单号
+        $params['out_trade_no'] = $order['order_number'];    //商户网站唯一订单号
         $params['subject']      = $order['goods_name'];     //商品名称
         $params['total_fee']    = $order['goods_price'];    //交易金额
         $params['body']         = $order['order_remarks'];  //备注
