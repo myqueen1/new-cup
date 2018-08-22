@@ -157,15 +157,6 @@
 			<div class="ydc-right-banner">
 				<div class="slideshow-container">
 					<a href="www.baidu.com" target="_blank" class="mySlides fade">
-<<<<<<< HEAD
-						<img src="/new-cup/Public/frontend/img/ad1.jpg" style="width:100%">
-					</a>
-					<a href="" target="_blank" class="mySlides fade">
-						<img src="/new-cup/Public/frontend/img/ad2.jpg" style="width:100%">
-					</a>
-					<a href="" target="_blank" class="mySlides fade">
-						<img src="/new-cup/Public/frontend/img/ad3.jpg" style="width:100%">
-=======
 						<img src="/Public/frontend/img/ad1.jpg" style="width:100%">
 					</a>
 					<a href="" target="_blank" class="mySlides fade">
@@ -173,7 +164,6 @@
 					</a>
 					<a href="" target="_blank" class="mySlides fade">
 						<img src="/Public/frontend/img/ad3.jpg" style="width:100%">
->>>>>>> ef6b02ede1a4661c0810093d3f84906ad41eaa37
 					</a>
 				</div>
 			</div>
