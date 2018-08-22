@@ -12,17 +12,27 @@
   <dd>
    <ul>
     <li>
-     <span>待发货订单：</span>
-     <span>539</span>
+     <span>总订单数：</span>
+     <span>{$order}</span>
     </li>
+   <foreach name='stu' item='v' >
     <li>
-     <span>未确认订单：</span>
-     <span>23</span>
+     <span>
+        <if condition="$v.order_status eq 0 ">    
+            <span>订单异常：</span>
+        <elseif condition="$v.order_status eq 1 " /> 
+            <span>未支付订单：</span>
+        <elseif condition="$v.order_status eq 2 " /> 
+            <span>待发货订单：</span>
+        <elseif condition="$v.order_status eq 3 " /> 
+            <span>待收货订单：</span>
+        <else/> 
+            <span>已成交订单：</span>
+        </if>
+     </span>
+     <span>{$v.count(*)}</span>
     </li>
-    <li>
-     <span>已成交订单：</span>
-     <span>1282</span>
-    </li>
+   </foreach>
    </ul>
   </dd>
  </dl>
@@ -32,30 +42,16 @@
   <dd>
    <ul>
     <li>
-     <span>店铺总数量：</span>
-     <span>1252</span>
-    </li>
-    <li>
      <span>商品总数量：</span>
-     <span>13252</span>
+     <span>{$goodsNum}</span>
     </li>
+    <foreach name='type' item='v'>
     <li>
-     <span>在线实时交易总计：</span>
-     <span>1282.00元</span>
+     <span>{$v.type_name}总数量：</span>
+     <span>{$v.count(*)}</span>
     </li>
-    <li>
-     <span>酒吧类店铺：</span>
-     <span>128家</span>
-    </li>
-    <li>
-     <span>家政服务类店铺：</span>
-     <span>300家</span>
-    </li>
-    <li>
-     <span>外卖类店铺：</span>
-     <span>458家</span>
-    </li>
-   </ul>
+    </foreach>
+    </ul>
   </dd>
  </dl>
  
@@ -67,34 +63,16 @@
      <span>会员总数：</span>
      <span>{$userNum}</span>
     </li>
+    <foreach name='num' item='v' >
     <li>
-     <span>女会员：</span>
-     <span>{$nv}</span>
+    <if condition="$v.user_sex eq 0 ">
+      <span>女会员比例：</span>
+    <else/> 
+      <span>男会员比例：</span>
+    </if>
+     <span><?php echo $userNum*$v['count(*)']/100; ?>%</span>
     </li>
-    <li>
-     <span>男会员：</span>
-     <span>{$nan}</span>
-    </li>
-   </ul>
-  </dd>
- </dl>
- 
- <dl>
-  <dt>访问统计</dt>
-  <dd>
-   <ul>
-    <li>
-     <span>今日访问：</span>
-     <span>1356</span>
-    </li>
-    <li>
-     <span>当前在线人数：</span>
-     <span>98</span>
-    </li>
-    <li>
-     <span>最新留言：</span>
-     <span>1</span>
-    </li>
+    </foreach>
    </ul>
   </dd>
  </dl>

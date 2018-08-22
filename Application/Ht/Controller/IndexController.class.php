@@ -8,6 +8,26 @@ class IndexController extends CommonController
     {
         $this->display();
     }
+
+    //总信息
+    public function main()
+    {
+        $userNum = M('user')->count();
+        $num = M('user')->field("user_sex,count(*)")->group('user_sex')->select();
+        $goodsNum = M('goods')->count();
+        $type = M('goods')->join('five_type ON five_type.type_id=five_goods.type_id')->field('type_name,count(*)')->group('type_name')->select();
+        $order = M('order')->count();
+        $stu = M('order')->field('order_status,count(*)')->group('order_status')->select();
+        $this->assign("type",$type);
+        $this->assign("stu",$stu);
+        $this->assign("order",$order);
+        $this->assign("userNum",$userNum);
+        $this->assign("goodsNum",$goodsNum);
+        $this->assign("num",$num);
+        $this->display();
+    }
+
+
     //订单列表
     public function order_list()
     {
@@ -22,6 +42,7 @@ class IndexController extends CommonController
         } else {
             $map['order_status'] = array("eq","$order_status");
         }
+        $map['order_status']  = array('lt','5');
         $count  = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
                             ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
                            ->where($map)->count();
@@ -29,7 +50,7 @@ class IndexController extends CommonController
         $show       = $Page->show();
         $data = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
                          ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
-                         ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,goods_price')
+                         ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,five_order.goods_price,accept_province,accept_city,accept_town,goods_number')
                          ->where($map)->order('order_id')->limit($Page->firstRow.','.$Page->listRows)->group('order_id')->select(); 
                            
         $this->assign('where',$where);
@@ -46,7 +67,7 @@ class IndexController extends CommonController
         $data = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
                          ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
                          ->join("five_goods ON five_order.goods_id = five_goods.goods_id")
-                         ->field('order_id,five_address.accept_id,user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,goods_price,order_remarks,goods_cover,goods_price,goods_name')
+                         ->field('order_id,five_address.accept_id,user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,order_remarks,goods_cover,five_order.goods_price,goods_number,goods_name,accept_province,accept_city,accept_town')
                          ->where("order_id=".$order_id)->find();
         $this->assign("v",$data);
         $this->display();
@@ -63,18 +84,40 @@ class IndexController extends CommonController
     //测试表格
     public function order_report()
     {
-        $data = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
+        if (IS_POST) {
+            $order_id = I('post.order_id');
+            if (empty($order_id)) {
+                $where = "1=1";
+             } elseif (is_array($order_id)) {
+                $str = implode($order_id, ',');
+                $where = "`order_id` IN ($str)";
+             } else {
+                $where = "`order_id` IN ($order_id)";   
+             }
+        } elseif (IS_GET) {
+            $order_id = I('get.order_id');
+            if (empty($order_id)) {
+                $where = "1=1";
+            } elseif (is_array($order_id)) {
+                $str = implode($order_id, ',');
+                $where = "`order_id` IN ($str)";
+             } else {
+                $where = "`order_id` IN ($order_id)";   
+             }
+        } else {
+            $where = "1=1";
+        }
+        $data = M('order')->where($where)->join('five_address ON five_order.accept_id=five_address.accept_id')
                          ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
                          ->join("five_goods ON five_order.goods_id = five_goods.goods_id")
-                         ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,goods_price,goods_name')->select();
-
+                         ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,five_order.goods_price,goods_name,accept_province,accept_city,accept_town,goods_number')->select();
+                         echo M('order')->getLastSql();
         vendor('Report');  //引入类文件
         vendor('Order');
-
         $reportObj = new \Report('order');
         $Order = new \Order();
         //设置要展示的字段
-        $reportObj->setTitle(array("下单日期","收货人","电话","收货地址","订单金额","支付状态","商品信息"));
+        $reportObj->setTitle(array("下单日期","收货人","电话","省份","市区","乡镇","收货地址","订单金额","支付状态","订单编号","商品名称/商品数量"));
 
         foreach($data as $good)
         {
@@ -83,11 +126,14 @@ class IndexController extends CommonController
                 $good['generate_time'],
                 $good['accept_name'],
                 $good['accept_tel'],
+                $good['accept_province'],
+                $good['accept_city'],
+                $good['accept_town'],
                 $Order->cont($good),
-                // $good['accept_address'],
                 "￥".$good['goods_price'],
                 $Order->getStatusText($good),
-                "商品编号：".$good['order_number']." 商品名称：".$good['goods_name']." 商品数量：".'1'."<br />",
+                $good['order_number'],
+                $good['goods_name'].' / '.$good['goods_number'],
             );
             $reportObj->setData($insertData);
         }       
@@ -114,7 +160,7 @@ class IndexController extends CommonController
         }
     }
 
-    //删除订单
+    //删除订单 垃圾箱作废的订单
     public function delAll()
     {
        if (IS_POST) {
@@ -135,9 +181,29 @@ class IndexController extends CommonController
         }
         if (M('address')->where($where_acc)->delete()) {
             M('order')->where($where)->delete();
-            $this->redirect('Index/order_list', "", 0, '页面跳转中...');
+            $this->success("删除成功");
         } else {
             $this->error("删除失败");
         }
     }
+
+    //垃圾箱  过期订单
+    public function Dustbin()
+    {
+        $data = M('order')->field('order_id,order_status,generate_time')->where("order_status != '5'")->select();
+        $num = count($data);
+        $guoTime=time();
+        for ($i=0; $i <$num ; $i++) { 
+            $time = strtotime($data[$i]['generate_time'])+60*60*24*7;
+            if ($time<$guoTime) {
+                $id['order_id'] = $data[$i]['order_id'];
+                $save['order_status'] = '5';
+                M('order')->where($id)->save($save);
+            }      
+        }
+        $rest = M('order')->where("order_status = '5'")->join('five_goods ON five_order.goods_id=five_goods.goods_id')->join('five_goods_detailed ON five_order.goods_id=five_goods_detailed.goods_id')->field('order_id,order_number,generate_time,five_order.goods_id,goods_name,goods_cover')->order('order_id')->select();
+        $this->assign('rest',$rest);
+        $this->display();
+    }
+ 
 }
