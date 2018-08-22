@@ -21,7 +21,7 @@ class LeaveController extends CommonController
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         $list = $leave
             ->join('five_user ON five_user.user_id = five_leave.user_id')
-            ->order('status')
+            ->order('leave_status')
             ->where('1=1')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $this->assign('list', $list);// 赋值数据集
         $this->assign('page', $show);// 赋值分页输出
@@ -31,8 +31,8 @@ class LeaveController extends CommonController
 //    删除留言
     public function delet()
     {
-        $id = I('get.id');
-        $where = "`id`=" . $id;
+        $id = I('get.leave_id');
+        $where = "`leave_id`=" . $id;
         $res = D('leave')->delet($where);
         if ($res) {
             echo true;
@@ -41,23 +41,21 @@ class LeaveController extends CommonController
         }
     }
 
-//    查看留言信息
-    public function reply_message()
-    {
-        $id = I('get.id');
-        $res = D('leave')->select_one($id);
-        $this->assign('list', $res);
-        $this->display(); // 输出模板
-    }
-
 //    回复消息
     public function reply_do()
     {
         $data = I('post.');
-        $cookie=cookie('userInfo');
-        $data['admin_id']=$cookie['admin_id'];
-        $data['status']=1;
-        $data['reply_time']=date('Y-m-d H:i:s');
+        if($data['answer']!=''){
+            $cookie=cookie('userInfo');
+            $data['admin_id']=$cookie['admin_id'];
+            $data['leave_status']=1;
+            $data['leave_reply_time']=date('Y-m-d H:i:s');
+        }else{
+            $cookie=cookie('userInfo');
+            $data['admin_id']=$cookie['admin_id'];
+            $data['leave_status']=0;
+            $data['leave_reply_time']=date('Y-m-d H:i:s');
+        }
         $leave = D('leave');
         $res = $leave->updat($data);
         if ($res) {
