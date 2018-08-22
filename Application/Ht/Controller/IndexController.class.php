@@ -37,21 +37,26 @@ class IndexController extends CommonController
             // $map['_logic'] = 'OR';            
         if ($order_status=='0') {
             $map['order_status'] = array("eq","$order_status");
-        } elseif( $order_status=="all" || empty($order_status)) {
+        } else if( $order_status=="all" || empty($order_status)) {
 
         } else {
             $map['order_status'] = array("eq","$order_status");
         }
         $map['order_status']  = array('lt','5');
+
         $count  = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
                             ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
-                           ->where($map)->count();
+                            ->where($map)->count();
+
         $Page       = new \Think\Page($count,10);
         $show       = $Page->show();
-        $data = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
-                         ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
-                         ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,five_order.goods_price,accept_province,accept_city,accept_town,goods_number')
-                         ->where($map)->order('order_id')->limit($Page->firstRow.','.$Page->listRows)->group('order_id')->select(); 
+        $data = M('order')->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_detail,order_status,five_order.goods_price,accept_province,accept_city,accept_town,five_order.goods_number')
+        				  ->join('five_address ON five_order.accept_id=five_address.accept_id')
+                          ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
+                          ->where($map)->order('order_id')
+                          ->limit($Page->firstRow.','.$Page->listRows)
+                          ->group('order_id')
+                          ->select(); 
                            
         $this->assign('where',$where);
         $this->assign('order_status',$order_status);
@@ -64,11 +69,14 @@ class IndexController extends CommonController
     public function order_detail()
     {
         $order_id = I('get.order_id');
+
         $data = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
-                         ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
-                         ->join("five_goods ON five_order.goods_id = five_goods.goods_id")
-                         ->field('order_id,five_address.accept_id,user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,order_remarks,goods_cover,five_order.goods_price,goods_number,goods_name,accept_province,accept_city,accept_town')
-                         ->where("order_id=".$order_id)->find();
+                          ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
+                          ->join("five_goods ON five_order.goods_id = five_goods.goods_id")
+                          ->field('order_id,five_address.accept_id,user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,order_remarks,goods_cover,five_order.goods_price,goods_number,goods_name,accept_province,accept_city,accept_town')
+                          ->where("order_id=".$order_id)
+                          ->find();
+
         $this->assign("v",$data);
         $this->display();
     }
