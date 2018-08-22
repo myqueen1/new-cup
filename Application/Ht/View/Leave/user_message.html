@@ -83,6 +83,10 @@
         var answer = $(this).val();
         var id = $(this).parents('tr').attr('leave_id');
         var _this = $(this);
+        if(answer==''){
+            _this.hide();
+            _this.next().show()
+        }
         $.ajax({
             type: "POST",
             url: "{:U('leave/reply_do')}",
@@ -92,14 +96,13 @@
                 if (!msg) {
                     alert("回复失败");
                 } else {
-                    _this.hide();
-                    _this.next().show().text(answer);
                     if (answer != '') {
                         _this.parents('td').prev().prev().empty().append("已回复");
                     } else {
                         _this.parents('td').prev().prev().empty().append('<font style="color: red">未回复</font>');
                     }
-
+                    _this.hide();
+                    _this.next().show().text(answer);
                 }
             }
         });
