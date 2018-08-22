@@ -148,6 +148,34 @@
 		<img src="img/s1.jpg" class="pc_h" />
 		<img src="img/mobile_h.jpg" class="mobile_h" />
 	</div> -->
+<<<<<<< HEAD
+=======
+
+	
+
+	<div class="footer">
+		<div class="footer_con">
+
+			<div class="ydc-right-banner">
+				<div class="slideshow-container">
+					<a href="www.baidu.com" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad1.jpg" style="width:100%">
+					</a>
+					<a href="" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad2.jpg" style="width:100%">
+					</a>
+					<a href="" target="_blank" class="mySlides fade">
+						<img src="/Public/frontend/img/ad3.jpg" style="width:100%">
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="footer_con2">
+			<p>© 2015 dingdongyouli.com All rights reserved.</p>
+			<img src="img/footer_p2.jpg" />
+		</div>
+	</div>
+>>>>>>> b4c92496e1827fab629673d90295bf57ff1c1288
 </body>
 <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script src="js/carousel_focus.min.js" type="text/javascript"></script>
