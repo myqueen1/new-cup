@@ -51,10 +51,9 @@ class LeaveController extends CommonController
             $data['leave_status']=1;
             $data['leave_reply_time']=date('Y-m-d H:i:s');
         }else{
-            $cookie=cookie('userInfo');
-            $data['admin_id']=$cookie['admin_id'];
+            $data['admin_id']="";
             $data['leave_status']=0;
-            $data['leave_reply_time']=date('Y-m-d H:i:s');
+            $data['leave_reply_time']="";
         }
         $leave = D('leave');
         $res = $leave->updat($data);

@@ -34,9 +34,9 @@ class BlogsController extends CommonController
     public function add_blog_do()
     {
         $data = I('post.');
-        $data['date'] = date("Y-m-d");
+        $data['blog_datetime'] = date("Y-m-d");
         $userinfo = cookie('userInfo');
-        $data['name'] = $userinfo['admin_name'];
+        $data['blog_author'] = $userinfo['admin_name'];
         $obj = D('blog');
         $res = $obj->add($data);
         if ($res) {
@@ -52,10 +52,10 @@ class BlogsController extends CommonController
         if (IS_POST) {
             $ids = I('post.ids');
             $str = implode($ids, ',');
-            $where = "`id` IN ($str)";
+            $where = "`blog_id` IN ($str)";
         } else {
             $id = I('get.id');
-            $where = "`id`=" . $id;
+            $where = "`blog_id`=" . $id;
         }
         $blog = D('blog');
         if ($blog->where($where)->delete()) {
@@ -76,16 +76,16 @@ class BlogsController extends CommonController
     public function updata_do()
     {
         $data = I('post.');
-        $data['date'] = date("Y-m-d");
+        $data['blog_datetime'] = date("Y-m-d");
         $userinfo = cookie('userInfo');
-        $data['name'] = $userinfo['admin_name'];
+        $data['blog_author'] = $userinfo['admin_name'];
         $obj = D('blog');
         $res=$obj->save($data);
         if ($res) {
             echo header("location:Blog_list");
         } else {
 
-            echo "<script>alert('修改失败');location.href='updata'</script>";
+            echo "<script>alert('修改失败');location.href='updata?id=".$data['blog_id']."'</script>";
         }
     }
 }

@@ -23,11 +23,11 @@
         <foreach name="list" item="vo">
             <tr>
                 <td>
-                    {$vo.title}
+                    {$vo.blog_title}
                 </td>
                 <td class="center">
-                    <a href="{:U('Blogs/updata')}?id={$vo.id}" title="编辑"><img src="images/icon_edit.gif"/></a>
-                    <a href="{:U('Blogs/del_blogs')}?id={$vo.id}&p=<?php echo I('get.p');?>" title="删除" class="bloc"><img src="images/icon_drop.gif"/></a>
+                    <a href="{:U('Blogs/updata')}?id={$vo.blog_id}" title="编辑"><img src="images/icon_edit.gif"/></a>
+                    <a href="{:U('Blogs/del_blogs')}?id={$vo.blog_id}&p=<?php echo I('get.p');?>" title="删除" class="bloc"><img src="images/icon_drop.gif"/></a>
                 </td>
             </tr>
         </foreach>
