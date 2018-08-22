@@ -24,7 +24,6 @@ class HeadController extends Controller
 	{
 		$user_info = cookie('user_info');
 		if (empty($user_info)){
-			layout(false);
 			$this->success('亲爱的用户,请先登录然后重试...',U('Login/login'));die;
 		}
 	}
@@ -39,7 +38,7 @@ class HeadController extends Controller
 			self::$information['code'] = $code;
 			self::$information['msg']  = $msg;
 		}
-		return json_encode(self::$information);
+		return json_encode(self::$information,JSON_UNESCAPED_UNICODE);
 	}
 
 	/**

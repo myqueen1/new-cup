@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>55°--BLOG</title>
+    <title>55° --SHOP</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
@@ -148,31 +148,6 @@
 		<img src="img/s1.jpg" class="pc_h" />
 		<img src="img/mobile_h.jpg" class="mobile_h" />
 	</div> -->
-
-	
-
-	<div class="footer">
-		<div class="footer_con">
-
-			<div class="ydc-right-banner">
-				<div class="slideshow-container">
-					<a href="www.baidu.com" target="_blank" class="mySlides fade">
-						<img src="/Public/frontend/img/ad1.jpg" style="width:100%">
-					</a>
-					<a href="" target="_blank" class="mySlides fade">
-						<img src="/Public/frontend/img/ad2.jpg" style="width:100%">
-					</a>
-					<a href="" target="_blank" class="mySlides fade">
-						<img src="/Public/frontend/img/ad3.jpg" style="width:100%">
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="footer_con2">
-			<p>© 2015 dingdongyouli.com All rights reserved.</p>
-			<img src="img/footer_p2.jpg" />
-		</div>
-	</div>
 </body>
 <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script src="js/carousel_focus.min.js" type="text/javascript"></script>
@@ -183,22 +158,6 @@
 			$(".meau_box").slideUp();
 		});
 	});
-</script>
-<script type="text/javascript">
-    var slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex> slides.length) {slideIndex = 1}
-        slides[slideIndex-1].style.display = "block";
-        setTimeout(showSlides, 3000); // 滚动时间
-    }
 </script>
 </html>
 
@@ -222,6 +181,29 @@
         </form>
     </div>
 </div>
+
+    <div class="footer">
+        <div class="footer_con">
+            <div class="ydc-right-banner">
+                <div class="slideshow-container">
+                    <a href="www.baidu.com" target="_blank" class="mySlides fade">
+                        <img src="/Public/frontend/img/ad1.jpg" style="width:100%">
+                    </a>
+                    <a href="" target="_blank" class="mySlides fade">
+                        <img src="/Public/frontend/img/ad2.jpg" style="width:100%">
+                    </a>
+                    <a href="" target="_blank" class="mySlides fade">
+                        <img src="/Public/frontend/img/ad3.jpg" style="width:100%">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer_con2">
+            <p>© 2015 dingdongyouli.com All rights reserved.</p>
+            <img src="img/footer_p2.jpg" />
+        </div>
+    </div>
+
 </body>
 <script>
     $(function () {
@@ -286,5 +268,21 @@
             })
         }
     })
+</script>
+<script type="text/javascript">
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex> slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 3000); // 滚动时间
+    }
 </script>
 </html>

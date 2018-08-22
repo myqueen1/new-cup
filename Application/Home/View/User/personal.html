@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
+<center><span id="tishi_info"></span></center>
 	<div class="personal">
 		<p class="title">我的账户<span>您好，{$user_info.user_nickname}</span></p>
 		<ul class="per_nav">
@@ -10,57 +11,56 @@
 			<li>我的留言</li>
 			<li>密码修改</li>
 		</ul>
-		<ul class="per_nav2">
-			<li class="active">订单</li>
-			<li>信息</li>
-			<li>优惠卷</li>
-			<li>留言</li>
-		</ul>
 		<div class="per_box">
 			<ul class="per_navul">
-				<li style="width: 130px;margin-right: 10px;">
-					<input type="checkbox" style="margin-right: 20px;"/>
-					全选
-				</li>
+				<li style="width: 130px;margin-left: 15px;">封面</li>
 				<li style="width: 450px;text-align: left;">商品名称</li>
 				<li>单价</li>
 				<li>数量</li>
 				<li>合计</li>
-				<li>专属码</li>
 				<li>状态</li>
+				<li>操作</li>
 			</ul>
+
+			<foreach name="orderlist" item="val">
 			<ul class="per_listul">
 				<li style="width: 130px;margin-right: 10px;">
-					<input type="checkbox" style="margin-right: 10px;margin-left: 18px;"/>
-					<img src="img/order_pic5.jpg" style="vertical-align: middle;"/>
+					<input type="radio" style="margin-right: 10px;margin-left: 18px;"/>
+					<a href="{:U('Goods/buy')}?id={$val.goods_id}" target="_blank">
+						<img src="{$val.goods_cover}" style="height: 70px;vertical-align: middle;border-radius:200px;vertical-align: middle;"/>
+					</a>
 				</li>
-				<li style="width: 450px;text-align: left;">泉立方防串染色母片</li>
-				<li>￥49</li>
-				<li>2</li>
-				<li>￥98</li>
-				<li>8800</li>
-				<li>已完成</li>
-				<p>送货地址：xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-
+				<li style="width: 450px;text-align: left;">
+					<a href="{:U('Goods/buy')}?id={$val.goods_id}" target="_blank">{$val.goods_name}</a>
+				</li>
+				<li>￥{$val.goods_price}</li>
+				<li>{$val.goods_number}</li>
+				<li>￥{$val.price_sum}</li>
+				<li>
+					<?php 
+						if($val['order_status'] == '1'){ 
+							echo "<font color='red'>订单未支付</font>";
+						} else if($val['order_status'] == '2') {
+							echo "<font color='green'>支付成功</font>";
+						} else if($val['order_status'] == '3'){
+							echo "<font color='#90EE90'>待收货</font>";
+						} else if($val['order_status'] == '4') {
+							echo '已完成';
+						} else {
+							echo "异常已关闭";
+						}
+					?>
+				</li>
+				<li data-id="{$val.order_id}">
+					<button class="order_select">查看</button><button class="order_del">删除</button>
+				</li>
+				<!-- <p>送货地址：xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p> -->
 			</ul>
+			</foreach>
+
 		</div>
 		<div class="per_box per_info" style="display: none;">
 			<form>
-				<p>
-					<span>昵称</span>
-					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
-					<span>修改</span>
-				</p>
-				<p>
-					<span>昵称</span>
-					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
-					<span>修改</span>
-				</p>
-				<p>
-					<span>昵称</span>
-					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
-					<span>修改</span>
-				</p>
 				<p>
 					<span>昵称</span>
 					<input type="text" name="user_nickname" value="{$user_info.user_nickname}"/>
@@ -154,6 +154,32 @@
 	</div>
 </body>
 <script>
+	$('.order_del').on('click',function(){
+		var order_id = $(this).parent('li').attr('data-id');
+		order_options(order_id,$(this));
+	})
+
+	function order_options(order_id,_this){
+		$.ajax({
+			url:"{:U('User/OrderOptions')}",
+			type:'GET',data:{order_id:order_id},dataType:'json',
+			success:function(come){
+				console.log(come)
+				if (come.code == 'error') {
+					$('#tishi_info').html("<font color='red'>"+come.msg+"</font>");
+				}
+				if (come.code == 'success') {
+					$('#tishi_info').html("<font color='green'>"+come.msg+"</font>");
+					_this.parents('.per_listul').remove();
+				};
+				setTimeout(function() {     //3秒后重启搜索框
+		            $('#tishi_info').fadeOut();
+		        }, 1000);
+			}
+		})
+	}
+</script>
+<script>
 	$(function () {
 	    $(".meau").on("click", function (e) {
 	        $(".meau_box").slideToggle();
@@ -194,7 +220,7 @@
 	});
 </script>
 <script>
-var oldpassword = null;
+	var oldpassword = null;
 	//开始修改密码 点击事件
 	$('#start').on('click',function(){
 		//移除 oldpwd 禁用属性/设置空值/新增 oldpwd提示语/修改button提示语
