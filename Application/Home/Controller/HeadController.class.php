@@ -38,7 +38,7 @@ class HeadController extends Controller
 			self::$information['code'] = $code;
 			self::$information['msg']  = $msg;
 		}
-		return json_encode(self::$information);
+		return json_encode(self::$information,JSON_UNESCAPED_UNICODE);
 	}
 
 	/**

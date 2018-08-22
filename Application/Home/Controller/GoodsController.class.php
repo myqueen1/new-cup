@@ -10,7 +10,7 @@ use Think\Controller;
 class GoodsController extends ComeController
 {
     private static $principle = ['brand_id','type_id','goods_price'];
-    //private static $allstatus = [];
+
 	/**
      *  @param $type_id,$price,$brand string 
      *  @return $result json_decode()   根据条件搜索 返回相应的数据
@@ -20,7 +20,7 @@ class GoodsController extends ComeController
         $goodsmodel = D('goods');   //实例化goods表
 
         if (IS_AJAX) {
-            $where = self::Conditionalstorage(I("post."));
+            $where = "five_goods_detailed.goods_status = '2' and ".self::Conditionalstorage(I("post."));
 
             $optiontype = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
                                      ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
@@ -81,7 +81,8 @@ class GoodsController extends ComeController
      *   @params 将我们之前的参数找出来,与新的条件拼接成sql语句
      *   @return $result string 执行的SQL语句
     */
-    private static function ConditionStatus($keys,$value){
+    private static function ConditionStatus($keys,$value)
+    {
         if (empty($keys) && empty($value)) {
             $allstatus = [];
             foreach (array_keys(cookie()) as $key => $value) {
@@ -118,16 +119,19 @@ class GoodsController extends ComeController
     {
         $goods_id   = I('get.id');
         if (is_numeric($goods_id)) {
-            $goodsmodel = D('goods_detailed');
+            $goodsmodel = D('goods');
 
-            $result = $goodsmodel->join('five_goods on five_goods_detailed.goods_id=five_goods.goods_id')
-                                 ->where("five_goods_detailed.goods_id='$goods_id'")
+            $result = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_stock,goods_original,goods_price,goods_cover,goods_content,goods_sale,five_brand.brand_name,brand_logo,brand_url')
+                                 ->join('five_brand on five_goods.brand_id=five_brand.brand_id')
+                                 ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
+                                 ->where("five_goods_detailed.goods_status = '2' and five_goods.goods_id = ".$goods_id)
                                  ->find();
-            //print_r($data);die;echo $db->getLastSql();die;print_r($data);die;
+            //echo $goodsmodel->getLastSql();die;
+
+            if (empty($result)){ layout(false);$this->error(); }
 
             $imgmodel = M('goods_img');
-            $ImgPath  = $imgmodel->where("goods_id = '$goods_id'")
-                                 ->select();
+            $ImgPath  = $imgmodel->where("goods_id = '$goods_id'")->select();
 
             $this->assign('data',$result);
             $this->assign('Img',$ImgPath);
@@ -138,6 +142,7 @@ class GoodsController extends ComeController
         }
     }
 
+    
     /**
      * @content  商品搜索  根据商品类型或者名称进行搜索
      * 传参方式 post
@@ -145,7 +150,7 @@ class GoodsController extends ComeController
      * 返回值 Json
      * 搜索方式 模糊查询
     */
-    public function searchGoods()
+    /*public function searchGoods()
     {
         $goods  = I("post.names");
         $search = M("search");
@@ -162,14 +167,14 @@ class GoodsController extends ComeController
             $data=$goodsmodel->join("five_brand on five_goods.brand_id=five_brand.brand_id")
                              ->join("five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id")
                              ->where("goods_name like '%$goods%' || brand_name like '%$goods%'")
-                             ->select();
+                             ->select();*/
 
             /**
              * @content 热词添加
              * @param string
              * @return  类型：数组  排序方式 降序
              */
-            $s_data=$search->where("search_name='$goods'")->find();
+            /*$s_data=$search->where("search_name='$goods'")->find();
             if(empty($s_data)){
                 $arr=array(
                     'search_name'=>$goods,
@@ -187,20 +192,5 @@ class GoodsController extends ComeController
             }
         }
         echo json_encode($this->Eliminate($data));
-    }
-
-    /**
-     *   @param $result array 剔除图片路径有问题的数据,返回图片路径没有问题的数组
-     *   @return $result array  
-    */
-    public function Eliminate($result){
-        //剔除没有封面的商品
-        /*foreach ($result as $key => $value) {
-            $url = 'http://127.0.0.1/new-cup/index.php'.$value['goods_cover'];
-            if(!@fopen( $url, 'r' ) ){ 
-                unset($result[$key]);
-            }
-        }*/
-        return $result;
-    }
+    }*/
 }

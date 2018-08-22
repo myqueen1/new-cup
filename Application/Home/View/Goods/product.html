@@ -259,7 +259,8 @@
             _this.siblings('a').removeClass(' on');
             _this.addClass(' on');
             _this.siblings('a').attr('status','shut');
-
+            _this.attr('status','shut');
+            
             screen_goods(options,_this.attr('data-id'));    //发起请求
 
             setTimeout(function() {

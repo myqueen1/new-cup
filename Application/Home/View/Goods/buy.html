@@ -6,7 +6,9 @@
 	<div class="buy">
 		<p class="crumb">
 			<a href="{:U('Goods/product')}">首页</a>>
-			<a>{$data.brand_name}</a>>{$data.goods_name} 水杯
+			<a href="{$data.brand_url}" target="_blank">
+                {$data.brand_name}
+            </a>>{$data.goods_name}水杯
 		</p>
 		<div class="buy_info">
 			<div class="buy_img">
@@ -31,8 +33,8 @@
 				<p class="p1">本周特推|{$data.goods_name}</p>
 				<p class="p2">
 					<input type="hidden" class="UnitPrice" disabled value="{$data.goods_price}">
-					<font style="font-size: 23px;" >售价：￥<?php echo $data['goods_price'] ?></font>
-					<span style="text-decoration:line-through">原价 : ￥<?php echo $data['goods_original'] ?></span>
+					<font style="font-size: 23px;" >售价：￥{$data.goods_price}</font>
+					<span style="text-decoration:line-through">原价 : ￥{$data.goods_original}</span>
 				</p>
 				<!--规格属性-->
 				<p class="p4 buy_p4">选择颜色：
@@ -61,7 +63,8 @@
                         <a class='login_btn' href="javascript:void(0);">立即购买</a>
 					<?php } else { ?>
 						<a class='btn-buy' data-id="{$data.goods_id}">加入购物车</a>
-                        <a href="{:U('User/fill_order')}?goods_id={$data.goods_id}&goods_number=1">立即购买</a>
+                        <!-- <a href="{:U('User/fill_order')}?goods_id={$data.goods_id}&goods_number=1" target="_blank">立即购买</a> -->
+                        <a href="javascript:void(0);" class="buy_now">立即购买</a>
 					<?php } ?>
 				</p>
 			</div>
@@ -96,7 +99,7 @@
     });
 </script>
 <script>
-var sku_color = '红色';
+    var sku_color = '红色';
 	//大图切换 路径 
     $(function() {
         var bool=true;
@@ -200,7 +203,7 @@ var sku_color = '红色';
             url:"{:U('User/ShoppingCart')}",type:"POST",dataType:"json",
             data:{'goods_id':goods_id,'sku_number':sku_number,'sku_color':sku_color}, 
             success:function (comeback) {
-                //console.log(comeback)
+                console.log(comeback)
                 if(comeback.code == 'success'){
                     var img = $(".middle_img").find('img');
                     var flyElm = img.clone().css('opacity', 0.75);
@@ -223,5 +226,13 @@ var sku_color = '红色';
             }
         })
     });
+</script>
+<script>
+    $('.buy_now').on('click',function(){
+        var goods_number = $('.number').val();
+        var goods_id     = $('.btn-buy').attr('data-id');
+        //alert(goods_id)
+        window.open("{:U('User/fill_order')}?goods_id="+goods_id+"&goods_number="+goods_number);
+    })
 </script>
 </html>

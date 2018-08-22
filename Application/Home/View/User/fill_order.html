@@ -88,9 +88,14 @@
 		<p class="title">商品与配送方式<a href="{:U('User/ShoppingCart')}" style="color:#474747;">[返回购物车]</a></p>
 		<div class="song">
 			<p class="pic"><img src="{$goodsdetail.goods_cover}"/></p>
-			<p class="name">{$goodsdetail.goods_name}</p>
-			<p class="num"><font color="#3CA5F1">￥{$goodsdetail.goods_price}</font>*{$goodsdetail.goods_number}</p>
-			<p class="totle">￥{$goodsdetail.goods_sum}</p>
+			<p class="name" data-id="{$goodsdetail.goods_name}">{$goodsdetail.goods_name}</p>
+			<p class="num" data-id="{$goodsdetail.goods_number}">
+				<font color="#3CA5F1">
+					￥{$goodsdetail.goods_price}
+				</font>
+					*{$goodsdetail.goods_number}
+			</p>
+			<p class="totle" data-id="{$goodsdetail.goods_price}">￥{$goodsdetail.goods_sum}</p>
 		</div>
 	</div>
 	
@@ -116,8 +121,7 @@
 	</div>
 	<p class="order_b3">
 		<span>订单总计：<font color="#de0000" style="font-size: 28px;">￥{$goodsdetail.goods_sum}</font></span>
-		<span class="Generating_order" data-id="{$goodsdetail.goods_id}">提交订单
-		</span>
+		<span class="Generating_order" data-id="{$goodsdetail.goods_id}">提交订单</span>
 	</p>
 </div>
 </body>
@@ -186,10 +190,14 @@
 <script>
 	$('.Generating_order').on('click',function(){
 		var goods_id = $(this).attr('data-id');
+		var goods_number = $('.num').attr('data-id');
+		var goods_price  = $('.totle').attr('data-id');
+		var goods_name  = $('.name').attr('data-id');
 
 		if (goods_id!='' && accept_id!="" && pay_way!="" && pay_way=="1") {
-			var data = "?goods_id="+goods_id+"&accept_id="+accept_id+"&pay_way="+pay_way
-			window.location.href = "{:U('Pay/GeneratingOrder')}"+data
+			var data = "?goods_name="+goods_name+"&goods_id="+goods_id+"&accept_id="+accept_id+"&pay_way="+pay_way+"&goods_number="+goods_number+"&goods_price="+goods_price;
+			//alert(data);
+			window.open("{:U('Pay/GeneratingOrder')}"+data);
 		};
 		if (pay_way=="") {
 			$('.pay_info').html("<font color='red'>请选择支付方式!</font>");
