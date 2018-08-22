@@ -39,7 +39,7 @@
    <tr>
     <th>订单编号</th>
     <th>下单时间</th>
-    <th>收件人</th>
+    <th>收件人信息</th>
     <th>订单金额</th>
     <th>订单状态</th>
     <th>操作</th>
@@ -55,9 +55,9 @@
      <span class="block">{$v.generate_time}</span>
     </td>
     <td width="450">
-     <span class="block">{$v.accept_name} <span style="float: right;margin-right: 30px;" ><b>电话</b>&nbsp;:&nbsp;{$v.accept_tel}</span></span>
+     <span class="block"><b>收件人</b> : {$v.accept_name} <br /><span><b>电话</b>&nbsp;:&nbsp;{$v.accept_tel}</span></span>
      <address><b>地址</b>&nbsp;:&nbsp;
-     <?php $str= strlen($v['accept_address']);if($str>100){ echo mb_substr($v['accept_address'], 0, 21, 'utf-8').'......'; }else { echo $v['accept_address'];} ?></address>
+     <?php echo $v['accept_province']."&nbsp;";echo $v['accept_city']."&nbsp;";echo $v['accept_town']."&nbsp;"; $str= strlen($v['accept_address']);if($str>100){ echo mb_substr($v['accept_address'], 0, 21, 'utf-8').'......'; }else { echo $v['accept_address'];} ?></address>
     </td>
     <td class="center">
      <span><i>￥</i><b>{$v.goods_price}</b></span>
@@ -104,7 +104,27 @@
  </div>
  <script>
     $('#report').click(function(){
-        window.open("{:U('Index/order_report')}")
+        var checkedNum = $("input[name='checkbox']:checked").length;
+        var order_id = new Array();
+        if (checkedNum == 0) {
+            order_id = "";
+        } else {
+            var che = $("input[name='checkbox']:checked");
+            for (var a = 0; a < che.length; a++) {
+                order_id[a] = che[a].value;
+            }
+        }
+        
+        $.ajax({
+          type: "POST",
+          url: "{:U('Index/order_report')}",
+          data: {'order_id': order_id},
+          success: function (result) {
+              window.open("{:U('Index/order_report')}?order_id="+order_id)
+              // window.location.reload();
+         }
+        });
+            
     })
        // 全选反选
     $(function () {

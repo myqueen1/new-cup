@@ -16,33 +16,30 @@ class PayController extends HeadController
     public function GeneratingOrder()
     {
         if(session('submit') != 'OK'){
-            $order['goods_id']  = I('get.goods_id');
-            $order['accept_id'] = I('get.accept_id');
-            $order['pay_way']   = I('get.pay_way');
-            $order['user_id']   = self::ReturnUserInfo('user_id');
+            $order['goods_name']    = I('get.goods_name');
+            $order['goods_id']      = I('get.goods_id');
+            $order['accept_id']     = I('get.accept_id');
+            $order['pay_way']       = I('get.pay_way');
+            $order['user_id']       = self::ReturnUserInfo('user_id');
+            $order['goods_number']  = I('get.goods_number');
+            $order['goods_price']   = I('get.goods_price');
             $order['generate_time'] = date('Y-m-d H:i:s',time());
             $order['order_number']  = $order['goods_id'].$order['user_id'].date('YmdHis',time()).$order['pay_way'].rand(99999,1000000);
             $order['order_remarks'] = "55° 水杯网店";
-
+            
             foreach($order as $key => $value){
-                if (empty($value)) { layout(false);$this->error();die; }
+                if (empty($value)) { layout(false);$this->error(); }
             }
 
             $ordermodel = D('order');   //根本不需要判断是否存在订单 直接添加
             $result = $ordermodel->add($order);
+
             if ($result) {
                 session('submit','OK');
 
-                $goodsmodel = D('goods');
-                $result = $goodsmodel->field('five_goods.goods_name,five_goods_detailed.goods_price')
-                                     ->join('five_goods_detailed on five_goods_detailed.goods_id = five_goods.goods_id')
-                                     ->where("five_goods.goods_id = ".$order['goods_id'])
-                                     ->find();
-
-                $order['goods_name']  = $result['goods_name'];
-                $order['goods_price'] = $result['goods_price'];
-                
+                $order['goods_sum'] = $order['goods_price']*$order['goods_number'];
                 $params = self::order_pay($order);
+                //print_r($params);die;
                 $this->assign('url','https://mapi.alipay.com/gateway.do');
                 $this->assign('params',$params);
                 $this->display('paymoney');
@@ -77,9 +74,9 @@ class PayController extends HeadController
                         'body'          => ''                   //备注
                     );
         
-        $params['out_trade_no'] = $order['goods_order'];    //商户网站唯一订单号
+        $params['out_trade_no'] = $order['order_number'];    //商户网站唯一订单号
         $params['subject']      = $order['goods_name'];     //商品名称
-        $params['total_fee']    = $order['goods_price'];    //交易金额
+        $params['total_fee']    = $order['goods_sum'];    //交易金额
         $params['body']         = $order['order_remarks'];  //备注
         //将筛选的参数按照第一个字符的键值ASCII码递增排序   字母升序排序
         $params = array_merge($params,$param);

@@ -12,14 +12,23 @@ class UserController extends HeadController
     //个人中心
     public function personal()
     {
-        $user_info = json_decode(cookie('user_info'),true);
-        $user_id   = $user_info['user_id'];
+        $user_id   = self::ReturnUserInfo('user_id');
+
+        $ordermodel= D('order');
+        $orderlist = $ordermodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_cover,five_order.order_id,goods_number,five_order.goods_price,generate_time,order_status,(five_order.goods_price*five_order.goods_number)as price_sum')
+                                ->join('five_goods on five_order.goods_id = five_goods.goods_id')
+                                ->join('five_goods_detailed on five_goods.goods_id = five_goods_detailed.goods_id')
+                                ->where("five_order.user_id = '$user_id'")
+                                ->select();
+                                //echo $ordermodel->getLastSql();die;
 
         $usermodel = D('user');
         $user_info = $usermodel->field('user_id,user_nickname,head_img,user_tel,user_email,user_sex')
                                ->where("user_id= '$user_id'")
                                ->find();
                             //echo $usermodel->getLastSql();die;
+
+        $this->assign('orderlist',$orderlist);
         $this->assign('user_info',$user_info);
         $this->display();
     }
@@ -104,6 +113,7 @@ class UserController extends HeadController
             
             $result = $carmodel->where("user_id = '".$shopdata['user_id']."' and goods_id = '".$shopdata['goods_id']."'")
                                ->find();
+                               //echo json_encode($result);die;
             if (!$result) {
                 $result = $carmodel->add($shopdata);
                 if($result)  echo self::PutOutMessage('success','加入购物车成功');
@@ -118,7 +128,7 @@ class UserController extends HeadController
                                ->join('five_goods_detailed on five_car.goods_id = five_goods_detailed.goods_id')
                                ->where("five_car.user_id = '$user_id'")
                                ->select();
-
+                              //echo $carmodel->getLastSql();die; 
             foreach ($result as $key => $value) {
                 $result[$key]['goods_sum'] = $value['goods_price']*$value['sku_number'];
             }
@@ -147,6 +157,24 @@ class UserController extends HeadController
             if (!$result) echo self::PutOutMessage('error','系统错误,请稍后重试!');
         } else {
             echo self::PutOutMessage('error','系统错误,请稍后重试!');
+        }
+    }
+    public function OrderOptions()
+    {
+
+        $order_id = I('get.order_id');
+
+        if (is_numeric($order_id)) {
+            $ordermodel = D('order');
+            $result = $ordermodel->where('order_id = '.$order_id)->delete();
+
+            if ($result) { 
+                echo self::PutOutMessage('success','删除订单成功'); 
+            }else { 
+                echo self::PutOutMessage('error','删除订单失败,请您稍后重试!'); 
+            }
+        } else {
+            echo self::PutOutMessage('error','错误操作,警告!');
         }
     }
 

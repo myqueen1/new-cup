@@ -33,5 +33,20 @@ class ComeController extends Controller
 		if (!empty($option)) session($option,null); return true;
 		if (empty($option)) return false;
 	}
+
+	/**
+     *   @param $result array 剔除图片路径有问题的数据,返回图片路径没有问题的数组
+     *   @return $result array  
+    */
+    public function Eliminate($result){
+
+        /*foreach ($result as $key => $value) {
+            $url = 'http://127.0.0.1/new-cup/index.php'.$value['goods_cover'];
+            if(!@fopen( $url, 'r' ) ){ 
+                unset($result[$key]);
+            }
+        }*/
+        return $result;
+    }
 }
 ?>

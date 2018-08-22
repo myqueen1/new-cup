@@ -62,9 +62,12 @@
     <else /> 
          <a href="javascript:void(0)" class="inline-block" title="不可编辑"><img src="images/icon_edit.gif" style="border: 2px red solid;" /></a>
     </if>
-    
-     <!-- <a href="account.html" class="inline-block" title="资金管理"><img src="images/icon_account.gif"/></a> -->
-     <a class="inline-block" href="{:U('Login/admin_del')}?admin_id={$v.admin_id}" title="删除"><img src="images/icon_drop.gif"/></a>
+    <if condition="$cid eq $v.admin_id ">
+      <a class="inline-block" href="{:U('Login/admin_del')}?admin_id={$v.admin_id}" title="删除"><img src="images/icon_drop.gif"/></a>
+    <else /> 
+        <a class="inline-block" href="javascript:void(0)" title="删除"><img src="images/icon_drop.gif" style="border: 2px red solid;"  /></a>
+    </if>
+
     </td>
    </tr>
    </foreach>
