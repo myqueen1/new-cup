@@ -57,7 +57,7 @@
     <td width="450">
      <span class="block"><b>收件人</b> : {$v.accept_name} <br /><span><b>电话</b>&nbsp;:&nbsp;{$v.accept_tel}</span></span>
      <address><b>地址</b>&nbsp;:&nbsp;
-     <?php echo $v['accept_province']."&nbsp;";echo $v['accept_city']."&nbsp;";echo $v['accept_town']."&nbsp;"; $str= strlen($v['accept_address']);if($str>100){ echo mb_substr($v['accept_address'], 0, 21, 'utf-8').'......'; }else { echo $v['accept_address'];} ?></address>
+     <?php echo $v['accept_province']."&nbsp;";echo $v['accept_city']."&nbsp;";echo $v['accept_town']."&nbsp;"; $str= strlen($v['accept_detail']);if($str>100){ echo mb_substr($v['accept_address'], 0, 21, 'utf-8').'......'; }else { echo $v['accept_detail'];} ?></address>
     </td>
     <td class="center">
      <span><i>￥</i><b>{$v.goods_price}</b></span>

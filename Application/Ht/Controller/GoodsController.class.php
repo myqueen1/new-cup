@@ -21,16 +21,18 @@ class GoodsController extends CommonController
         $goods_name = I("get.goods_name");
         $arr = preg_split('/(?<!^)(?!$)/u', $goods_name);
         $str = count($arr);
-        $where = '';
+        
         for ($i = 0; $i < $str; $i++) {
             $where .= "goods_name like '%$arr[$i]%' or ";
         }
         $where = trim($where, " or ");
+        $where.= " and `goods_status` != '3'";
+        //print_r($where);die;
         $map['goods_name'] = array('like', "%$goods_name%");
         $count = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->where($where)->count();// 查询满足要求的总记录数
         $Page = new \Think\Page($count, 10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show = $Page->show();// 分页显示输出// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        $where .= " and `goods_status`!= '3'";
+        
         $data = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->where($where)->order('five_goods.goods_id')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $this->assign('keyword', $goods_name);
         $this->assign('data', $data);

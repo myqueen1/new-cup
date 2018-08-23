@@ -72,7 +72,7 @@ class IndexController extends CommonController
         $data = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
                           ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
                           ->join("five_goods ON five_order.goods_id = five_goods.goods_id")
-                          ->field('order_id,five_address.accept_id,user_id,order_number,generate_time,accept_name,accept_tel,accept_detail,order_status,order_remarks,goods_cover,five_order.goods_price,goods_number,goods_name,accept_province,accept_city,accept_town')
+                          ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_detail,order_status,order_remarks,goods_cover,five_order.goods_price,goods_number,goods_name,accept_province,accept_city,accept_town')
                           ->where("order_id=".$order_id)
                           ->find();
 
