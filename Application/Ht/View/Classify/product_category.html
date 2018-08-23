@@ -20,10 +20,11 @@
             <th>操作</th>
         </tr>
         <foreach name="list" item="v">
-            <tr>
+            <tr type_id="{$v.type_id}">
                 <td>
                     <input type="checkbox" name="checkbox" value="{$v.type_id}"/>
-                    <span>{$v.type_name}</span>
+                    <input type="text" name="type_name" class="type_name2" style="display: none">
+                    <span class="type_name">{$v.type_name}</span>
                 </td>
                 <td class="center"><a href="{:U('Classify/del')}?type_id={$v.type_id}&p=<?php echo I('get.p');?>"
                                       class="block" title="移除"><img
@@ -115,6 +116,25 @@
         }
     })
 
+    $(document).on('click', '.type_name', function () {
+        var type_name = $(this).hide().text();
+        $(this).prev().show().val(type_name).focus();
+    })
+    $(document).on('blur', '.type_name2', function () {
+        var type_name = $(this).val();
+        var type_id = $(this).parents('tr').attr('type_id');
+        var _this = $(this);
+        $.ajax({
+            type: "POST",
+            url: "{:U('Classify/updata')}",
+            dataType: "json",
+            data: {type_name: type_name, type_id: type_id},
+            success: function (msg) {
+                _this.hide();
+                _this.next().show().text(type_name);
+            }
+        });
+    })
 </script>
 </body>
 </html>

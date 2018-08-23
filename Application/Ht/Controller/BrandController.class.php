@@ -50,7 +50,7 @@ class BrandController extends CommonController
                 if ($brand->add_all($data)) {
                     echo "<script>alert('添加成功');location.href='brand_list'</script>";
                 } else {
-                    echo "<script>alert('添加失败');location.href='add_category'</script>";
+                    echo "<script>alert('添加失败');location.href='add_brand'</script>";
                 }
             }
             die;
@@ -102,4 +102,40 @@ class BrandController extends CommonController
         }
     }
 
+    public function updata_brand()
+    {
+        $brand_id = I('get.brand_id');
+        $res = M('brand')->find($brand_id);
+        $this->assign('list', $res);// 赋值分页输出
+        $this->display();
+    }
+
+    public function updata_do()
+    {
+        $data = I('post.');
+        $brand_id=$data['brand_id'];
+        $rules = array(
+            array('brand_name', 'require', '品牌名称不能为空！'), // 品牌不能为空
+            array('brand_name', '', '品牌名称已经存在！', 1, 'unique', 1), // 验证用户名是否已经存在
+            array('brand_url', 'require', '品牌网址不能为空！'), // 品牌不能为空
+            array('brand_url', '/^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/', '请输入正确网址！'),
+        );
+        $brand = M("brand"); // 实例化brand对象
+        if (!$brand->validate($rules)->create()) {
+            // 如果创建失败 表示验证没有通过 输出错误提示信息
+            $this->error($brand->getError());
+        } else {
+            if($_FILES ['brand_logo'] ['error']!=4){
+                // 验证通过 可以进行其他数据操作
+                $imag = $this->upload($_FILES);
+                $img = $imag['brand_logo']['savepath'] . $imag['brand_logo']['savename'];
+                $data['brand_logo'] = $img;
+            }
+            if ($brand->save($data)) {
+                echo "<script>alert('修改成功');location.href='brand_list'</script>";
+            } else {
+                echo "<script>alert('修改失败');location.href='updata_brand?brand_id=$brand_id'</script>";
+            }
+        }
+    }
 }
