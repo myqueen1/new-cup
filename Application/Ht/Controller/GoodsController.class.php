@@ -38,7 +38,7 @@ class GoodsController extends CommonController
         $this->assign('data',$data);
         $this->assign("page",$show);
         $this->display();  
-=======
+
         $map = "`goods_name` like '%$goods_name%'";
 
         $count = M('goods')->where($map)->count();// 查询满足要求的总记录数

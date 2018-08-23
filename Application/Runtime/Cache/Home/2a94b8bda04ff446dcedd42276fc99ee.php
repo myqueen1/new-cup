@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-    <base href="/new-cup/Public/frontend/">
+    <base href="/Public/frontend/">
     <link rel="stylesheet" href="css/Index/Indexstyle.css"/>
     <link href="css/Index/Indexstyle.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="css/demo.css"/>
@@ -148,34 +148,6 @@
 		<img src="img/s1.jpg" class="pc_h" />
 		<img src="img/mobile_h.jpg" class="mobile_h" />
 	</div> -->
-<<<<<<< HEAD
-
-	
-
-	<div class="footer">
-		<div class="footer_con">
-
-			<div class="ydc-right-banner">
-				<div class="slideshow-container">
-					<a href="www.baidu.com" target="_blank" class="mySlides fade">
-						<img src="/new-cup/Public/frontend/img/ad1.jpg" style="width:100%">
-					</a>
-					<a href="" target="_blank" class="mySlides fade">
-						<img src="/new-cup/Public/frontend/img/ad2.jpg" style="width:100%">
-					</a>
-					<a href="" target="_blank" class="mySlides fade">
-						<img src="/new-cup/Public/frontend/img/ad3.jpg" style="width:100%">
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="footer_con2">
-			<p>© 2015 dingdongyouli.com All rights reserved.</p>
-			<img src="img/footer_p2.jpg" />
-		</div>
-	</div>
-=======
->>>>>>> master
 </body>
 <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script src="js/carousel_focus.min.js" type="text/javascript"></script>
