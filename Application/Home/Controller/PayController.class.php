@@ -1,6 +1,6 @@
 <?php
 /**
- *  @author 马燕 王晓雪
+ *  @author yanxusheng
  *  @datetime 2018/8/2
  */
 namespace Home\Controller;
@@ -9,13 +9,30 @@ use Think\Controller;
 
 class PayController extends HeadController
 {
+    //第三方支付公共参数
+    private static $payRequestBuilder;
+    private static $aop;
+    private static $configs;
+
+    public function __construct(){
+        parent::__construct();
+        //读取配置信息
+        self::$configs = C('config_alipay');
+        //引入第三方类库
+        Vendor('alipay.pagepay.service.AlipayTradeService');
+        Vendor('alipay.pagepay.buildermodel.AlipayTradePagePayContentBuilder');
+        //实例化第三方类文件
+        self::$payRequestBuilder = new \AlipayTradePagePayContentBuilder();
+        self::$aop = new \AlipayTradeService(self::$configs);
+    }
+
     /**
      *   @param $goods_id,$accept_id,$pay_way string 
      *   @content 用户提交订单
     */
     public function GeneratingOrder()
     {
-        if(session('submit') != 'OK'){
+        if(session('submit') != '1OK'){
             $order['goods_name']    = I('get.goods_name');
             $order['goods_id']      = I('get.goods_id');
             $order['accept_id']     = I('get.accept_id');
@@ -37,23 +54,83 @@ class PayController extends HeadController
             if ($result) {
                 session('submit','OK');
 
-                $order['goods_sum'] = $order['goods_price']*$order['goods_number'];
-                $params = self::order_pay($order);
+                $order['goods_sum'] = sprintf("%.2f", $order['goods_price']*(float)$order['goods_number']);
+                self::AlipaySdk($order);
+
+                //$params = self::order_pay($order);
                 //print_r($params);die;
-                $this->assign('url','https://mapi.alipay.com/gateway.do');
-                $this->assign('params',$params);
-                $this->display('paymoney');
+                //$this->assign('url','https://mapi.alipay.com/gateway.do');
+                //$this->assign('params',$params);
+                //$this->display('paymoney');
             } else {
                 layout(false);$this->error();
             }
         } else {
             layout(false);$this->error();
-        }   
+        }
+    }
+
+    /**
+     *    @param $order 生成支付二维码所需参数
+     *    @return 支付宝第三方支付地址与二维码
+    */
+    private static function AlipaySdk($order)
+    {
+        //传入参数
+        self::$payRequestBuilder->setBody($order['order_remarks']);
+        self::$payRequestBuilder->setSubject($order['goods_name']);
+        self::$payRequestBuilder->setTotalAmount($order['goods_sum']);
+        self::$payRequestBuilder->setOutTradeNo($order['order_number']);
+        //输出支付宝返回信息
+        $response = self::$aop->pagePay(self::$payRequestBuilder,self::$configs['return_url'],self::$configs['notify_url']);
+        var_dump($response);
+    }
+
+    /**
+     *   @param I('get.') 接收GET参数,调用check 方法验证合法性
+     *   @return 支付成功/失败页面
+    */
+    public function synchronization()
+    {
+        $result = self::$aop->check(I('get.'));
+
+        if ($result['code']) {
+            //echo $result['out_trade_no'];die;
+            $ordermodel= D('order');
+            $goods_id  = $ordermodel->field('goods_id,goods_number')
+                                    ->where("order_number = ".$result['out_trade_no'])
+                                    ->find();
+            //开启事物
+            $ordermodel->startTrans();
+            //修改订单状态 
+            $setFields = $ordermodel->where("order_number = ".$result['out_trade_no'])
+                                    ->setField(['order_status' => '2']);
+
+            if ($setFields) {
+                //修改商品表中库存
+                $goodsmodel = D('goods_detailed');
+                $result = $goodsmodel->where('goods_id = '.$goods_id['goods_id'])
+                                     ->setDec('goods_stock',$goods_id['goods_number']);
+                                    //print_r($result);die;
+                if ($result) { 
+                    $ordermodel->commit(); 
+                    $this->success('订单支付成功,别着急马上就好',U('User/personal'));
+                } else { 
+                    $ordermodel->rollback(); 
+                    layout(false);$this->error();
+                }
+            }else{
+                $ordermodel->rollback();    //错误!  回滚
+                layout(false);$this->error();
+            }
+        } else {
+            layout(false);$this->error();
+        }
     }
 
     /**
      *   @param $order array 根据参数$order 拼接支付信息
-     *   @return ???
+     *   @return ???  已废除,这是真正的线上支付接口,项目正在用的是沙箱环境
     */
     private static function order_pay($order)
     {
@@ -101,6 +178,4 @@ class PayController extends HeadController
         
         return $params;
     }
-
-    
 }
