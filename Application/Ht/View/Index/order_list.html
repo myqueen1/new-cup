@@ -79,6 +79,7 @@
     </td>
     <td class="center">
      <a href="{:U('Index/order_detail')}?order_id={$v.order_id}" class="inline-block" title="查看订单"><img src="images/icon_view.gif"/></a>
+     <a href="javascript:void(0)" class="prt" val='{$v.order_id}' title="购物清单打印" id="shop"><img src="__ROOT__/Public/backend/images/dayin.png" width="20" height="20" alt="" /></a>
      <a class="inline-block" title="删除订单" href="{:U('Index/delAll')}?order_id={$v.order_id}" ><img src="images/icon_trash.gif"/></a>
     </td>
    </tr>
@@ -189,6 +190,12 @@
                 }
             });
         }
+    })
+
+    //打印购物清单
+    $('#shop').click(function(){
+      var order_id= $(this).attr("val");
+      window.open("{:U('index/order_template')}?order_id="+order_id);
     })
  </script>
 </html>

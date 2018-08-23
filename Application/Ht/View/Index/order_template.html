@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>  &nbsp;</title>
+</head>
+<body>
+	
+<style>
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,button{padding:0;margin:0;font-size:100%;}
+body{font-size:14px;text-align:center}
+table{border-collapse:collapse;}
+.container{width:90%;margin:20px auto}
+.v_m{vertical-align: middle}
+.ml_20{margin-left:20px;}
+.m_10{ margin-bottom:10px;}
+.f14{font-size:14px;}
+.f18{font-size:18px;}
+.f30{font-size:30px;}
+.bold{font-weight:bold}
+.gray{color:#979797}
+.orange{color:#f76f10;}
+table.table.topBorder{border-top:2px solid #b0b0b0;}
+.btn_print{width:112px;height:31px;margin:20px auto;border:0;}
+</style>
+<div class="container">
+	<table class="m_10" width="100%" cellspacing="0" cellpadding="0" border="0">
+		<tr>
+			<th class="f18">55°C购物清单</th>
+		</tr>
+		<tr>
+			<td><br></td>
+		</tr>
+		<tr>
+			<td valign="bottom" align="right"><p>客户:{$v.accept_name}<span class="ml_20">地址:{$v.accept_province}&nbsp;{$v.accept_city}&nbsp;{$v.accept_town}&nbsp;{$v.accept_detail}</span><span class="ml_20">电话:{$v.accept_tel}</span></p></td>
+		</tr>
+	</table>
+
+	<table class="table" width="100%" cellspacing="0" cellpadding="0" border="1">
+		<colgroup>
+			<col width="370px" />
+			<col width="120px" />
+			<col width="120px" />
+			<col width="100px" />
+			<col width="100px" />
+			<col width="120px" />
+		</colgroup>
+
+		<tbody>
+			<tr class="f17">
+				<th colspan="2" style="text-align:left;border-right:none;">
+					<b>订单号:{$v.order_number}</b>
+				</th>
+				<th colspan="4" style="text-align:right;border-left:none;">
+					<b>订购日期:{$v.generate_time}</b>
+				</th>
+			</tr>
+
+			<tr class="f14">
+				<th>商品名称</th>
+				<th>单价</th>
+				<th>数量</th>
+				<th>小计</th>
+			</tr>
+			<tr>
+				<td align="left">
+					<label>
+						{$v.goods_name} &nbsp;
+						<span class="gray">【{$v.type_name}】</span>
+					</label>
+				</td>
+				<td align='center' >￥{$v.goods_price}</td>
+				<td align='center' >{$v.goods_number}</td>
+				<td align='center' >￥<?php echo $str = $v['goods_price'] * $v['goods_number'];?></td>
+			</tr>
+			
+		</tbody>
+	</table>
+
+	<table class="table f14" width="100%" cellspacing="0" cellpadding="0" border="0">
+		<tr>
+			<td align='right' >原商品总价：￥<?php echo $v['yuan']*$v['goods_number'] ?> </td>
+		</tr>
+		<tr>
+			<td align="right">现商品总价：￥{$str} </td>
+		</tr>
+		<tr>
+			<td align="right">订单优惠：￥<?php echo $v['pian']*$v['goods_number']; ?></td>
+		</tr>
+		<tr>
+			<td align="right">订单价格：￥{$str}</td>
+		</tr>
+		<tr>
+			<td align="left">订单附言：{$v.order_remarks}</td>
+		</tr>
+	</table>
+
+	<table class="table topBorder" width="100%" cellspacing="0" cellpadding="0" border="0">
+		<colgroup>
+			<col />
+			<col width="350px" />
+		</colgroup>
+
+		<tr>
+			<td align="left">服务商：55°C有限公司</td>
+			<td align="left">网站：http://cup.waip.top</td>
+		</tr>
+	</table>
+
+	<input type="submit" class="btn_print noprint" onclick="window.print();" value="打印" />
+</div>
+</body>
+</html>

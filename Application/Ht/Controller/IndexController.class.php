@@ -38,11 +38,10 @@ class IndexController extends CommonController
         if ($order_status=='0') {
             $map['order_status'] = array("eq","$order_status");
         } else if( $order_status=="all" || empty($order_status)) {
-
+            $map['order_status']  = array('lt','5');
         } else {
             $map['order_status'] = array("eq","$order_status");
         }
-        $map['order_status']  = array('lt','5');
 
         $count  = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
                             ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
@@ -73,7 +72,7 @@ class IndexController extends CommonController
         $data = M('order')->join('five_address ON five_order.accept_id=five_address.accept_id')
                           ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
                           ->join("five_goods ON five_order.goods_id = five_goods.goods_id")
-                          ->field('order_id,five_address.accept_id,user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,order_remarks,goods_cover,five_order.goods_price,goods_number,goods_name,accept_province,accept_city,accept_town')
+                          ->field('order_id,five_address.accept_id,user_id,order_number,generate_time,accept_name,accept_tel,accept_detail,order_status,order_remarks,goods_cover,five_order.goods_price,goods_number,goods_name,accept_province,accept_city,accept_town')
                           ->where("order_id=".$order_id)
                           ->find();
 
@@ -118,7 +117,7 @@ class IndexController extends CommonController
         $data = M('order')->where($where)->join('five_address ON five_order.accept_id=five_address.accept_id')
                          ->join("five_goods_detailed ON five_order.goods_id = five_goods_detailed.goods_id")
                          ->join("five_goods ON five_order.goods_id = five_goods.goods_id")
-                         ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_address,order_status,five_order.goods_price,goods_name,accept_province,accept_city,accept_town,goods_number')->select();
+                         ->field('order_id,five_address.accept_id,five_address.user_id,order_number,generate_time,accept_name,accept_tel,accept_detail,order_status,five_order.goods_price,goods_name,accept_province,accept_city,accept_town,goods_number')->select();
                          echo M('order')->getLastSql();
         vendor('Report');  //引入类文件
         vendor('Order');
@@ -214,4 +213,15 @@ class IndexController extends CommonController
         $this->display();
     }
  
+    //打印购物清单
+    public function order_template()
+    {
+        $order_id = I('get.order_id');
+        $data = M('order')->where('order_id ='.$order_id)->join('five_address ON five_order.accept_id = five_address.accept_id')->join('five_goods ON five_order.goods_id=five_goods.goods_id')->join('five_type ON five_goods.type_id = five_type.type_id')->join('five_goods_detailed ON five_order.goods_id=five_goods_detailed.goods_id')->field('order_number,generate_time,accept_name,accept_tel,accept_detail,order_status,five_order.goods_price,goods_name,accept_province,accept_city,accept_town,goods_number,order_remarks,type_name')->find();
+        $price = M('order')->where('order_id = '.$order_id)->join('five_goods_detailed ON five_order.goods_id=five_goods_detailed.goods_id')->field('five_goods_detailed.goods_price')->find();
+        $data['yuan'] = $price['goods_price'];
+        $data['pian'] = $price['goods_price'] - $data['goods_price'] ;
+        $this->assign('v',$data);
+        $this->display();
+    }
 }
