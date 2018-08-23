@@ -18,39 +18,25 @@ class GoodsController extends CommonController
     {
         header("content-type:text/html;charset=utf8");
 
-        $num = M('goods')->count();
         $goods_name = I("get.goods_name");
-<<<<<<< HEAD
-        // $arr = str_split("$goods_name");
-        $arr = preg_split('/(?<!^)(?!$)/u', $goods_name );
+        $arr = preg_split('/(?<!^)(?!$)/u', $goods_name);
         $str = count($arr);
-        for ($i=0; $i <$str ; $i++) { 
-           $where .= "goods_name like '%$arr[$i]%' or ";
+        $where = '';
+        for ($i = 0; $i < $str; $i++) {
+            $where .= "goods_name like '%$arr[$i]%' or ";
         }
-        $where = trim($where," or ");
-        $map['goods_name'] =array('like',"%$goods_name%");
-        $count      = M('goods')->where($where)->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
-        $show       = $Page->show();// 分页显示输出// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        $data = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->where($where)->order('five_goods.goods_id')->limit($Page->firstRow.','.$Page->listRows)->select();
-        // echo M('goods')->getLastSql();die;
-        $this->assign('keyword',$goods_name);
-        $this->assign('data',$data);
-        $this->assign("page",$show);
-        $this->display();  
-
-        $map = "`goods_name` like '%$goods_name%'";
-
-        $count = M('goods')->where($map)->count();// 查询满足要求的总记录数
+        $where = trim($where, " or ");
+        $map['goods_name'] = array('like', "%$goods_name%");
+        $count = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->where($where)->count();// 查询满足要求的总记录数
         $Page = new \Think\Page($count, 10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show = $Page->show();// 分页显示输出// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        $map .= " and `goods_status`!= '3'";
-        $data = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->where($map)->order('five_goods.goods_id')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        $where .= " and `goods_status`!= '3'";
+        $data = M('goods')->join("five_goods_detailed ON five_goods.goods_id = five_goods_detailed.goods_id")->where($where)->order('five_goods.goods_id')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $this->assign('keyword', $goods_name);
         $this->assign('data', $data);
         $this->assign("page", $show);
         $this->display();
->>>>>>> gjw
+
     }
 
 //    放入回收站
