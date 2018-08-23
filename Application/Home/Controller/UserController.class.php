@@ -89,11 +89,51 @@ class UserController extends HeadController
     public function UseSave()
     {
         $arr=I('post.');
+        $a='/^([\u4e00-\u9fa5]{2,3})$/i';
+        $b='/^\w+@\w+(\.)(com|cn|net|org)$/';
+        $c='/^1[3|4|5|8|7][0-9]\d{8}$/';
+        if (empty($arr['user_nickname'])) {
+           unset($arr['user_nickname']);
+        }else{
+           if (!preg_match($a,$arr['user_nickname'])) {
+           $res=[
+                'status'=>'0'
+           ];
+            echo json_encode($res);
+            die;
+        } 
+        }
+        if (empty($arr['user_email'])) {
+           unset($arr['user_email']);
+        }else{
+             if (!preg_match($b,$arr['user_email'])) {
+           $res=[
+                'status'=>'0'
+           ];
+            echo json_encode($res);
+            die;
+        } 
+        }
+        if (empty($arr['user_tel'])) {
+           unset($arr['user_tel']);
+        }else{
+           if (strlen($arr['user_tel'])!=11 || !preg_match($c,$arr['user_tel'])) {
+           $res=[
+                'status'=>'0'
+           ];
+            echo json_encode($res);
+            die;
+        }
 
+        }
+        // print_r($arr);die;
         $usermodel = D('user');
         $id=$arr['user_id'];
-        $data=$db->where("user_id='$id'")->save($arr);
-        $res=$db->where("user_id='$id'")->find();
+        $data=$usermodel->where("user_id='$id'")->save($arr);
+        $res=$usermodel->where("user_id='$id'")->find();
+        $res['status']=1;
+        // echo $usermodel->getLastSql();die;
+        // var_dump($res);die;
         echo json_encode($res);
     }
 

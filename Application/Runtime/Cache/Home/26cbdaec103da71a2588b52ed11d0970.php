@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-    <base href="/Public/frontend/">
+    <base href="/new/new-cup/Public/frontend/">
     <link rel="stylesheet" href="css/Index/Indexstyle.css"/>
     <link href="css/Index/Indexstyle.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="css/demo.css"/>
@@ -48,9 +48,6 @@
 <?php  $user_info = json_decode(cookie('user_info'),true); if(empty($user_info)){ ?>
     <p>
         <a href="<?php echo U('Login/register');?>">注册</a>|<a class="login_btn">登录</a>
-         <a href="https://api.weibo.com/oauth2/authorize?client_id=2975497433&forcelogin=true&response_type=code&redirect_uri=http://cup.waip.top/index.php/Home/San/index">
-       <img src="img/weibo.jpg" width="20px" height="20px">
-       </a>
     </p>
 <?php }else{ ?>
     <p>
@@ -67,102 +64,72 @@
 
 <div>
 
-    <!DOCTYPE html>
-<html>
-<body>
-<div class="banner">
-	<div class="index_b_hero">
-		<div class="hero-wrap">
-			<ul class="heros">
-				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img01.jpg" /></a></li>
-				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img02.jpg" /></a></li>
-				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img03.jpg" /></a></li>
-				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img04.jpg" /></a></li>
-				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img05.jpg" /></a></li>
-				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img06.jpg" /></a></li>
-				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img07.jpg" /></a></li>
-			</ul>
-		</div>
-		<div class="helper">
-			<div class="mask-left"></div>
-			<div class="mask-right"></div>
-			<a href="javascript:;" class="page_btn prev"></a>
-			<a href="javascript:;" class="page_btn next"></a>
-		</div>
-	</div>
-	
-	<div id="lt_ss_tus" class="little_img">
-		<ul class="small_list">
-			<li class="on">
-				<img id="0" src="images/img01.jpg" height="65" width="162">
-				<div class="bg"></div>
-			</li>
-			<li>
-				<img id="1" src="images/img02.jpg" height="65" width="162">
-				<div class="bg"></div>
-			</li>
-			<li>
-				<img id="2" src="images/img03.jpg" height="65" width="162">
-				<div class="bg"></div>
-			</li>
-			<li>
-				<img id="3" src="images/img04.jpg" height="65" width="162">
-				<div class="bg"></div>
-			</li>
-			<li>
-				<img id="4" src="images/img05.jpg" height="65" width="162">
-				<div class="bg"></div>
-			</li>
-			<li>
-				<img id="5" src="images/img06.jpg" height="65" width="162">
-				<div class="bg"></div>
-			</li>
-			<li class="last">
-				<img id="6" src="images/img07.jpg" height="65" width="162">
-				<div class="bg"></div>
-			</li>
-		</ul>
-	</div>
+    <div class="blog">
+    <div class="blog_list">
+        <p class="title">2016年1月15日 花束主题 | 感谢之意</p>
+        <p class="date">2016/01/25</p>
+        <p class="info">待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+            看着他们的眼睛，问他们近况如何，听他们讲自己的生活，自己的爱人，自己的孩子，自己的小狗，自己的一切一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        </p>
+        <a href="<?php echo U('Blog/blog');?>">
+            <div class="b_l_bg">
+                <img src="img/blog_p1.png"/>
+            </div>
+        </a>
+    </div>
+    <div class="blog_list">
+        <p class="title">2016年1月15日 花束主题 | 感谢之意</p>
+        <p class="date">2016/01/25</p>
+        <p class="info">待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+            看着他们的眼睛，问他们近况如何，听他们讲自己的生活，自己的爱人，自己的孩子，自己的小狗，自己的一切一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        </p>
+        <a href="<?php echo U('Blog/blog');?>">
+            <div class="b_l_bg">
+                <img src="img/blog_p1.png"/>
+            </div>
+        </a>
+    </div>
+    <div class="blog_list">
+        <p class="title">2016年1月15日 花束主题 | 感谢之意</p>
+        <p class="date">2016/01/25</p>
+        <p class="info">待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+            看着他们的眼睛，问他们近况如何，听他们讲自己的生活，自己的爱人，自己的孩子，自己的小狗，自己的一切一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        </p>
+        <a href="<?php echo U('Blog/blog');?>">
+            <div class="b_l_bg">
+                <img src="img/blog_p1.png"/>
+            </div>
+        </a>
+    </div>
+    <div class="blog_list">
+        <p class="title">2016年1月15日 花束主题 | 感谢之意</p>
+        <p class="date">2016/01/25</p>
+        <p class="info">待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
+            看着他们的眼睛，问他们近况如何，听他们讲自己的生活，自己的爱人，自己的孩子，自己的小狗，自己的一切一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
+            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
+        </p>
+        <a href="<?php echo U('Blog/blog');?>">
+            <div class="b_l_bg">
+                <img src="img/blog_p1.png"/>
+            </div>
+        </a>
+    </div>
 </div>
-
-<div class="index_product">
-	<div class="product">
-		<ul class=".aa">
-	        <?php foreach($data as $key=>$val){ ?>
-	        <a href="<?php echo U('Goods/buy');?>?id=<?php echo $val['goods_id'] ?>" target="_blank">
-	            <li>
-	                <img src="<?php echo ($val["goods_cover"]); ?>" height="500"/>
-	                <div class="proli_bg">
-	                    <div class="proli_bg_box">
-	                        <div class="proli_top">
-	                            <p>本周特推</p>
-	                            <p><?php echo ($val["goods_name"]); ?></p>
-	                        </div>
-	                        <p>￥ <?php echo ($val["goods_price"]); ?></p>
-	                    </div>
-	                </div>
-	            </li>
-	        </a>
-	        <?php } ?>
-	    </ul>
-	</div>
-</div>
-	<!-- <div class="box1">
-		<img src="img/s1.jpg" class="pc_h" />
-		<img src="img/mobile_h.jpg" class="mobile_h" />
-	</div> -->
-</body>
-<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script src="js/carousel_focus.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-	$(function() {
-		$(".login_btn").click(function() {
-			$(".login_bg").slideDown();
-			$(".meau_box").slideUp();
-		});
-	});
-</script>
-</html>
 
 </div>
 
@@ -190,13 +157,13 @@
             <div class="ydc-right-banner">
                 <div class="slideshow-container">
                     <a href="www.baidu.com" target="_blank" class="mySlides fade">
-                        <img src="/Public/frontend/img/ad1.jpg" style="width:100%">
+                        <img src="/new/new-cup/Public/frontend/img/ad1.jpg" style="width:100%">
                     </a>
                     <a href="" target="_blank" class="mySlides fade">
-                        <img src="/Public/frontend/img/ad2.jpg" style="width:100%">
+                        <img src="/new/new-cup/Public/frontend/img/ad2.jpg" style="width:100%">
                     </a>
                     <a href="" target="_blank" class="mySlides fade">
-                        <img src="/Public/frontend/img/ad3.jpg" style="width:100%">
+                        <img src="/new/new-cup/Public/frontend/img/ad3.jpg" style="width:100%">
                     </a>
                 </div>
             </div>
