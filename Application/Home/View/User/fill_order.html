@@ -11,7 +11,7 @@
 			<foreach name="user_address" item="val">
 				<div class="info" data-id="{$val.accept_id}">
 					<p>{$val.accept_name}</p>
-					<p>{$val.accept_address}</p>
+					<p>{$val.accept_province}{$val.accept_city}{$val.accept_town}{$val.accept_detail}</p>
 					<p>{$val.accept_tel}</p>
 					<?php if($val['is_default']){ ?>
 						<img src="img/order_p1.png" class="accept_default" data-id="{$val.accept_id}"/>
@@ -31,38 +31,29 @@
 		<div class="new_add" style="display: none;">
 			<p class="p1">新增地址</p>
 			<img src="img/close.png" class="close"/>
-			<form action="" method="post">
+			<form class="address_bian" action="{:U('User/fill_order')}" method="post">
 				<p>
 					<span class="tl"><font color="#D70000" style="margin-right: 5px;">*</font>收货人</span>
-					<input type="text" />
+					<input type="hidden" name="goods_id" value="{$goodsdetail.goods_id}"/>
+					<input type="hidden" name="goods_number" value="{$goodsdetail.goods_number}"/>
+					<input type="text" name="accept_name"/>
 				</p>
-				<p>
-					<span class="tl"><font color="#D70000" style="margin-right: 5px;">*</font>所在地区</span>
-					<select name="">
-						<option value="">请选择省份</option>
-					</select>
-					<select name="">
-						<option value="">请选择市</option>
-					</select>
-					<select name="">
-						<option value="">请选择区</option>
-					</select>
+				<p id="province">
+					<span class="tl">
+						<font color="#D70000" style="margin-right: 5px;">*</font>所在地区
+					</span>
 				</p>
 				<p>
 					<span class="tl"><font color="#D70000" style="margin-right: 5px;">*</font>详细地址</span>
-					<input type="text" style="width: 500px;"/>
+					<input type="text" name="accept_detail" style="width: 500px;"/>
 				</p>
 				<p>
 					<span class="tl"><font color="#D70000" style="margin-right: 5px;">*</font>联系电话</span>
-					<input type="tel" />
+					<input type="text" name="accept_tel"/>
 				</p>
 				<p>
 					<span class="tl">邮编</span>
-					<input type="text" />
-				</p>
-				<p>
-					<input type="checkbox" />
-					<span class="tl" style="width: 90px;">设为常用地址</span>
+					<input type="text" name="accept_zip" />
 				</p>
 				<p class="add_btn">保存</p>
 			</form>
@@ -125,7 +116,37 @@
 	</p>
 </div>
 </body>
+<script src="__PUBLIC__/frontend/address/jquery.provincesCity.js"></script>
+<script src="__PUBLIC__/frontend/address/provincesData.js"></script>
 <script type="text/javascript">
+	$(function(){
+		$("#province").ProvinceCity();
+	});
+
+	$('.add_btn').on('click',function(){
+		var accept_name  = $('[name="accept_name"]:input').val();
+		var accept_detail= $('[name="accept_detail"]:input').val();
+		var accept_tel   = $('[name="accept_tel"]:input').val();
+		var accept_zip   = $('[name="accept_zip"]:input').val();
+
+		var accept_addres= $('.accept_province').val();
+
+		if (accept_name=='' && accept_detail=='' && accept_addres=='请选择') {
+			alert('检查表单是否有空项未填写');
+		} else {
+			zip_code = /^\d{6}$/;
+			tel_code = /^[1][3,4,5,7,8][0-9]{9}$/;
+			if (!tel_code.test(accept_tel)) {
+				alert('手机号格式不正确');
+			} else {
+				if (!zip_code.test(accept_zip)) {
+					alert('请输入正确的邮编');
+				} else {
+					$('.address_bian').submit();
+				}
+			}
+		}
+	})
 	// $(function(){
 	// 	var bool=true;
 	// 	$(".dq").click(function(){
@@ -160,10 +181,10 @@
 			$(".old_add").hide();
 			$(".new_add").fadeIn();
 		});
-		$(".add_btn").click(function(){
+		/*$(".add_btn").click(function(){
 			$(".new_add").hide();
 			$(".old_add").fadeIn();
-		});
+		});*/
 		$(".close").click(function(){
 			$(".new_add").hide();
 			$(".old_add").fadeIn();
