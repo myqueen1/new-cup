@@ -113,7 +113,7 @@ class BrandController extends CommonController
     public function updata_do()
     {
         $data = I('post.');
-        $brand_id=$data['brand_id'];
+        $brand_id = $data['brand_id'];
         $rules = array(
             array('brand_name', 'require', '品牌名称不能为空！'), // 品牌不能为空
             array('brand_name', '', '品牌名称已经存在！', 1, 'unique', 1), // 验证用户名是否已经存在
@@ -125,7 +125,7 @@ class BrandController extends CommonController
             // 如果创建失败 表示验证没有通过 输出错误提示信息
             $this->error($brand->getError());
         } else {
-            if($_FILES ['brand_logo'] ['error']!=4){
+            if ($_FILES ['brand_logo'] ['error'] != 4) {
                 // 验证通过 可以进行其他数据操作
                 $imag = $this->upload($_FILES);
                 $img = $imag['brand_logo']['savepath'] . $imag['brand_logo']['savename'];
