@@ -88,7 +88,7 @@
         <td style="text-align:right;">产品详情：</td>
         <td>
               <!-- 加载编辑器的容器 -->
-            <script id="container" name="goods_content" type="text/plain">{$d.goods_content}</script>
+            <script id="container" name="goods_content" type="text/plain">{:htmlspecialchars_decode($d['goods_content'])}</script>
         </td>
     </tr>
    <tr>

@@ -24,44 +24,89 @@
             <th>操作</th>
         </tr>
         <foreach name="list" item="vo">
-            <tr>
+            <tr leave_id="{$vo.leave_id}">
                 <td class="center">{$vo.user_nickname}</td>
-                <td class="center">{$vo.time}</td>
-                <td class="center">
-                    <if condition="$vo.status eq 0 ">
-                        未回复
+                <td class="center">{$vo.leave_time}</td>
+                <td class="center status">
+                    <if condition="$vo.leave_status eq 0 ">
+                        <font style="color: red">未回复</font>
                         <else/>
                         已回复
                     </if>
                 </td>
                 <td width="300">
                     <div style="width:400px;height:50px;overflow:scroll;overflow-x:hidden;">
-                        {$vo.question}
+                        {$vo.leave_question}
                     </div>
                 </td>
                 <td width="300">
-                    <div style="width:400px;height:50px;overflow:scroll;overflow-x:hidden;">
-
-                    </div>
+                    <textarea class="answer_2" rows='' cols='' style="display: none"></textarea>
+                    <div class="answer" style="width:400px;height:50px;overflow:scroll;overflow-x:hidden;">{$vo.answer}</div>
                 </td>
                 <td class="center">
-                    <a href="{:U('Leave/reply_message')}" class="inline-block" title="回复"><img src="images/icon_title.gif"/></a>
-                    <a class="inline-block" title="移除"><img src="images/icon_drop.gif"/></a>
+                    <a href="{:U('Leave/delet')}?leave_id={$vo.leave_id}" class="inline-block block" title="移除"><img
+                            src="images/icon_drop.gif"/></a>
                 </td>
             </tr>
         </foreach>
-
-
     </table>
     <!-- BatchOperation -->
     <div style="overflow:hidden;">
         <!-- turn page -->
         <div class="turnPage center fr">
-            <a>第一页</a>
-            <a>1</a>
-            <a>最后一页</a>
+            {$page}
         </div>
     </div>
 </div>
+<script>
+    $(document).on('click', '.block', function () {
+        event.preventDefault()
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            success: function (result) {
+                if (result) {
+                    // alert('删除成功');
+                    location.href = "{:U('Leave/user_message')}?p=<?php echo I('get.p');?>";
+                } else {
+                    alert('删除失败');
+                    location.href = "{:U('Leave/user_message')}?p=<?php echo I('get.p');?>";
+                }
+            }
+        });
+    })
+    $(document).on('click', '.answer', function () {
+        var answer = $(this).hide().text();
+        $(this).prev().show().text(answer).focus();
+    })
+    $(document).on('blur', '.answer_2', function () {
+        var answer = $(this).val();
+        var id = $(this).parents('tr').attr('leave_id');
+        var _this = $(this);
+        if(answer==''){
+            _this.hide();
+            _this.next().show()
+        }
+        $.ajax({
+            type: "POST",
+            url: "{:U('leave/reply_do')}",
+            dataType: "json",
+            data: {answer: answer, leave_id: id},
+            success: function (msg) {
+                if (!msg) {
+                    alert("回复失败");
+                } else {
+                    if (answer != '') {
+                        _this.parents('td').prev().prev().empty().append("已回复");
+                    } else {
+                        _this.parents('td').prev().prev().empty().append('<font style="color: red">未回复</font>');
+                    }
+                    _this.hide();
+                    _this.next().show().text(answer);
+                }
+            }
+        });
+    })
+</script>
 </body>
 </html>

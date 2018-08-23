@@ -33,7 +33,7 @@ class LoginController extends ComeController
 	        }
 		} else {
             $user_info = json_decode(cookie('user_info'),true);
-			if (empty($user_info)) $this->display('login');
+			if (empty($user_info)) layout(false);$this->display('login');
             if (!empty($user_info)) echo "<script>JavaScript:history.go(-1)</script>"; 
 		}
 	}
