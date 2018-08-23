@@ -68,4 +68,18 @@ class ClassifyController extends CommonController
 
 
     }
+
+//    修改
+    public function updata()
+    {
+        $data=I('post.');
+        $res=M('type')->save($data);
+        if($res){
+            echo 1;
+            echo true;
+        }else{
+            echo 2;
+            echo false;
+        }
+    }
 }

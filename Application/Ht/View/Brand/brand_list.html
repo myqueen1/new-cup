@@ -30,8 +30,14 @@
                     <span><img src="{$v.brand_logo}" alt="" width="80px"/></span>
                 </td>
 
-                <td class="center"><a href="{:U('Brand/del')}?brand_id={$v.brand_id}&p=<?php echo I('get.p');?>"
-                                      class="block" title="移除"><img
+                <td class="center">
+                    <!-- <a href="edit_product.html" title="添加商品规格"> -->
+                    <a href="{:U('Brand/updata_brand')}?brand_id={$v.brand_id}" title="编辑">
+                        <img src="images/icon_edit.gif"/>
+                    </a>&nbsp;&nbsp;&nbsp;
+
+                    <a href="{:U('Brand/del')}?brand_id={$v.brand_id}&p=<?php echo I('get.p');?>"
+                                      class="bloc" title="移除"><img
                         src="images/icon_trash.gif"/></a></td>
             </tr>
         </foreach>
@@ -57,7 +63,7 @@
 
 <script src="js/jquery.js"></script>
 <script>
-    $(document).on('click','.block',function () {
+    $(document).on('click','.bloc',function () {
         event.preventDefault()
         var url=$(this).attr('href');
         $.ajax({
