@@ -29,11 +29,11 @@ class LoginController extends ComeController
 	        //判断返回值 并 存储COOKIE
 	        if ($result){
 
-                $db=D('weibo');  //微博
+                $db=D('weibo');  //微博表
                 $data['uid']=$uid;
                 $data['user_id']=$result['user_id'];
                 $res=$db->add($data);
-                cookie('uid',null);
+                cookie('uid',null);   //清空cookie
                 // var_dump($uid);die;
 	            $comeback = $this->SetCookie($result);     //设置COOKIE 
 	            echo self::PutOutMessage("success","登录成功请稍后,马上就好.....");
@@ -73,12 +73,12 @@ class LoginController extends ComeController
 
             if ($result) {
                 
-                $uid = cookie('uid');
+                $uid = cookie('uid');  //获取cookie  uid
                 $db=D('weibo');
                 $data['uid']=$uid;
                 $data['user_id']=$result['user_id'];
                 $res=$db->add($data);
-                cookie('uid',null);
+                cookie('uid',null); //清空cookie
 
                 //拼接 储存所必须 id 和手机号
                 $arr = array('user_id'=>$result , 'user_tel'=>$data['user_tel']);

@@ -35,23 +35,19 @@
          // die;
         // 微博 uid
         if ($data['uid']) {
-        	// var_dump($data['uid']);die;
-        	// $db=D('qq_login_info');
-        	// $res=$db->add($data);
-        	// // var_dump($res);die;
         	$uid=$data['uid'];
         	$db=D('weibo');
         	$data=$db->join("five_user on five_weibo.user_id=five_user.user_id")->where("uid='$uid'")->find();
         	// echo $db->getLastSql();
         	
         	// print_r($data);die;
-        	cookie('uid',$uid);
+        	cookie('uid',$uid);   //设置cookie
         	// die;
         	if ($data) {
-        		cookie('user_info',json_encode($data));
-        		header("location:../Index/index.html");
+        		cookie('user_info',json_encode($data));  //接到登录的cookie
+        		header("location:../Index/index.html");  //跳转到首页
         	}else{
-                header("location:../Login/login.html");
+                header("location:../Login/login.html");   //未绑定，跳转进行绑定
         	}
             
         }

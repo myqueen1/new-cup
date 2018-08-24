@@ -67,72 +67,207 @@
 
 <div>
 
-    <div class="blog">
-    <div class="blog_list">
-        <p class="title">2016年1月15日 花束主题 | 感谢之意</p>
-        <p class="date">2016/01/25</p>
-        <p class="info">待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
-            看着他们的眼睛，问他们近况如何，听他们讲自己的生活，自己的爱人，自己的孩子，自己的小狗，自己的一切一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
-        </p>
-        <a href="<?php echo U('Blog/blog');?>">
-            <div class="b_l_bg">
-                <img src="img/blog_p1.png"/>
-            </div>
-        </a>
-    </div>
-    <div class="blog_list">
-        <p class="title">2016年1月15日 花束主题 | 感谢之意</p>
-        <p class="date">2016/01/25</p>
-        <p class="info">待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
-            看着他们的眼睛，问他们近况如何，听他们讲自己的生活，自己的爱人，自己的孩子，自己的小狗，自己的一切一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
-        </p>
-        <a href="<?php echo U('Blog/blog');?>">
-            <div class="b_l_bg">
-                <img src="img/blog_p1.png"/>
-            </div>
-        </a>
-    </div>
-    <div class="blog_list">
-        <p class="title">2016年1月15日 花束主题 | 感谢之意</p>
-        <p class="date">2016/01/25</p>
-        <p class="info">待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
-            看着他们的眼睛，问他们近况如何，听他们讲自己的生活，自己的爱人，自己的孩子，自己的小狗，自己的一切一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
-        </p>
-        <a href="<?php echo U('Blog/blog');?>">
-            <div class="b_l_bg">
-                <img src="img/blog_p1.png"/>
-            </div>
-        </a>
-    </div>
-    <div class="blog_list">
-        <p class="title">2016年1月15日 花束主题 | 感谢之意</p>
-        <p class="date">2016/01/25</p>
-        <p class="info">待客人们各自找到自己最舒适的位置，慢慢的喝着咖啡，我们再点上几只蜡烛，播上音乐。我们的感谢之意就这样开始了。想要坐到他们身边，
-            看着他们的眼睛，问他们近况如何，听他们讲自己的生活，自己的爱人，自己的孩子，自己的小狗，自己的一切一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下一切，我们就静静的听着就好。
-            就这样慢慢的聊下去，也不觉得时间将尽，我们一起看日落，一起看晚霞，直到夜幕降临。在漫天繁星下
-        </p>
-        <a href="<?php echo U('Blog/blog');?>">
-            <div class="b_l_bg">
-                <img src="img/blog_p1.png"/>
-            </div>
-        </a>
-    </div>
-</div>
+    <!DOCTYPE html>
+<html>
+<head>
+	<base href="/Public/">
+	<link rel="stylesheet" href="css/demo.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/fen.css" />
+	<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+</head>
+<body>
+	<div class="register">
+		<p class="res_title">用户注册</p>
+		<div class="res_box">
+			<ul class="res_nav">
+				<li class="active">
+					<i class="iconfont">&#xe602;</i>
+					<span>手机注册</span>
+				</li>
+				<li>
+					<i class="iconfont">&#xe603;</i>
+					<span>邮箱注册</span>
+				</li>
+				<li>
+					<i class="iconfont">&#xe604;</i>
+					<span>用户名注册</span>
+				</li>
+			</ul>
+			<div class="res_form" id="res_form">
+				<form action="<?php echo U('Index/index');?>" mentend="post">
+					<p class="res_list">
+						<span>手机号码</span>
+						<input type="user_tel" id="telphone" title="请输入手机号码" onkeyup="validate_tel()"/>
+					</p>
+					<p class="tip">仅支持中国大陆地区手机号码！</p>
+						<p class="res_list" style="margin-top: 0px;">
+							<span>手机验证码</span>
+							<input type="text" id="code" style="width: 70px;" title="请输入接收到的手机验证码" onkeyup="validate_code()"/>
+							<span class="yan_code">获取验证码</span>
+						</p>
+					<p class="res_list">
+						<span>设置密码</span>
+						<input type="password" id="password" title="6-18位数字字母组合"/>
+					</p>
+					<p class="res_list">
+						<span>确认密码</span>
+						<input type="password" id="password1" onkeyup="validate_pass()" title="请输入确认密码"/>
+						<span id="tishi"></span>
+					</p>
+					<p class="res_btn">注册</p>
+				</form>
+				<p>已有账号？请<a style="color: #AE191B;" class="login_btn">直接登录</a></p>
+			</div>
+			<div class="res_form" style="padding-top: 40px;display: none;">
+				<h1>该通道已关闭</h1>
+			</div>
+			<div class="res_form" style="padding-top: 20px;display: none;">
+				<h1>该通道已关闭</h1>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        $(".close").click(function(){
+            $(".login_bg").fadeOut();
+        });
+        $(".login_btn").click(function(){
+            $(".login_bg").slideDown();
+            $(".meau_box").slideUp();
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        $(".res_nav").children("li").click(function(){
+            $(".res_nav").children("li").stop().removeClass("active");
+            $(this).stop().addClass("active");
+            $(".res_form").stop().slideUp();
+            $(".res_form").eq($(".res_nav").children("li").index(this)).stop().slideDown();
+        });
+    });
+</script>
+<script type="text/javascript">
+$(".yan_code").on('click',function(){
+	var telphone = $('#telphone').val();
+	var back_tel = validate_tel();
+
+	if (back_tel) {
+        $.ajax({
+            url:"<?php echo U('Send/SendMessage');?>",type:'GET',dataType:'json',
+            data:{telphone:telphone},
+            success:function(comeback){
+            	console.log(comeback)
+
+            	if(comeback.code == 'success'){
+            		$('.yan_code').html("验证码已发送...")
+					$(".yan_code").unbind();
+            	} else{
+            		$('.tip').html("<font color='red'>"+comeback.msg+"</font>")
+            	}
+            }
+        });
+	};
+});
+
+//验证手机号方法
+function validate_tel(){
+	var telphone = $('#telphone').val();
+
+	var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+	if (!myreg.test(telphone)) {
+		$('.tip').html("<font color='red'>手机号格式不正确</font>")
+		return false;
+	} else {
+		$(".tip").html("仅支持中国大陆地区手机号码！");
+        return true;
+	}
+}
+
+//验证两次密码方法
+function validate_pass() {
+    var pwd1 = $("#password").val();
+    var pwd2 = $("#password1").val();
+    var mreg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
+
+    if (mreg.test(pwd1)) {
+    	//对比两次输入的密码 
+	    if(pwd1 == pwd2){
+	        $("#tishi").html("");
+	        return true;
+	    }else {
+	        $("#tishi").html("两次密码不相同");
+	        $("#tishi").css("color","red")
+	        $("button").attr("disabled","disabled");  
+	        return false;
+	    }
+    } else {
+    	$("#tishi").html("密码不能为纯数字或空！");
+	    $("#tishi").css("color","red")
+    	return false;
+    };
+}
+
+//判断验证码方法
+function validate_code(){
+	var code = $('#code').val();
+	var mreg = /^[0-9]{6}$/;
+	if (mreg.test(code)) {
+		return true;
+	}else {
+		return false;
+	};
+}
+
+//点击注册时验证全部input框，然后发送数据入口保存
+$('.res_btn').on('click',function(){
+	var back_tel  = validate_tel();
+	var back_code = validate_code();
+	var back_pass = validate_pass();
+
+	if (back_tel && back_pass && back_code) {
+
+		var telphone = $('#telphone').val();
+		var pwd1 	 = $("#password").val();
+		var code 	 = $('#code').val();
+		//判断用户输入眼验证码是否正确
+		$.ajax({
+			url:"<?php echo U('Send/Verification');?>",
+			type:"GET",dataType:'json',data:{code:code},
+			success:function(comeback){
+				if (comeback == 1) {
+					//将数据发送到后台入库
+					$.ajax({
+						url:"<?php echo U('Login/register');?>",dataType:'json',type:'POST',
+						data:{tel:telphone,pass:pwd1},
+						success:function(come){
+							if (come.code == 'success') {
+								$("#tishi").html("<font color='green' size='2'>"+come.msg+"</font>");
+								setTimeout(function(){
+			                        window.location.href = "<?php echo U('Index/index');?>";
+			                    },1500)
+								
+							} else{
+								$('.tip').html("<font color='red'>"+come.msg+"</font>")
+							};
+						}
+					})
+				} else {
+					alert('验证码不正确，请核对后重试！')
+				};
+			}
+		})
+	} else {
+		if (!back_code) {
+			alert('验证码格式不正确，请核对后重试！')
+		};
+		return false;
+	};
+});
+</script>
+</html>
 
 </div>
 
