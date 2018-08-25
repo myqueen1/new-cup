@@ -18,7 +18,7 @@ class UserController extends HeadController
         $orderlist = $ordermodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_cover,five_order.order_id,goods_number,five_order.goods_price,generate_time,order_status,(five_order.goods_price*five_order.goods_number)as price_sum')
                                 ->join('five_goods on five_order.goods_id = five_goods.goods_id')
                                 ->join('five_goods_detailed on five_goods.goods_id = five_goods_detailed.goods_id')
-                                ->where("five_order.user_id = '$user_id'")
+                                ->where("five_order.user_id = '$user_id' and five_order.order_status != '5'")
                                 ->select();
                                 //echo $ordermodel->getLastSql();die;
 
@@ -199,6 +199,11 @@ class UserController extends HeadController
             echo self::PutOutMessage('error','系统错误,请稍后重试!');
         }
     }
+
+    /**
+     *   @param $order_id 订单ID 用来删除订单
+     *   @return $result json 
+    */
     public function OrderOptions()
     {
 
@@ -206,8 +211,9 @@ class UserController extends HeadController
 
         if (is_numeric($order_id)) {
             $ordermodel = D('order');
-            $result = $ordermodel->where('order_id = '.$order_id)->delete();
-
+            $result = $ordermodel->where('order_id = '.$order_id)
+                                 ->setField(["order_status" => '5']);
+                                
             if ($result) { 
                 echo self::PutOutMessage('success','删除订单成功'); 
             }else { 
@@ -224,43 +230,65 @@ class UserController extends HeadController
     */
     public function fill_order()
     {
-        $goods_id = I('get.goods_id');  //接收商品ID
-        $goods_number = I('get.goods_number');  //接收商品数量
+        if (IS_POST) {  //新增收货地址
+            $address = I('post.');
+            $address['user_id'] = self::ReturnUserInfo('user_id');
 
-        if (is_numeric($goods_id) && is_numeric($goods_number)) {    //判断合法性
-            //判断商品状态
-            $detailmodel = D('goods_detailed');
-            $status = $detailmodel->field('goods_status')
-                                  ->where("goods_id = '$goods_id'")
-                                  ->find();
-                                  //print_r($status);die;
-            if ($status['goods_status'] == '2') {   //商品状态正常
-                //获取收货地址
-                $user_id = self::ReturnUserInfo('user_id');
-                $addressmodel = D('address');
-                $user_address = $addressmodel->where("user_id = '$user_id'")
-                                             ->select();
+            $goods_id     = $address['goods_id'];
+            $goods_number = $address['goods_number'];
 
-                //获取商品详细信息
-                $goodsmodel  = D('goods');
-                $goodsdetail = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
-                                          ->join('five_goods_detailed on five_goods_detailed.goods_id = five_goods.goods_id')
-                                          ->where("five_goods.goods_id = '$goods_id'")
-                                          ->find();
+            unset($address['goods_id']);
+            unset($address['goods_number']);
 
-                $goodsdetail['goods_number'] = $goods_number;
-                $goodsdetail['goods_sum']    = $goods_number*$goodsdetail['goods_price'];
-                //print_r($goodsdetail);die;
-
-                $this->assign('goodsdetail',$goodsdetail);
-                $this->assign('user_address',$user_address);
-                $this->display();
+            $addressmodel = D('address');
+            $result = $addressmodel->where('user_id = '.$address['user_id'])
+                                   ->Count();
+                                   //print_r($result);die();
+            if ($result >= 3) {
+                layout(false);$this->error();
             } else {
-                layout(false);$this->error();   //商品状态 抛出异常
-            }                   
+                $result = $addressmodel->add($address);
+                $this->success('保存成功,正在为您返回...',U('User/fill_order',array('goods_id'=>$goods_id,'goods_number'=>$goods_number)));
+            }
         } else {
-            //商品ID不是数字的情况下 抛出异常
-            layout(false);$this->error();
+            $goods_id = I('get.goods_id');  //接收商品ID
+            $goods_number = I('get.goods_number');  //接收商品数量
+
+            if (is_numeric($goods_id) && is_numeric($goods_number)) {    //判断合法性
+                //判断商品状态
+                $detailmodel = D('goods_detailed');
+                $status = $detailmodel->field('goods_status')
+                                      ->where("goods_id = '$goods_id'")
+                                      ->find();
+                                      //print_r($status);die;
+                if ($status['goods_status'] == '2') {   //商品状态正常
+                    //获取收货地址
+                    $user_id = self::ReturnUserInfo('user_id');
+                    $addressmodel = D('address');
+                    $user_address = $addressmodel->where("user_id = '$user_id'")
+                                                 ->select();
+
+                    //获取商品详细信息
+                    $goodsmodel  = D('goods');
+                    $goodsdetail = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
+                                              ->join('five_goods_detailed on five_goods_detailed.goods_id = five_goods.goods_id')
+                                              ->where("five_goods.goods_id = '$goods_id'")
+                                              ->find();
+
+                    $goodsdetail['goods_number'] = $goods_number;
+                    $goodsdetail['goods_sum']    = $goods_number*$goodsdetail['goods_price'];
+                    //print_r($goodsdetail);die;
+
+                    $this->assign('goodsdetail',$goodsdetail);
+                    $this->assign('user_address',$user_address);
+                    $this->display();
+                } else {
+                    layout(false);$this->error();   //商品状态 抛出异常
+                }                   
+            } else {
+                //商品ID不是数字的情况下 抛出异常
+                layout(false);$this->error();
+            }
         }
     }
 
