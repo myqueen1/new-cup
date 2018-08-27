@@ -48,7 +48,7 @@
 <?php  $user_info = json_decode(cookie('user_info'),true); if(empty($user_info)){ ?>
     <p>
         <a href="<?php echo U('Login/register');?>">注册</a>|<a class="login_btn">登录</a>
-         <a href="https://api.weibo.com/oauth2/authorize?client_id=2975497433&forcelogin=true&response_type=code&redirect_uri=http://cup.waip.top/index.php/Home/San/index">
+        <a href="https://api.weibo.com/oauth2/authorize?client_id=2975497433&forcelogin=true&response_type=code&redirect_uri=http://cup.waip.top/index.php/Home/San/index">
        <img src="img/weibo.jpg" width="20px" height="20px">
        </a>
     </p>
@@ -76,7 +76,7 @@
 <div class="product">
     <div class="col-lg-6" style="margin-top:20px;">
         <div class="input-group">
-            <input type="text" class="form-control" status="open" id="keywords" placeholder="🔍    输入您想要购买的商品名称试一试吧  .  .  .  . ">
+            <input type="text" class="form-control" status="open" id="keywords" placeholder="  🔍    输入您想要购买的商品名称试一试吧  .  .  .  . ">
                 <span class="input-group-btn">
                     <button class="btn btn-default" id="search" type="button">Search!</button>
                 </span>
@@ -136,9 +136,28 @@
                 </li>
             </a><?php endforeach; endif; ?>
     </ul>
+    <div class="cubeshape cube" style="margin-left:80%;">
+        <button class="btn btn-default" type="button">这一批不不感兴趣,帮我换一批吧!
+        </button>
+    </div>
 </div>
+    
+    
 </body>
 <script type="text/javascript">
+    $('.btn-default').click(function(){
+
+        screen_goods('nextpage','start');
+
+        var timer=setInterval(function(){
+            if($(document).scrollTop()==0){
+                clearInterval(timer);
+            }else{
+                $(document).scrollTop($(document).scrollTop()-30);
+            }
+        },5);
+    });
+
     $(function(){
         update_history();
         // 绑定回车事件
@@ -344,6 +363,7 @@
     */
     function screen_goods(options,parameter){
         //alert(parameter)
+        //console.log([{name:options,value:parameter}]);
         $.ajax({
             url:"<?php echo U('Goods/product');?>",type:"POST",
             data:[{name:options,value:parameter}],  //序列化,重中之重!
@@ -356,7 +376,7 @@
                         window.location.reload();
                     },3000)
                 }
-                Splicing_goodsList(comeback)                                                      
+                Splicing_goodsList(comeback)
             }
         })
     }

@@ -48,7 +48,7 @@
 <?php  $user_info = json_decode(cookie('user_info'),true); if(empty($user_info)){ ?>
     <p>
         <a href="<?php echo U('Login/register');?>">注册</a>|<a class="login_btn">登录</a>
-         <a href="https://api.weibo.com/oauth2/authorize?client_id=2975497433&forcelogin=true&response_type=code&redirect_uri=http://cup.waip.top/index.php/Home/San/index">
+        <a href="https://api.weibo.com/oauth2/authorize?client_id=2975497433&forcelogin=true&response_type=code&redirect_uri=http://cup.waip.top/index.php/Home/San/index">
        <img src="img/weibo.jpg" width="20px" height="20px">
        </a>
     </p>

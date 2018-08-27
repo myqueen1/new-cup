@@ -3,6 +3,11 @@ return array(
     //'配置项'=>'配置值'
     'LAYOUT_ON' => true,
     'LAYOUT_NAME' => 'layout',
+
+    'DATA_CACHE_TYPE'       => 'Memcache',  // 数据缓存类型,
+    'MEMCACHE_HOST'  		=> 'tcp://127.0.0.1:11211', 
+    'DATA_CACHE_TIME' 		=> '1000',
+
     'SESSION_AUTO_START'    =>  true,    // 是否自动开启Session
     'SESSION_OPTIONS'       =>  array('expire'=>60), // session 配置数组 支持type name id path expire domain 等参数
     'TMPL_ACTION_ERROR'     =>  'Common/404error', // 默认错误跳转对应的模板文件

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-    <base href="/new/new-cup/Public/frontend/">
+    <base href="/Public/frontend/">
     <link rel="stylesheet" href="css/Index/Indexstyle.css"/>
     <link href="css/Index/Indexstyle.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="css/demo.css"/>
@@ -48,6 +48,9 @@
 <?php  $user_info = json_decode(cookie('user_info'),true); if(empty($user_info)){ ?>
     <p>
         <a href="<?php echo U('Login/register');?>">注册</a>|<a class="login_btn">登录</a>
+        <a href="https://api.weibo.com/oauth2/authorize?client_id=2975497433&forcelogin=true&response_type=code&redirect_uri=http://cup.waip.top/index.php/Home/San/index">
+       <img src="img/weibo.jpg" width="20px" height="20px">
+       </a>
     </p>
 <?php }else{ ?>
     <p>
@@ -72,7 +75,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="renderer" content="webkit">
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-		<base href="/new/new-cup/Public/">
+		<base href="/Public/">
 		<link rel="stylesheet" href="css/demo.css" />
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" type="text/css" href="css/animate.css" />
@@ -380,13 +383,13 @@
             <div class="ydc-right-banner">
                 <div class="slideshow-container">
                     <a href="www.baidu.com" target="_blank" class="mySlides fade">
-                        <img src="/new/new-cup/Public/frontend/img/ad1.jpg" style="width:100%">
+                        <img src="/Public/frontend/img/ad1.jpg" style="width:100%">
                     </a>
                     <a href="" target="_blank" class="mySlides fade">
-                        <img src="/new/new-cup/Public/frontend/img/ad2.jpg" style="width:100%">
+                        <img src="/Public/frontend/img/ad2.jpg" style="width:100%">
                     </a>
                     <a href="" target="_blank" class="mySlides fade">
-                        <img src="/new/new-cup/Public/frontend/img/ad3.jpg" style="width:100%">
+                        <img src="/Public/frontend/img/ad3.jpg" style="width:100%">
                     </a>
                 </div>
             </div>
