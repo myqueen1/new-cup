@@ -100,7 +100,7 @@ class GoodsController extends ComeController
         } else if($optionkey == 'goods_name'){
             $result = self::ConditionStatus($optionkey,$optionval);
         }
-        //print_r($result);die;
+        print_r($result);die;
         return $result;
     }
 
