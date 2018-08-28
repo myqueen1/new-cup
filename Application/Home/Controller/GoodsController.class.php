@@ -100,7 +100,7 @@ class GoodsController extends ComeController
         } else if($optionkey == 'goods_name'){
             $result = self::ConditionStatus($optionkey,$optionval);
         }
-        print_r($result);die;
+        //print_r($result);die;
         return $result;
     }
 
@@ -168,6 +168,7 @@ class GoodsController extends ComeController
             cookie('goods_start',8);
             $result = array_slice($goods_list,0,8);
         }
+        print_r($result);die;
         return $result;
     }
 
