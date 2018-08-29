@@ -210,7 +210,7 @@ class IndexController extends CommonController
         }
         $rest = M('order')->where("order_status = '5'")->join('five_goods ON five_order.goods_id=five_goods.goods_id')->join('five_goods_detailed ON five_order.goods_id=five_goods_detailed.goods_id')->field('order_id,order_number,generate_time,five_order.goods_id,goods_name,goods_cover')->order('order_id')->select();
         $this->assign('rest',$rest);
-        $this->display();
+        $this->display('dustbin');
     }
  
     //打印购物清单
