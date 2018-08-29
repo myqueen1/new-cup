@@ -24,6 +24,7 @@ class GoodsController extends ComeController
             if (!empty($nextpage)) {
                 echo json_encode($this->Eliminate(self::GetlistGoods(cookie('goods_start'))));
             } else {
+                //print_r(I("post."));die;
                 $prefix = self::Conditionalstorage(I("post."));
                 if ($prefix) {
                     $where = "five_goods_detailed.goods_status = '2' and ".$prefix;
@@ -122,11 +123,11 @@ class GoodsController extends ComeController
                 if ($value == 'type_id') $prefix = 'five_goods.';
                 if ($value == 'brand_id') $prefix = 'five_goods.';
 
-                /*if ($value == 'goods_name') {
+                if ($value == 'goods_name') {
                     $prefix = 'five_goods.';
                     $condition[] = $prefix.$value.' like "%'.cookie($value).'%" and ';
                     continue;
-                }*/
+                }
 
                 if ($value == 'goods_price') {
 
