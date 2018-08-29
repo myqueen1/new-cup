@@ -22,22 +22,22 @@ class GoodsController extends ComeController
         if (IS_POST) {
             $nextpage = I('post.nextpage');
             if (!empty($nextpage)) {
-                echo json_encode($this->Eliminate(self::GetlistGoods(cookie('goods_start'))));die;
-            }
-
-            $prefix = self::Conditionalstorage(I("post."));
-            if ($prefix) {
-                $where = "five_goods_detailed.goods_status = '2' and ".$prefix;
-                
-                $optiontype = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
-                                         ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
-                                         ->where($where)
-                                         ->select();
-                                         //echo $goodsmodel->getLastSql();die;
-
-                echo json_encode($this->Eliminate(self::GetlistGoods(cookie('goods_start',0))));
+                echo json_encode($this->Eliminate(self::GetlistGoods(cookie('goods_start'))));
             } else {
-                echo json_encode($this->Eliminate(self::GetlistGoods(cookie('goods_start',0))));
+                $prefix = self::Conditionalstorage(I("post."));
+                if ($prefix) {
+                    $where = "five_goods_detailed.goods_status = '2' and ".$prefix;
+                    //echo $where;die();
+                    $optiontype = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
+                                             ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
+                                             ->where($where)
+                                             ->select();
+                                             //echo $goodsmodel->getLastSql();die;
+                                             //print_r($optiontype);die();
+                    echo json_encode($this->Eliminate($optiontype));
+                } else {
+                    echo json_encode($this->Eliminate(self::GetlistGoods(cookie('goods_start',0))));
+                } 
             } 
         } else {
             cookie('brand_id',null);
@@ -122,11 +122,11 @@ class GoodsController extends ComeController
                 if ($value == 'type_id') $prefix = 'five_goods.';
                 if ($value == 'brand_id') $prefix = 'five_goods.';
 
-                if ($value == 'goods_name') {
+                /*if ($value == 'goods_name') {
                     $prefix = 'five_goods.';
                     $condition[] = $prefix.$value.' like "%'.cookie($value).'%" and ';
                     continue;
-                }
+                }*/
 
                 if ($value == 'goods_price') {
 
@@ -168,7 +168,7 @@ class GoodsController extends ComeController
             cookie('goods_start',8);
             $result = array_slice($goods_list,0,8);
         }
-        print_r($result);die;
+        //print_r($result);die;
         return $result;
     }
 
