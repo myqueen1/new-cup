@@ -9,7 +9,7 @@ use Think\Controller;
 
 class GoodsController extends ComeController
 {
-    private static $principle = ['brand_id','type_id','goods_price'];
+    private static $principle = ['brand_id','type_id','goods_price','goods_name'];
 
 	/**
      *  @param $type_id,$price,$brand string 
@@ -19,26 +19,52 @@ class GoodsController extends ComeController
     {
         $goodsmodel = D('goods');   //实例化goods表
 
-        if (IS_AJAX) {
-            $where = "five_goods_detailed.goods_status = '2' and ".self::Conditionalstorage(I("post."));
-
-            $optiontype = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
-                                     ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
-                                     ->where($where)
-                                     ->select();
-                                    //echo json_encode($goodsmodel->getLastSql());die;
-            echo json_encode($this->Eliminate($optiontype));
+        if (IS_POST) {
+            $nextpage = I('post.nextpage');
+            if (!empty($nextpage)) {
+                echo json_encode($this->Eliminate(self::GetlistGoods(cookie('goods_start'))));
+            } else {
+                //print_r(I("post."));die;
+                $prefix = self::Conditionalstorage(I("post."));
+                if ($prefix) {
+                    $where = "five_goods_detailed.goods_status = '2' and ".$prefix;
+                    //echo $where;die();
+                    $optiontype = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
+                                             ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
+                                             ->where($where)
+                                             ->select();
+                                             //echo $goodsmodel->getLastSql();die;
+                                             //print_r($optiontype);die();
+                    echo json_encode($this->Eliminate($optiontype));
+                } else {
+                    echo json_encode($this->Eliminate(self::GetlistGoods(cookie('goods_start',0))));
+                } 
+            } 
         } else {
             cookie('brand_id',null);
             cookie('type_id',null);
             cookie('goods_price',null);
 
-            $result = $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
-                                 ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
-                                 ->where("goods_status = '2'")
-                                 ->select();
-                                //echo $goodsmodel->getLastSql();die;
+            $goods_list = S('goods_list');
+            if (!empty($goods_list)) {
+                //echo "正在用缓存";
+                $result = self::GetlistGoods(cookie('goods_start',0));
+            } else {
+                //echo "没有缓存";
+                $results= $goodsmodel->field('five_goods.goods_id,goods_name,five_goods_detailed.goods_price,goods_cover')
+                                     ->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
+                                     ->where("goods_status = '2'")
+                                     ->select();
+                                    //echo $goodsmodel->getLastSql();die;
+                $goodnum= $goodsmodel->join('five_goods_detailed on five_goods.goods_id=five_goods_detailed.goods_id')
+                                     ->where("goods_status = '2'")
+                                     ->count();
 
+                S('goods_list',$results);
+                S('goods_count',$goodnum);
+                $result = self::GetlistGoods(cookie('goods_start',0));
+            }         
+            //print_r($result);die;
             $goods_list = $this->Eliminate($result);
             $this->assign('goods_list',$goods_list);
             //热词展示
@@ -72,8 +98,10 @@ class GoodsController extends ComeController
             $result = self::ConditionStatus($optionkey,'all');
         } else if($optionkey == 'goods_price') {
             $result = self::ConditionStatus($optionkey,$optionval);
+        } else if($optionkey == 'goods_name'){
+            $result = self::ConditionStatus($optionkey,$optionval);
         }
-
+        //print_r($result);die;
         return $result;
     }
 
@@ -94,6 +122,13 @@ class GoodsController extends ComeController
             foreach($allstatus as $key => $value){
                 if ($value == 'type_id') $prefix = 'five_goods.';
                 if ($value == 'brand_id') $prefix = 'five_goods.';
+
+                if ($value == 'goods_name') {
+                    $prefix = 'five_goods.';
+                    $condition[] = $prefix.$value.' like "%'.cookie($value).'%" and ';
+                    continue;
+                }
+
                 if ($value == 'goods_price') {
 
                     $prefix = 'five_goods_detailed.';
@@ -105,7 +140,7 @@ class GoodsController extends ComeController
 
             return rtrim(implode('',$condition),' and');  //数组分割成字符串
         } else {
-            if ($value == 'all') {
+            if ($value == 'all' || $value == '') {
                 cookie($keys,null);
             } else {
                 cookie($keys,$value);
@@ -113,6 +148,31 @@ class GoodsController extends ComeController
             return self::ConditionStatus();
         }
     }
+
+    /**
+     *   @param $goods_list array 商品列表缓存
+     *   @return $goods_list array 返回缓存中的数据
+    */
+    private static function GetlistGoods($goods_start)
+    {   
+        $goods_list = S('goods_list');
+
+        if (!empty($goods_start)) {
+            if (cookie('goods_start') <= S('goods_count')) {
+                cookie('goods_start',$goods_start+8);
+                $result = array_slice($goods_list,$goods_start,8);
+            } else {
+                cookie('goods_start',0);
+                return self::GetlistGoods(cookie('goods_start'));
+            }
+        } else {
+            cookie('goods_start',8);
+            $result = array_slice($goods_list,0,8);
+        }
+        //print_r($result);die;
+        return $result;
+    }
+
 
     //商品详情
     public function buy()

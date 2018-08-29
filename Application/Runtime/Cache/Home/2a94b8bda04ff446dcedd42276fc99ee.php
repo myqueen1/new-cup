@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 
 <head>
@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-    <base href="__PUBLIC__/frontend/">
+    <base href="/Public/frontend/">
     <link rel="stylesheet" href="css/Index/Indexstyle.css"/>
     <link href="css/Index/Indexstyle.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="css/demo.css"/>
@@ -24,42 +24,39 @@
 <body>
 <div class="header">
     <div class="hea_nav">
-        <a href="{:U('Index/index')}"><img src="img/s0.png" class="logo"/></a>
+        <a href="<?php echo U('Index/index');?>"><img src="img/s0.png" class="logo"/></a>
         <ul>
-            <a href="{:U('Index/index')}" title="网站首页">
+            <a href="<?php echo U('Index/index');?>" title="网站首页">
                 <li>首页</li>
             </a>
-            <a href="{:U('Goods/product')}" title="进入商品页">
+            <a href="<?php echo U('Goods/product');?>" title="进入商品页">
                 <li>一杯(辈)子</li>
             </a>
-            <a href="{:U('User/personal')}" title="您的个人中心">
+            <a href="<?php echo U('User/personal');?>" title="您的个人中心">
                 <li>个人中心</li>
             </a>
-            <a href="{:U('Blog/blog_list')}" title="指尖蜜语,让我们告诉您杯子的故事">
+            <a href="<?php echo U('Blog/blog_list');?>" title="指尖蜜语,让我们告诉您杯子的故事">
                 <li>指尖蜜语</li>
             </a>
-            <a href="{:U('Index/message')}" title="看看网站留言">
+            <a href="<?php echo U('Index/message');?>" title="看看网站留言">
                 <li>留言板</li>
             </a>
         </ul>
     </div>
     <div class="hea_right">
         
-<?php 
-    $user_info = json_decode(cookie('user_info'),true);
-    if(empty($user_info)){ 
-?>
+<?php  $user_info = json_decode(cookie('user_info'),true); if(empty($user_info)){ ?>
     <p>
-        <a href="{:U('Login/register')}">注册</a>|<a class="login_btn">登录</a>
+        <a href="<?php echo U('Login/register');?>">注册</a>|<a class="login_btn">登录</a>
         <a href="https://api.weibo.com/oauth2/authorize?client_id=2975497433&forcelogin=true&response_type=code&redirect_uri=http://cup.waip.top/index.php/Home/San/index">
        <img src="img/weibo.jpg" width="20px" height="20px">
        </a>
     </p>
 <?php }else{ ?>
     <p>
-        <a href="{:U('User/personal')}"><?php echo $user_info['user_nickname'] ?></a>
+        <a href="<?php echo U('User/personal');?>"><?php echo $user_info['user_nickname'] ?></a>
         <a href="javascript:void(0);" class="loginOut">退出</a>
-        <a href="{:U('User/ShoppingCart')}">
+        <a href="<?php echo U('User/ShoppingCart');?>">
             <p class="head-shopcart"><i class="iconfont">&#xe600;</i>购物车</p>
         </a>
     </p>
@@ -70,7 +67,102 @@
 
 <div>
 
-    {__CONTENT__}
+    <!DOCTYPE html>
+<html>
+<body>
+<div class="banner">
+	<div class="index_b_hero">
+		<div class="hero-wrap">
+			<ul class="heros">
+				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img01.jpg" /></a></li>
+				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img02.jpg" /></a></li>
+				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img03.jpg" /></a></li>
+				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img04.jpg" /></a></li>
+				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img05.jpg" /></a></li>
+				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img06.jpg" /></a></li>
+				<li class="hero"><a href="javascript:void(0);"><img class="thumb" src="images/img07.jpg" /></a></li>
+			</ul>
+		</div>
+		<div class="helper">
+			<div class="mask-left"></div>
+			<div class="mask-right"></div>
+			<a href="javascript:;" class="page_btn prev"></a>
+			<a href="javascript:;" class="page_btn next"></a>
+		</div>
+	</div>
+	
+	<div id="lt_ss_tus" class="little_img">
+		<ul class="small_list">
+			<li class="on">
+				<img id="0" src="images/img01.jpg" height="65" width="162">
+				<div class="bg"></div>
+			</li>
+			<li>
+				<img id="1" src="images/img02.jpg" height="65" width="162">
+				<div class="bg"></div>
+			</li>
+			<li>
+				<img id="2" src="images/img03.jpg" height="65" width="162">
+				<div class="bg"></div>
+			</li>
+			<li>
+				<img id="3" src="images/img04.jpg" height="65" width="162">
+				<div class="bg"></div>
+			</li>
+			<li>
+				<img id="4" src="images/img05.jpg" height="65" width="162">
+				<div class="bg"></div>
+			</li>
+			<li>
+				<img id="5" src="images/img06.jpg" height="65" width="162">
+				<div class="bg"></div>
+			</li>
+			<li class="last">
+				<img id="6" src="images/img07.jpg" height="65" width="162">
+				<div class="bg"></div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="index_product">
+	<div class="product">
+		<ul class=".aa">
+	        <?php foreach($data as $key=>$val){ ?>
+	        <a href="<?php echo U('Goods/buy');?>?id=<?php echo $val['goods_id'] ?>" target="_blank">
+	            <li>
+	                <img src="<?php echo ($val["goods_cover"]); ?>" height="500"/>
+	                <div class="proli_bg">
+	                    <div class="proli_bg_box">
+	                        <div class="proli_top">
+	                            <p>本周特推</p>
+	                            <p><?php echo ($val["goods_name"]); ?></p>
+	                        </div>
+	                        <p>￥ <?php echo ($val["goods_price"]); ?></p>
+	                    </div>
+	                </div>
+	            </li>
+	        </a>
+	        <?php } ?>
+	    </ul>
+	</div>
+</div>
+	<!-- <div class="box1">
+		<img src="img/s1.jpg" class="pc_h" />
+		<img src="img/mobile_h.jpg" class="mobile_h" />
+	</div> -->
+</body>
+<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="js/carousel_focus.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function() {
+		$(".login_btn").click(function() {
+			$(".login_bg").slideDown();
+			$(".meau_box").slideUp();
+		});
+	});
+</script>
+</html>
 
 </div>
 
@@ -98,13 +190,13 @@
             <div class="ydc-right-banner">
                 <div class="slideshow-container">
                     <a href="www.baidu.com" target="_blank" class="mySlides fade">
-                        <img src="__PUBLIC__/frontend/img/ad1.jpg" style="width:100%">
+                        <img src="/Public/frontend/img/ad1.jpg" style="width:100%">
                     </a>
                     <a href="" target="_blank" class="mySlides fade">
-                        <img src="__PUBLIC__/frontend/img/ad2.jpg" style="width:100%">
+                        <img src="/Public/frontend/img/ad2.jpg" style="width:100%">
                     </a>
                     <a href="" target="_blank" class="mySlides fade">
-                        <img src="__PUBLIC__/frontend/img/ad3.jpg" style="width:100%">
+                        <img src="/Public/frontend/img/ad3.jpg" style="width:100%">
                     </a>
                 </div>
             </div>
@@ -150,7 +242,7 @@
         if (tel_myreg.test(user_tel) && pass_myreg.test(user_pass)) {
             $('.Hint').html('');
             $.ajax({ 
-                url:"{:U('Login/login')}",type:"POST",dataType:"json",
+                url:"<?php echo U('Login/login');?>",type:"POST",dataType:"json",
                 data:{'user_tel':user_tel,'user_pass':user_pass}, 
                 success:function (comeback) {
                     //console.log(comeback)
@@ -172,7 +264,7 @@
 <script>
     $('.loginOut').on('click',function(){
         if (confirm("你确定退出登录吗？")) { 
-            $.ajax({url:"{:U('Login/SingOut')}",type:"GET",
+            $.ajax({url:"<?php echo U('Login/SingOut');?>",type:"GET",
                 success:function (comeback) {
                     window.location.reload();
                 }
