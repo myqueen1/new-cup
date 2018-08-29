@@ -243,6 +243,7 @@ $('.res_btn').on('click',function(){
 						url:"<?php echo U('Login/register');?>",dataType:'json',type:'POST',
 						data:{tel:telphone,pass:pwd1},
 						success:function(come){
+							console.log(come);
 							if (come.code == 'success') {
 								$("#tishi").html("<font color='green' size='2'>"+come.msg+"</font>");
 								setTimeout(function(){

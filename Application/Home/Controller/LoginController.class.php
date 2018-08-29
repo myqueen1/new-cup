@@ -16,7 +16,7 @@ class LoginController extends ComeController
 	public function login()
     {
          //获取 uid
-         $uid = cookie('uid');
+         //$uid = cookie('uid');
 		if (IS_POST) {
 	        $user_tel  = I('post.user_tel');           //手机号
 	        $user_pass = MD5(I('post.user_pass'));     //密码
@@ -29,11 +29,11 @@ class LoginController extends ComeController
 	        //判断返回值 并 存储COOKIE
 	        if ($result){
 
-                $db=D('weibo');  //微博表
-                $data['uid']=$uid;
-                $data['user_id']=$result['user_id'];
-                $res=$db->add($data);
-                cookie('uid',null);   //清空cookie
+                // $db=D('weibo');  //微博表
+                // $data['uid']=$uid;
+                // $data['user_id']=$result['user_id'];
+                // $res=$db->add($data);
+                // cookie('uid',null);   //清空cookie
                 // var_dump($uid);die;
 	            $comeback = $this->SetCookie($result);     //设置COOKIE 
 	            echo self::PutOutMessage("success","登录成功请稍后,马上就好.....");
@@ -63,7 +63,7 @@ class LoginController extends ComeController
     */
     public function register()
     {
-        if(IS_AJAX) {
+        if(IS_POST) {
             $data['user_tel']  = I('post.tel');
             $data['user_pass'] = MD5(I('post.pass'));
             $data['user_time'] = date('Y-m-d H:i:s',time());
@@ -73,12 +73,12 @@ class LoginController extends ComeController
 
             if ($result) {
                 
-                $uid = cookie('uid');  //获取cookie  uid
-                $db=D('weibo');
-                $data['uid']=$uid;
-                $data['user_id']=$result['user_id'];
-                $res=$db->add($data);
-                cookie('uid',null); //清空cookie
+                //$uid = cookie('uid');  //获取cookie  uid
+                //$db=D('weibo');
+                //$data['uid']=$uid;
+                //$data['user_id']=$result['user_id'];
+                //$res=$db->add($data);
+                //cookie('uid',null); //清空cookie
 
                 //拼接 储存所必须 id 和手机号
                 $arr = array('user_id'=>$result , 'user_tel'=>$data['user_tel']);
